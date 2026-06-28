@@ -1,0 +1,9 @@
+{
+  "name": "registre-factures-syscohada",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Capture automatique de factures (IA Gemini) avec suggestion de compte SYSCOHADA et export CSV pour Sage 100 i7.",
+  "engines": {
+    "node": ">=18"
+  }
+}
