@@ -327,7 +327,7 @@ async function processItem(item){
     item.error = (lastErrMsg.toLowerCase().includes('quota') || lastErrMsg.includes('429'))
       ? 'Limite Gemini atteinte malgre les reessais. Cliquez sur cette facture puis sur Reessayer plus tard.'
       : ('Lecture impossible (' + lastErrMsg + '). Remplissez les champs manuellement.');
-    item.extracted = { fournisseur:'', date:'', description:'', montant_ht:0, montant_tva:0, montant_ttc:0, compte_code:'', compte_libelle:'' };
+    item.extracted = { fournisseur:'', date:'', numero_facture:'', description:'', montant_ht:0, montant_tva:0, montant_ttc:0, compte_code:'', compte_libelle:'' };
   }
   batchDone++;
   updateProgress();
@@ -349,7 +349,7 @@ async function extractInvoice(item){
   const candidates = SUGGEST_ACCOUNTS.map(a=> a[0]+' : '+a[1]).join('\n');
   const promptText = "Tu es un assistant comptable specialise SYSCOHADA (zone OHADA, Afrique de l'Ouest/Centrale). " +
     "On te montre une facture (photo ou PDF). Extrais les informations et reponds UNIQUEMENT avec un objet JSON valide, sans texte autour, sans balises markdown. " +
-    "Format exact attendu: {\"fournisseur\":string,\"date\":string (format YYYY-MM-DD ou vide si illisible),\"description\":string (court, 5-8 mots),\"montant_ht\":number,\"montant_tva\":number,\"montant_ttc\":number,\"compte_code\":string,\"compte_libelle\":string,\"confiance\":\"haute\"|\"moyenne\"|\"basse\"}. " +
+    "Format exact attendu: {\"fournisseur\":string,\"date\":string (format YYYY-MM-DD ou vide si illisible),\"numero_facture\":string (numero ou reference de la facture visible sur le document, vide si absent),\"description\":string (court, 5-8 mots),\"montant_ht\":number,\"montant_tva\":number,\"montant_ttc\":number,\"compte_code\":string,\"compte_libelle\":string,\"confiance\":\"haute\"|\"moyenne\"|\"basse\"}. " +
     "Pour compte_code, choisis le code le plus pertinent UNIQUEMENT dans cette liste de comptes SYSCOHADA (charges, immobilisations, tiers) :\n" + candidates +
     "\nSi aucun montant TVA n'est visible, mets 0. Si le HT n'est pas indique mais le TTC oui, estime le HT en supposant 18% de TVA sauf indication contraire visible sur la facture. Les montants sont en Francs CFA, donne des nombres simples sans espace ni symbole.";
 
@@ -414,14 +414,15 @@ function selectItem(id){
     detailBody.innerHTML = '<div class="empty">'+(item.status==='waiting' ? 'En attente dans la file (traitement une facture a la fois)…' : 'Lecture automatique de la facture en cours…')+'</div>';
     return;
   }
-  const ex = item.extracted || { fournisseur:'', date:'', description:'', montant_ht:0, montant_tva:0, montant_ttc:0, compte_code:'', compte_libelle:'' };
+  const ex = item.extracted || { fournisseur:'', date:'', numero_facture:'', description:'', montant_ht:0, montant_tva:0, montant_ttc:0, compte_code:'', compte_libelle:'' };
   const readonly = item.status==='validated';
   detailBody.innerHTML =
     (item.error ? '<div class="notice">'+escapeHtml(item.error)+'</div>' : '') +
     (ex._memoire ? '<div class="notice">Compte habituel de ce fournisseur appliqué automatiquement.</div>' : '') +
     field('Fournisseur','d_fournisseur', ex.fournisseur, readonly) +
-    '<div class="row2">' + field('Date','d_date', ex.date, readonly, true) + field('TTC (F CFA)','d_ttc', ex.montant_ttc, readonly, true) + '</div>' +
+    '<div class="row2">' + field('Date','d_date', ex.date, readonly, true) + field('N\u00b0 Facture','d_numfact', ex.numero_facture, readonly, true) + '</div>' +
     '<div class="row2">' + field('Montant HT','d_ht', ex.montant_ht, readonly, true) + field('TVA','d_tva', ex.montant_tva, readonly, true) + '</div>' +
+    field('TTC (F CFA)','d_ttc', ex.montant_ttc, readonly, true) +
     field('Description','d_desc', ex.description, readonly) +
     '<div class="field"><label>Compte SYSCOHADA</label><div class="acct-wrap">' +
       '<input id="d_compte" '+(readonly?'disabled':'')+' value="'+escapeHtml((ex.compte_code||'')+(ex.compte_libelle ? ' — '+ex.compte_libelle : ''))+'" placeholder="Rechercher un compte (numéro ou mot-clé)" autocomplete="off">' +
@@ -484,6 +485,7 @@ function validateItem(id){
   item.extracted = {
     fournisseur: document.getElementById('d_fournisseur').value.trim(),
     date: document.getElementById('d_date').value.trim(),
+    numero_facture: document.getElementById('d_numfact').value.trim(),
     description: document.getElementById('d_desc').value.trim(),
     montant_ht: parseFloat(document.getElementById('d_ht').value) || 0,
     montant_tva: parseFloat(document.getElementById('d_tva').value) || 0,
@@ -527,19 +529,40 @@ function updateTotals(){
   exportBtn.disabled = false;
 }
 
+function isoToJjMmAaaa(iso){
+  if(!iso) return '';
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(m) return m[3]+'/'+m[2]+'/'+m[1];
+  return iso; // si deja dans un autre format, on laisse tel quel
+}
+function money2(n){
+  const v = Number(n)||0;
+  return v.toFixed(2); // point decimal, 2 decimales, sans separateur de milliers
+}
+
 exportBtn.addEventListener('click', ()=>{
   const validated = queue.filter(q=>q.status==='validated');
   if(validated.length===0) return;
-  const rows = [['Date','Journal','Compte','Libelle','Debit','Credit']];
+  // Structure alignee sur le format "import parametrable" Sage 100 (delimite par |) :
+  // 1 Code journal | 2 Compte general | 3 Compte tiers (inutilise) | 4 Date piece |
+  // 5 Date piece bis (inutilise) | 6 Montant debit | 7 Montant credit | 8 N. facture | 9 Libelle
+  const lines = [];
   validated.forEach(q=>{
     const e = q.extracted;
+    const d = isoToJjMmAaaa(e.date);
+    const numFact = e.numero_facture || '';
     const lib = (e.fournisseur||'') + (e.description ? ' - '+e.description : '');
-    if(e.montant_ht) rows.push([e.date||'', 'AC', e.compte_code||'', lib, e.montant_ht, '']);
-    if(e.montant_tva) rows.push([e.date||'', 'AC', '4452', 'TVA recuperable sur achats - '+(e.fournisseur||''), e.montant_tva, '']);
-    rows.push([e.date||'', 'AC', '401', e.fournisseur||'', '', e.montant_ttc||0]);
+
+    if(e.montant_ht){
+      lines.push(['AC', e.compte_code||'', '', d, '', money2(e.montant_ht), '', numFact, lib].join('|'));
+    }
+    if(e.montant_tva){
+      lines.push(['AC', '4452', '', d, '', money2(e.montant_tva), '', numFact, 'TVA recuperable sur achats - '+(e.fournisseur||'')].join('|'));
+    }
+    lines.push(['AC', '401', '', d, '', '', money2(e.montant_ttc||0), numFact, (e.fournisseur||'')].join('|'));
   });
-  const csv = rows.map(r=> r.map(v=> typeof v==='string' && v.includes(';') ? '"'+v+'"' : v).join(';')).join('\n');
-  const blob = new Blob(['\ufeff'+csv], { type:'text/csv;charset=utf-8;' });
+  const txt = lines.join('\\n');
+  const blob = new Blob([txt], { type:'text/plain;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = 'export_factures_sage.txt';
