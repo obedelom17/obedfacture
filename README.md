@@ -1,94 +1,94 @@
-# Registre de factures SYSCOHADA — version Vercel
+# ObedFacture — version Vercel
 
 Capture automatique de factures (photo ou PDF) avec lecture par IA (Gemini),
-suggestion du compte SYSCOHADA, validation manuelle, et export CSV prêt pour
-l'import dans Sage 100 i7.
+suggestion du compte SYSCOHADA, validation manuelle ou en masse, et export
+au format Sage 100 i7 **deja teste et valide** (modele officiel Sage).
 
 ## Pourquoi cette structure ?
 
-La clé API Gemini est **gardée côté serveur** (dans `api/extract.js`, via une
+La cle API Gemini est **gardee cote serveur** (dans `api/extract.js`, via une
 variable d'environnement). Le navigateur de l'utilisateur ne voit jamais la
-clé — il appelle simplement `/api/extract`, qui est une petite fonction
-serverless qui relaie la demande à Gemini.
+cle.
 
 ```
 Navigateur (index.html)  --->  /api/extract (Vercel, garde la cle)  --->  Gemini
 ```
 
-## Déploiement en 5 étapes
+## Deploiement en 5 etapes
 
-### 1. Obtenir une clé API Gemini (gratuite)
+### 1. Obtenir une cle API Gemini (gratuite)
+https://aistudio.google.com/app/apikey -> "Create API key"
 
-Allez sur **https://aistudio.google.com/app/apikey**, connectez-vous avec un
-compte Google, cliquez sur **"Create API key"**, copiez la clé.
-
-### 2. Pousser ce projet sur GitHub (ou GitLab/Bitbucket)
-
+### 2. Pousser ce projet sur GitHub
 ```bash
 git init
 git add .
-git commit -m "Premier import du registre de factures"
+git commit -m "Premier import"
 git branch -M main
 git remote add origin https://github.com/VOTRE-COMPTE/VOTRE-DEPOT.git
 git push -u origin main
 ```
 
-### 3. Importer le projet dans Vercel
+### 3. Importer dans Vercel
+vercel.com -> Add New -> Project -> selectionnez le depot. Aucune
+configuration necessaire (le dossier `api/` est detecte automatiquement).
 
-- Allez sur **https://vercel.com**, connectez-vous
-- **"Add New" > "Project"**
-- Sélectionnez votre dépôt GitHub
-- Vercel détecte automatiquement le dossier `api/` — **aucune configuration
-  supplémentaire n'est nécessaire** (pas de build, pas de framework à choisir)
-
-### 4. Ajouter la clé API en variable d'environnement
-
-Avant ou après le premier déploiement :
-- Dans le projet Vercel : **Settings > Environment Variables**
-- Nom : `GEMINI_API_KEY`
-- Valeur : la clé copiée à l'étape 1
-- Cochez les 3 environnements (Production, Preview, Development)
-- **Redéployez** le projet pour que la variable soit prise en compte
-  (Deployments > ... > Redeploy)
+### 4. Ajouter la cle en variable d'environnement
+Settings -> Environment Variables -> `GEMINI_API_KEY` = votre cle ->
+redeployez.
 
 ### 5. Utiliser l'outil
+Ouvrez l'URL Vercel fournie.
 
-Ouvrez l'URL fournie par Vercel (ex. `https://votre-projet.vercel.app`).
-C'est prêt — glissez une facture pour tester.
+## Importer les ecritures dans Sage 100 i7 (etapes testees)
 
-## Développement local (optionnel)
+L'export produit un fichier `export_factures_sage.txt` qui suit **exactement**
+la structure du modele officiel Sage "Cegid" (fichier `Exemple ecritures
+Cegid.txt` fourni par Sage dans ses modeles d'importation), donc le fichier
+de configuration officiel fonctionne directement.
 
-```bash
-npm install -g vercel
-vercel dev
+1. Dans Sage : **Fichier -> Format import/export parametrable**
+2. Cliquez **Charger** (ou Importer un format existant)
+3. Selectionnez le fichier **`Import_ecritures_ObedFacture.ema`** fourni dans
+   ce projet (c'est le modele officiel Sage pour ce type de structure, copie
+   tel quel depuis le dossier "Modeles d'importation" de Sage)
+4. Verifiez que le journal par defaut (`AC`) correspond a un code journal
+   existant dans votre dossier (sinon adaptez dans Sage ou demandez-moi de
+   changer le code dans l'outil)
+5. **Fichier -> Importer -> Format parametrable** -> selectionnez ce format
+   -> selectionnez votre fichier `.txt` exporte par ObedFacture
+6. Verifiez l'ecriture creee dans **Traitement -> Consultation des ecritures**
+
+### Structure exacte du fichier exporte
+Delimiteur : tabulation · Decimales : virgule · Dates : JJ/MM/AAAA ·
+Encodage : Windows-1252 (compatible Sage)
+
 ```
-
-Créez un fichier `.env.local` à partir de `.env.example` avec votre vraie clé
-pour tester en local.
+Jal  Date        N°    General   Auxiliaire  Reference  Debit    Credit   Date echeance  Libelle                       Mode de paiement
+AC   28/06/2026  F123  605101                F123       15000,00 0,00                    Fact. fourn.  ACME - fournitures
+AC   28/06/2026  F123  4452                  F123       2700,00  0,00                    Fact. fourn.  ACME - fournitures
+AC   28/06/2026  F123  401                   F123       0,00     17700,00 28/06/2026     Fact. fourn.  ACME - fournitures
+```
 
 ## Limites connues
 
-- **Quota gratuit Gemini** : environ 250 à 1500 requêtes/jour selon les
-  modèles et les ajustements de Google (vérifiable sur aistudio.google.com).
-  L'outil traite les factures une par une avec une pause pour rester sous la
-  limite, et réessaie automatiquement en cas de blocage temporaire.
-- **Confidentialité** : sur le niveau gratuit, Google peut utiliser le
-  contenu envoyé pour améliorer ses modèles. Pour des données très sensibles,
-  il faudra activer la facturation chez Google (n'est alors plus gratuit).
-- **Stockage** : les factures validées et la mémoire des fournisseurs sont
-  gardées dans le navigateur (`localStorage`) — pas de base de données
-  partagée entre plusieurs ordinateurs pour l'instant.
-- **Format d'export CSV** : structure générique (Date, Journal, Compte,
-  Libellé, Débit, Crédit). À vérifier/adapter selon le format d'import exact
-  accepté par votre version de Sage 100 i7.
+- **Quota gratuit Gemini** : ~250 a 1500 requetes/jour. L'outil traite les
+  factures une par une avec une pause, et reessaie automatiquement en cas de
+  blocage temporaire.
+- **Confidentialite** : niveau gratuit Google = le contenu peut servir a
+  ameliorer leurs modeles.
+- **Stockage** : factures validees et memoire fournisseurs gardees dans le
+  navigateur (`localStorage`), pas de base partagee entre plusieurs PC.
+- **Validation en masse** : le bouton "Valider tout" saute la verification
+  manuelle - a utiliser seulement quand vous faites confiance a la lecture
+  automatique (ou pour un premier tri rapide a corriger ensuite dans Sage).
 
 ## Structure du projet
-
 ```
 .
-├── index.html          → l'interface complète (front-end)
-├── api/
-│   └── extract.js      → fonction serverless qui appelle Gemini (garde la cle)
+├── index.html                          -> l'interface ObedFacture
+├── api/extract.js                       -> fonction serverless (garde la cle)
+├── Import_ecritures_ObedFacture.ema     -> format Sage pret a charger
 ├── package.json
 ├── .gitignore
 └── .env.example

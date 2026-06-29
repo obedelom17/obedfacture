@@ -607,22 +607,47 @@ function isoToJjMmAaaa(iso){
   if(m) return m[3]+'/'+m[2]+'/'+m[1];
   return iso;
 }
-function money2(n){ return (Number(n)||0).toFixed(2); }
+function moneyComma(n){ return (Number(n)||0).toFixed(2).replace('.', ','); }
+function toLatin1Bytes(str){
+  const bytes = [];
+  for(let i=0;i<str.length;i++){
+    let code = str.charCodeAt(i);
+    if(code > 255) code = 63; // '?' de secours pour les caracteres hors Latin-1
+    bytes.push(code);
+  }
+  return new Uint8Array(bytes);
+}
+
+// Structure calquee sur "Exemple ecritures Cegid.txt" (modele officiel Sage) :
+// Jal | Date | N° | General | Auxiliaire | Reference | Debit | Credit | Date echeance | Libelle | Mode de paiement | (vide)
+const SAGE_HEADER = "Jal\tDate\tN°\tGénéral\tAuxiliaire\tRéférence\tDébit\tCrédit\tDate échéance\tLibellé\tMode de paiement\t";
+
+function sageLine(jal, date, numPiece, compteGeneral, auxiliaire, reference, debit, credit, dateEcheance, libelle, modePaiement){
+  return [jal, date, numPiece, compteGeneral, auxiliaire, reference, debit, credit, dateEcheance, libelle, modePaiement, ''].join('\t');
+}
 
 exportBtn.addEventListener('click', ()=>{
   const validated = queue.filter(q=>q.status==='validated');
   if(validated.length===0) return;
-  const lines = [];
+  const lines = [SAGE_HEADER];
   validated.forEach(q=>{
     const e = q.extracted;
     const d = isoToJjMmAaaa(e.date);
     const numFact = e.numero_facture || '';
-    const lib = (e.fournisseur||'') + (e.description ? ' - '+e.description : '');
-    if(e.montant_ht){ lines.push(['AC', e.compte_code||'', '', d, '', money2(e.montant_ht), '', numFact, lib].join('|')); }
-    if(e.montant_tva){ lines.push(['AC', '4452', '', d, '', money2(e.montant_tva), '', numFact, 'TVA recuperable sur achats - '+(e.fournisseur||'')].join('|')); }
-    lines.push(['AC', '401', '', d, '', '', money2(e.montant_ttc||0), numFact, (e.fournisseur||'')].join('|'));
+    const fourn = e.fournisseur || '';
+    const libelle = 'Fact. fourn.  ' + fourn + (e.description ? ' - '+e.description : '');
+
+    if(e.montant_ht){
+      lines.push(sageLine('AC', d, numFact, e.compte_code||'', '', numFact, moneyComma(e.montant_ht), '0,00', '', libelle, ''));
+    }
+    if(e.montant_tva){
+      lines.push(sageLine('AC', d, numFact, '4452', '', numFact, moneyComma(e.montant_tva), '0,00', '', libelle, ''));
+    }
+    lines.push(sageLine('AC', d, numFact, '401', '', numFact, '0,00', moneyComma(e.montant_ttc||0), d, libelle, ''));
   });
-  const blob = new Blob([lines.join('\n')], { type:'text/plain;charset=utf-8;' });
+  const text = lines.join('\r\n') + '\r\n';
+  const bytes = toLatin1Bytes(text);
+  const blob = new Blob([bytes], { type:'text/plain;charset=windows-1252;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = 'export_factures_sage.txt';
