@@ -638,12 +638,12 @@ exportBtn.addEventListener('click', ()=>{
     const libelle = 'Fact. fourn.  ' + fourn + (e.description ? ' - '+e.description : '');
 
     if(e.montant_ht){
-      lines.push(sageLine('AC', d, numFact, e.compte_code||'', '', numFact, moneyComma(e.montant_ht), '0,00', '', libelle, ''));
+      lines.push(sageLine('ACH', d, numFact, e.compte_code||'', '', numFact, moneyComma(e.montant_ht), '0,00', '', libelle, ''));
     }
     if(e.montant_tva){
-      lines.push(sageLine('AC', d, numFact, '4452', '', numFact, moneyComma(e.montant_tva), '0,00', '', libelle, ''));
+      lines.push(sageLine('ACH', d, numFact, '4452', '', numFact, moneyComma(e.montant_tva), '0,00', '', libelle, ''));
     }
-    lines.push(sageLine('AC', d, numFact, '401', '', numFact, '0,00', moneyComma(e.montant_ttc||0), d, libelle, ''));
+    lines.push(sageLine('ACH', d, numFact, '401', '', numFact, '0,00', moneyComma(e.montant_ttc||0), d, libelle, ''));
   });
   const text = lines.join('\r\n') + '\r\n';
   const bytes = toLatin1Bytes(text);
