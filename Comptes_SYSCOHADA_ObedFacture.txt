@@ -1,0 +1,1092 @@
+Compte	Intitulé	Nature	
+101	Capital social	DIV	
+1011	Capital souscrit, non appelé	DIV	
+1012	Capital souscrit, appelé, non versé	DIV	
+1013	Capital souscrit, appelé, versé, non amorti	DIV	
+1014	Capital souscrit, appelé, versé, amorti	DIV	
+1018	Capital souscrit soumis à des conditions particulières	DIV	
+102	Capital par dotation	DIV	
+1021	Dotation initiale	DIV	
+1022	Dotations complémentaires	DIV	
+1028	Autres dotations	DIV	
+103	Capital personnel	DIV	
+104	Compte de l'exploitant	DIV	
+1041	Apports temporaires	DIV	
+1042	Opérations courantes	DIV	
+1043	Rémunérations, impôts et autres charges personnelles	DIV	
+1047	Prélèvements d'autoconsommation	DIV	
+1048	Autres prélèvements	DIV	
+105	Primes liées aux capitaux propres	DIV	
+1051	Primes d'émission	DIV	
+1052	Primes d'apport	DIV	
+1053	Primes de fusion	DIV	
+1054	Primes de conversion	DIV	
+1058	Autres primes	DIV	
+106	Écarts de réévaluation	DIV	
+1061	Écarts de réévaluation légale	DIV	
+1062	Écarts de réévaluation libre	DIV	
+109	Actionnaires, capital souscrit, non appelé	DIV	
+111	Réserve légale	DIV	
+112	Réserves statutaires ou contractuelles	DIV	
+113	Réserves réglementées	DIV	
+1131	Réserves de plus-values nettes à long terme	DIV	
+1133	Réserves consécutives à l'octroi de subventions d'investisse	DIV	
+1138	Autres réserves réglementées	DIV	
+118	Autres réserves	DIV	
+1181	Réserves facultatives	DIV	
+1188	Réserves diverses	DIV	
+121	Report à nouveau créditeur	DIV	
+129	Report à nouveau débiteur	DIV	
+1291	Perte nette à reporter	DIV	
+1292	Perte - Amortissements réputés différés	DIV	
+130	Résultat en instance d'affectation	DIV	
+1301	Résultat en instance d'affectation : bénéfice	DIV	
+1309	Résultat en instance d'affectation : perte	DIV	
+131	Résultat net : bénéfice	DIV	
+132	Marge brute (MB)	DIV	
+1321	Marge brute sur marchandises	DIV	
+1322	Marge brute sur matières	DIV	
+133	Valeur ajoutée (VA)	DIV	
+134	Excédent brut d'exploitation (EBE)	DIV	
+135	Résultat d'exploitation (RE)	DIV	
+136	Résultat financier (RF)	DIV	
+137	Résultat des activités ordinaires (RAO)	DIV	
+138	Résultat hors activités ordinaires (RHAO)	DIV	
+139	Résultat net : perte	DIV	
+141	Subventions d'équipement A	DIV	
+1411	État	DIV	
+1412	Régions	DIV	
+1413	Départements	DIV	
+1414	Communes et collectivités publiques décentralisées	DIV	
+1415	Entreprises publiques ou mixtes	DIV	
+1416	Entreprises et organismes privés	DIV	
+1417	Organismes internationaux	DIV	
+1418	Autres	DIV	
+142	Subventions d'équipement B	DIV	
+148	Autres subventions d'investissement	DIV	
+151	Amortissements dérogatoires	DIV	
+152	Plus-values de cession à réinvestir	DIV	
+153	Fonds réglementés	DIV	
+1531	Fonds National	DIV	
+1532	Prélèvement pour le Budget	DIV	
+154	Provision spéciale de réévaluation	DIV	
+155	Provisions réglementées relatives aux immobilisations	DIV	
+1551	Reconstitution des gisements miniers et pétroliers	DIV	
+156	Provisions réglementées relatives aux stocks	DIV	
+1561	Hausse de prix	DIV	
+1562	Fluctuation des cours	DIV	
+157	Provisions pour investissement	DIV	
+158	Autres provisions et fonds réglementés	DIV	
+161	Emprunts obligataires	DIV	
+1611	Emprunts obligataires ordinaires	DIV	
+1612	Emprunts obligataires convertibles	DIV	
+1618	Autres emprunts obligataires	DIV	
+162	Emprunts et dettes auprès des établissements de crédit	DIV	
+163	Avances reçues de l'état	DIV	
+164	Avances reçues et comptes courants bloqués	DIV	
+165	Dépôts et cautionnements reçus	DIV	
+1651	Dépôts	DIV	
+1652	Cautionnements	DIV	
+166	Intérêts courus (classe 1 - emprunts)	DIV	
+1661	Intérêts courus sur emprunts obligataires	DIV	
+1662	Intérêts courus sur emprunts et dettes auprès des établissem	DIV	
+1663	Intérêts courus sur avances reçues de l'État	DIV	
+1664	Intérêts courus sur avances reçues et comptes courants bloqu	DIV	
+1665	Intérêts courus sur dépôts et cautionnements reçus	DIV	
+1667	Intérêts courus sur avances assorties de conditions particul	DIV	
+1668	Intérêts courus sur autres emprunts et dettes	DIV	
+167	Avances assorties de conditions particulières	DIV	
+1671	Avances bloquées pour augmentation du capital	DIV	
+1672	Avances conditionnées par l'État	DIV	
+1673	Avances conditionnées par les autres organismes africains	DIV	
+1674	Avances conditionnées par les organismes internationaux	DIV	
+1676	Droits du concédant exigibles en nature	DIV	
+168	Autres emprunts et dettes	DIV	
+1681	Rentes viagères capitalisées	DIV	
+1682	Billets de fonds	DIV	
+1683	Dettes consécutives à des titres empruntés	DIV	
+1684	Dettes du concédant exigibles en nature	DIV	
+1685	Emprunts participatifs	DIV	
+1686	Participation des travailleurs aux bénéfices	DIV	
+172	Emprunts équivalents de crédit-bail immobilier	DIV	
+173	Emprunts équivalents de crédit-bail mobilier	DIV	
+176	Intérêts courus (classe 1 - crédit-bail)	DIV	
+1762	Intérêts courus sur emprunts équivalents de crédit-bail immo	DIV	
+1763	Intérêts courus sur emprunts équivalents de crédit-bail mobi	DIV	
+1768	Intérêts courus sur emprunts équivalents d'autres contrats	DIV	
+178	Emprunts équivalents d'autres contrats	DIV	
+181	Dettes liées à des participations	DIV	
+1811	Dettes liées à des participations (groupe)	DIV	
+1812	Dettes liées à des participations (hors groupe)	DIV	
+182	Dettes liées à des sociétés en participation	DIV	
+183	Intérêts courus sur dettes liées à des participations	DIV	
+184	Comptes permanents bloqués des établissements et succursales	DIV	
+185	Comptes permanents non bloqués des établissements et succurs	DIV	
+186	Comptes de liaison charges	DIV	
+187	Comptes de liaison produits	DIV	
+188	Comptes de liaison des sociétés en participation	DIV	
+191	Provisions pour litiges	DIV	
+192	Provisions pour garanties données aux clients	DIV	
+193	Provisions pour pertes sur marchés à achèvement futur	DIV	
+194	Provisions pour pertes de change	DIV	
+195	Provisions pour impôts	DIV	
+196	Provisions pour pensions et obligations similaires	DIV	
+197	Provisions pour charges à répartir sur plusieurs exercices	DIV	
+1971	Provisions pour grosses réparations	DIV	
+198	Autres provisions financières pour risques et charges	DIV	
+1981	Provisions pour amendes et pénalités	DIV	
+1982	Provisions pour renouvellement des immobilisations (concessi	DIV	
+1983	Provisions de propre assureur	DIV	
+1988	Autres provisions financières pour risques et charges	DIV	
+201	Frais d'établissement	IMO	
+2011	Frais de constitution	IMO	
+2012	Frais de prospection	IMO	
+2013	Frais de publicité et de lancement	IMO	
+2014	Frais de fonctionnement antérieurs au démarrage	IMO	
+2015	Frais de modification du capital (fusions, scissions, transf	IMO	
+2016	Frais d'entrée à la Bourse	IMO	
+2017	Frais de restructuration	IMO	
+2018	Frais divers d'établissement	IMO	
+202	Charges à répartir sur plusieurs exercices	IMO	
+2021	Charges différées	IMO	
+2022	Frais d'acquisition d'immobilisations	IMO	
+2026	Frais d'émission des emprunts	IMO	
+2028	Charges à étaler	IMO	
+206	Primes de remboursement des obligations	IMO	
+2061	Obligations ordinaires	IMO	
+2062	Obligations convertibles	IMO	
+2068	Autres emprunts obligataires	IMO	
+211	Frais de recherche et de développement	IMO	
+212	Brevets, licences, concessions et droits similaires	IMO	
+213	Logiciels	IMO	
+214	Marques	IMO	
+215	Fonds commercial	IMO	
+216	Droit au bail	IMO	
+217	Investissements de création	IMO	
+218	Autres droits et valeurs incorporels	IMO	
+219	Immobilisations incorporelles en cours	IMO	
+2191	Frais de recherche et de développement en cours	IMO	
+2193	Logiciels en cours	IMO	
+2198	Autres droits et valeurs incorporels en cours	IMO	
+221	Terrains agricoles et forestiers	IMO	
+2211	Terrains d'exploitation agricole	IMO	
+2212	Terrains d'exploitation forestière	IMO	
+2218	Autres terrains agricoles et forestiers	IMO	
+222	Terrains nus	IMO	
+2221	Terrains à bâtir	IMO	
+2228	Autres terrains nus	IMO	
+223	Terrains bâtis	IMO	
+2231	Terrains pour bâtiments industriels et agricoles	IMO	
+2232	Terrains pour bâtiments administratifs et commerciaux	IMO	
+2234	Terrains pour bâtiments affectés aux autres opérations profe	IMO	
+2235	Terrains pour bâtiments affectés aux autres opérations non p	IMO	
+2238	Autres terrains bâtis	IMO	
+224	Travaux de mise en valeur des terrains	IMO	
+2241	Plantation d'arbres et d'arbustes	IMO	
+2248	Autres travaux de mise en valeur des terrains	IMO	
+225	Terrains de gisement	IMO	
+2251	Carrières	IMO	
+226	Terrains aménagés	IMO	
+2261	Parkings	IMO	
+227	Terrains mis en concession	IMO	
+228	Autres terrains	IMO	
+2281	Terrains des immeubles de rapport	IMO	
+2285	Terrains des logements affectés au personnel	IMO	
+2288	Autres terrains	IMO	
+229	Aménagements de terrains en cours	IMO	
+2291	Terrains agricoles et forestiers en cours	IMO	
+2292	Terrains nus en cours	IMO	
+2295	Terrains de gisement en cours	IMO	
+2298	Autres terrains en cours	IMO	
+231	Bâtiments industriels, agricoles, administratifs et commerci	IMO	
+2311	Bâtiments industriels (sol propre)	IMO	
+2312	Bâtiments agricoles (sol propre)	IMO	
+2313	Bâtiments administratifs et commerciaux (sol propre)	IMO	
+2314	Bâtiments affectés au logement du personnel (sol propre)	IMO	
+2315	Immeubles de rapport (sol propre)	IMO	
+232	Bâtiments industriels, agricoles, administratifs et commerci	IMO	
+2321	Bâtiments industriels (sol d'autrui)	IMO	
+2322	Bâtiments agricoles (sol d'autrui)	IMO	
+2323	Bâtiments administratifs et commerciaux (sol d'autrui)	IMO	
+2324	Bâtiments affectés au logement du personnel (sol d'autrui)	IMO	
+2325	Immeubles de rapport (sol d'autrui)	IMO	
+233	Ouvrages d'infrastructure	IMO	
+2331	Voies de terre	IMO	
+2332	Voies de fer	IMO	
+2333	Voies d'eau	IMO	
+2334	Barrages, Digues	IMO	
+2335	Pistes d'aérodrome	IMO	
+2338	Autres ouvrages d'infrastructure	IMO	
+234	Installations techniques	IMO	
+2341	Installations complexes spécialisées sur sol propre	IMO	
+2342	Installations complexes spécialisées sur sol d'autrui	IMO	
+2343	Installations à caractère spécifique sur sol propre	IMO	
+2344	Installations à caractère spécifique sur sol d'autrui	IMO	
+235	Aménagements de bureaux	IMO	
+2351	Installations générales	IMO	
+2358	Autres aménagements de bureaux	IMO	
+237	Bâtiments industriels, agricoles et commerciaux mis en conce	IMO	
+238	Autres installations et agencements	IMO	
+239	Bâtiments et installations en cours	IMO	
+241	Matériel et outillage industriel et commercial	IMO	
+2411	Matériel industriel	IMO	
+2412	Outillage industriel	IMO	
+2413	Matériel commercial	IMO	
+2414	Outillage commercial	IMO	
+242	Matériel et outillage agricole	IMO	
+2421	Matériel agricole	IMO	
+2422	Outillage agricole	IMO	
+243	Matériel d'emballage récupérable et identifiable	IMO	
+244	Matériel et mobilier	IMO	
+2441	Matériel de bureau	IMO	
+2442	Matériel informatique	IMO	
+2443	Matériel bureautique	IMO	
+2444	Mobilier de bureau	IMO	
+2446	Matériel et mobilier des immeubles de rapport	IMO	
+2447	Matériel et mobilier des logements du personnel	IMO	
+245	Matériel de transport	IMO	
+2451	Matériel automobile	IMO	
+2452	Matériel ferroviaire	IMO	
+2453	Matériel fluvial, lagunaire	IMO	
+2454	Matériel naval	IMO	
+2455	Matériel aérien	IMO	
+2456	Matériel hippomobile	IMO	
+2458	Autres matériels de transport (vélo, mobylette, moto)	IMO	
+246	Immobilisations animales et agricoles	IMO	
+2461	Cheptel, animaux de trait	IMO	
+2462	Cheptel, animaux reproducteurs	IMO	
+2463	Animaux de garde	IMO	
+2465	Plantations agricoles	IMO	
+2468	Autres immobilisations animales et agricoles	IMO	
+247	Agencements et aménagements du matériel	IMO	
+248	Autres matériels	IMO	
+2481	Collections et œuvres d'art	IMO	
+249	Matériel en cours	IMO	
+2491	Matériel et outillage industriel et commercial en cours	IMO	
+2492	Matériel et outillage agricole en cours	IMO	
+2493	Matériel d'emballage récupérable et identifiable en cours	IMO	
+2494	Matériel et mobilier de bureau en cours	IMO	
+2495	Matériel de transport en cours	IMO	
+2496	Immobilisations animales et agricoles en cours	IMO	
+2497	Agencements et aménagements du matériel en cours	IMO	
+2498	Autres matériels en cours	IMO	
+251	Avances et acomptes versés sur immobilisations incorporelles	IMO	
+252	Avances et acomptes versés sur immobilisations corporelles	IMO	
+261	Titres de participation dans des sociétés sous contrôle excl	IMO	
+262	Titres de participation dans des sociétés sous contrôle conj	IMO	
+263	Titres de participation dans des sociétés conférant une infl	IMO	
+265	Participations dans des organismes professionnels	IMO	
+266	Parts dans des groupements d'intérêt économique (GIE)	IMO	
+268	Autres titres de participation	IMO	
+271	Prêts et créances non commerciales	IMO	
+2711	Prêts participatifs	IMO	
+2712	Prêts aux associés	IMO	
+2713	Billets de fonds	IMO	
+2714	Titres prêtés	IMO	
+272	Prêts au personnel	IMO	
+2721	Prêts immobiliers	IMO	
+2722	Prêts mobiliers et d'installation	IMO	
+2728	Autres prêts (frais d'études…)	IMO	
+273	Créances sur l'État	IMO	
+2731	Retenues de garantie	IMO	
+2733	Fonds réglementé	IMO	
+2738	Autres créances sur l'État	IMO	
+274	Titres immobilisés	IMO	
+2741	Titres immobilisés de l'activité de portefeuille (TIAP)	IMO	
+2742	Titres participatifs	IMO	
+2743	Certificats d'investissement	IMO	
+2744	Parts de fonds commun de placement (FCP)	IMO	
+2748	Autres titres immobilisés	IMO	
+275	Dépôts et cautionnements versés	IMO	
+2751	Dépôts pour loyers d'avance	IMO	
+2752	Dépôts pour l'électricité	IMO	
+2753	Dépôts pour l'eau	IMO	
+2754	Dépôts pour le gaz	IMO	
+2755	Dépôts pour le téléphone, le télex, la télécopie	IMO	
+2756	Cautionnements sur marchés publics	IMO	
+2757	Cautionnements sur autres opérations	IMO	
+2758	Autres dépôts et cautionnements	IMO	
+276	Intérêts courus (immobilisations financières)	IMO	
+2761	Intérêts courus sur prêts et créances non commerciales	IMO	
+2762	Intérêts courus sur prêts au personnel	IMO	
+2763	Intérêts courus sur créances sur l'État	IMO	
+2764	Intérêts courus sur titres immobilisés	IMO	
+2765	Intérêts courus sur dépôts et cautionnements versés	IMO	
+2767	Intérêts courus sur créances rattachées à des participations	IMO	
+2768	Intérêts courus sur immobilisations financières diverses	IMO	
+277	Créances rattachées à des participations et avances à des GI	IMO	
+2771	Créances rattachées à des participations (groupe)	IMO	
+2772	Créances rattachées à des participations (hors groupe)	IMO	
+2773	Créances rattachées à des sociétés en participation	IMO	
+2774	Avances à des Groupements d'intérêt économique (GIE)	IMO	
+278	Immobilisations financières diverses	IMO	
+2781	Créances diverses groupe	IMO	
+2782	Créances diverses hors groupe	IMO	
+2785	Or et métaux précieux	IMO	
+281	Amortissements des immobilisations incorporelles	IMO	
+2811	Amortissements des frais de recherche et de développement	IMO	
+2812	Amortissements des brevets, licences, concessions et droits 	IMO	
+2813	Amortissements des logiciels	IMO	
+2814	Amortissements des marques	IMO	
+2815	Amortissements du fonds commercial	IMO	
+2816	Amortissements du droit au bail	IMO	
+2817	Amortissements des investissements de création	IMO	
+2818	Amortissements des autres droits et valeurs incorporels	IMO	
+282	Amortissements des terrains	IMO	
+2821	Amortissements des terrains agricoles et forestiers	IMO	
+2824	Amortissements des travaux de mise en valeur des terrains	IMO	
+2825	Amortissements des terrains de gisement	IMO	
+283	Amortissements des bâtiments, installations techniques et ag	IMO	
+2831	Amortissements des bâtiments industriels, agricoles, adminis	IMO	
+2832	Amortissements des bâtiments industriels, agricoles, adminis	IMO	
+2833	Amortissements des ouvrages d'infrastructure	IMO	
+2834	Amortissements des installations techniques	IMO	
+2835	Amortissements des aménagements de bureaux	IMO	
+2837	Amortissements des bâtiments mis en concession	IMO	
+2838	Amortissements des autres installations et agencements	IMO	
+284	Amortissements du matériel	IMO	
+2841	Amortissements du matériel et outillage industriel et commer	IMO	
+2842	Amortissements du matériel et outillage agricole	IMO	
+2843	Amortissements du matériel d'emballage récupérable et identi	IMO	
+2844	Amortissements du matériel et mobilier	IMO	
+2845	Amortissements du matériel de transport	IMO	
+2846	Amortissements des immobilisations animales et agricoles	IMO	
+2847	Amortissements des agencements et aménagements du matériel	IMO	
+2848	Amortissements des autres matériels	IMO	
+291	Provisions pour dépréciation des immobilisations incorporell	IMO	
+2912	Provisions pour dépréciation des brevets, licences, concessi	IMO	
+2913	Provisions pour dépréciation des logiciels	IMO	
+2914	Provisions pour dépréciation des marques	IMO	
+2915	Provisions pour dépréciation du fonds commercial	IMO	
+2916	Provisions pour dépréciation du droit au bail	IMO	
+2917	Provisions pour dépréciation des investissements de création	IMO	
+2918	Provisions pour dépréciation des autres droits et valeurs in	IMO	
+2919	Provisions pour dépréciation des immobilisations incorporell	IMO	
+292	Provisions pour dépréciation des terrains	IMO	
+293	Provisions pour dépréciation des bâtiments, installations te	IMO	
+294	Provisions pour dépréciation de matériel	IMO	
+295	Provisions pour dépréciation des avances et acomptes versés 	IMO	
+296	Provisions pour dépréciation des titres de participation	IMO	
+297	Provisions pour dépréciation des autres immobilisations fina	IMO	
+311	Marchandises A	DIV	
+3111	Marchandises A1	DIV	
+3112	Marchandises A2	DIV	
+312	Marchandises B	DIV	
+3121	Marchandises B1	DIV	
+3122	Marchandises B2	DIV	
+318	Marchandises hors activités ordinaires (HAO)	DIV	
+321	Matières A	DIV	
+322	Matières B	DIV	
+323	Fournitures liées (A, B)	DIV	
+331	Matières consommables	DIV	
+332	Fournitures d'atelier et d'usine	DIV	
+333	Fournitures de magasin	DIV	
+334	Fournitures de bureau	DIV	
+335	Emballages	DIV	
+3351	Emballages perdus	DIV	
+3352	Emballages récupérables non identifiables	DIV	
+3353	Emballages à usage mixte	DIV	
+3358	Autres emballages	DIV	
+338	Autres matières	DIV	
+341	Produits en cours	DIV	
+3411	Produits en cours P1	DIV	
+3412	Produits en cours P2	DIV	
+342	Travaux en cours	DIV	
+3421	Travaux en cours T1	DIV	
+3422	Travaux en cours T2	DIV	
+343	Produits intermédiaires en cours	DIV	
+3431	Produits intermédiaires en cours A	DIV	
+3432	Produits intermédiaires en cours B	DIV	
+344	Produits résiduels en cours	DIV	
+3441	Produits résiduels en cours A	DIV	
+3442	Produits résiduels en cours B	DIV	
+351	Études en cours	DIV	
+3511	Études en cours E1	DIV	
+3512	Études en cours E2	DIV	
+352	Prestations de services en cours	DIV	
+3521	Prestations de services en cours S1	DIV	
+3522	Prestations de services en cours S2	DIV	
+361	Produits finis A	DIV	
+362	Produits finis B	DIV	
+371	Produits intermédiaires	DIV	
+3711	Produits intermédiaires A	DIV	
+3712	Produits intermédiaires B	DIV	
+372	Produits résiduels	DIV	
+3721	Déchets	DIV	
+3722	Rebuts	DIV	
+3723	Matières de récupération	DIV	
+381	Marchandises en cours de route	DIV	
+382	Matières premières et fournitures liées en cours de route	DIV	
+383	Autres approvisionnements en cours de route	DIV	
+386	Produits finis en cours de route	DIV	
+387	Stock en consignation ou en dépôt	DIV	
+3871	Stock en consignation	DIV	
+3872	Stock en dépôt	DIV	
+388	Stock provenant d'immobilisations mises hors service ou au r	DIV	
+391	Dépréciations des stocks de marchandises	DIV	
+392	Dépréciations des stocks de matières premières et fourniture	DIV	
+393	Dépréciations des stocks d'autres approvisionnements	DIV	
+394	Dépréciations des productions en cours	DIV	
+395	Dépréciations des services en cours	DIV	
+396	Dépréciations des stocks de produits finis	DIV	
+397	Dépréciations des stocks de produits intermédiaires et résid	DIV	
+398	Dépréciations des stocks en cours de route, en consignation 	DIV	
+401	Fournisseurs, dettes en compte	COF	
+4011	Fournisseurs	COF	
+4012	Fournisseurs Groupe	COF	
+4013	Fournisseurs sous-traitants	COF	
+4017	Fournisseurs, retenues de garantie	COF	
+402	Fournisseurs, effets à payer	COF	
+4021	Fournisseurs, Effets à payer	COF	
+4022	Fournisseurs - Groupe, Effets à payer	COF	
+4023	Fournisseurs sous-traitants, Effets à payer	COF	
+408	Fournisseurs, factures non parvenues	COF	
+4081	Fournisseurs - factures non parvenues	COF	
+4082	Fournisseurs - Groupe - factures non parvenues	COF	
+4083	Fournisseurs sous-traitants - factures non parvenues	COF	
+4086	Fournisseurs, intérêts courus	COF	
+409	Fournisseurs débiteurs	COF	
+4091	Fournisseurs avances et acomptes versés	COF	
+4092	Fournisseurs - Groupe avances et acomptes versés	COF	
+4093	Fournisseurs sous-traitants avances et acomptes versés	COF	
+4094	Fournisseurs créances pour emballages et matériels à rendre	COF	
+4098	Rabais, Remises, Ristournes et autres avoirs à obtenir	COF	
+411	Clients	COC	
+4111	Clients	COC	
+4112	Clients - Groupe	COC	
+4114	Clients, État et Collectivités publiques	COC	
+4115	Clients, organismes internationaux	COC	
+4117	Client, retenues de garantie	COC	
+4118	Clients, dégrèvement de taxes sur la valeur ajoutée (TVA)	COC	
+412	Clients, effets à recevoir en portefeuille	COC	
+4121	Clients, Effets à recevoir	COC	
+4122	Clients - Groupe, Effets à recevoir	COC	
+4124	État et Collectivités publiques, Effets à recevoir	COC	
+4125	Organismes Internationaux, Effets à recevoir	COC	
+414	Créances sur cessions d'immobilisations	COC	
+4141	Créances en compte (cessions d'immobilisations)	COC	
+4142	Effets à recevoir (cessions d'immobilisations)	COC	
+415	Clients, effets escomptés non échus	COC	
+416	Créances clients litigieuses ou douteuses	COC	
+4161	Créances litigieuses	COC	
+4162	Créances douteuses	COC	
+418	Clients, produits à recevoir	COC	
+4181	Clients, factures à établir	COC	
+4186	Clients, intérêts courus	COC	
+419	Clients créditeurs	COC	
+4191	Clients, avances et acomptes reçus	COC	
+4192	Clients - Groupe, avances et acomptes reçus	COC	
+4194	Clients, dettes pour emballages et matériels consignés	COC	
+4198	Rabais, Remises, Ristournes et autres avoirs à accorder	COC	
+421	Personnel, avances et acomptes	DIV	
+4211	Personnel, avances	DIV	
+4212	Personnel, acomptes	DIV	
+4213	Frais avancés et fournitures au personnel	DIV	
+422	Personnel, rémunérations dues	DIV	
+423	Personnel, oppositions, saisies-arrêts	DIV	
+4231	Personnel, oppositions	DIV	
+4232	Personnel, saisies-arrêts	DIV	
+4233	Personnel, avis à tiers détenteur	DIV	
+424	Personnel, œuvres sociales internes	DIV	
+4241	Assistance médicale	DIV	
+4242	Allocations familiales	DIV	
+4245	Organismes sociaux rattachés à l'entreprise	DIV	
+4248	Autres œuvres sociales internes	DIV	
+425	Représentants du personnel	DIV	
+4251	Délégués du personnel	DIV	
+4252	Syndicats et Comités d'entreprises, d'Établissement	DIV	
+4258	Autres représentants du personnel	DIV	
+426	Personnel, participation aux bénéfices	DIV	
+427	Personnel - dépôts	DIV	
+428	Personnel, charges à payer et produits à recevoir	DIV	
+4281	Dettes provisionnées pour congés à payer	DIV	
+4286	Autres charges à payer (personnel)	DIV	
+4287	Produits à recevoir (personnel)	DIV	
+431	Sécurité sociale	DIV	
+4311	Prestations familiales	DIV	
+4312	Accidents de travail	DIV	
+4313	Caisse de retraite obligatoire	DIV	
+4314	Caisse de retraite facultative	DIV	
+4318	Autres cotisations sociales	DIV	
+432	Caisses de retraite complémentaire	DIV	
+433	Autres organismes sociaux	DIV	
+4331	Mutuelle	DIV	
+438	Organismes sociaux, charges à payer et produits à recevoir	DIV	
+4381	Charges sociales sur gratifications à payer	DIV	
+4382	Charges sociales sur congés à payer	DIV	
+4386	Autres charges à payer (organismes sociaux)	DIV	
+4387	Produits à recevoir (organismes sociaux)	DIV	
+441	État, impôt sur les bénéfices	DIV	
+442	État, autres impôts et taxes	DIV	
+4421	Impôts et taxes d'État	DIV	
+4422	Impôts et taxes pour les collectivités publiques	DIV	
+4423	Impôts et taxes recouvrables sur des obligataires	DIV	
+4424	Impôts et taxes recouvrables sur des associés	DIV	
+4426	Droits de douane	DIV	
+4428	Autres impôts et taxes	DIV	
+443	État, TVA facturée	DIV	
+4431	TVA facturée sur ventes	DIV	
+4432	TVA facturée sur prestations de services	DIV	
+4433	TVA facturée sur travaux	DIV	
+4334	TVA facturée sur production livrée à soi-même	DIV	
+4335	TVA sur factures à établir	DIV	
+444	État, TVA due ou crédit de TVA	DIV	
+4441	État, TVA due	DIV	
+4449	État, crédit de TVA à reporter	DIV	
+445	État, TVA récupérable	DIV	
+4451	TVA récupérable sur immobilisations	DIV	
+4452	TVA récupérable sur achats	DIV	
+4453	TVA récupérable sur transport	DIV	
+4454	TVA récupérable sur services extérieurs et autres charges	DIV	
+4455	TVA récupérable sur factures non parvenues	DIV	
+4456	TVA transférée par d'autres entreprises	DIV	
+446	État, autres taxes sur le chiffre d'affaires	DIV	
+447	État, impôts retenus à la source	DIV	
+4471	Impôt Général sur le revenu	DIV	
+4472	Impôts sur salaires	DIV	
+4473	Contribution nationale	DIV	
+4474	Contribution nationale de solidarité	DIV	
+4478	Autres impôts et contributions	DIV	
+448	État, charges à payer et produits à recevoir	DIV	
+4486	Charges à payer (État)	DIV	
+4487	Produits à recevoir (État)	DIV	
+449	État, créances et dettes diverses	DIV	
+4491	État, obligations cautionnées	DIV	
+4492	État, avances et acomptes versés sur impôts	DIV	
+4493	État, fonds de dotation à recevoir	DIV	
+4494	État, subventions d'équipement à recevoir	DIV	
+4495	État, subventions d'exploitation à recevoir	DIV	
+4496	État, subventions d'équilibre à recevoir	DIV	
+4499	État, fonds réglementé provisionné	DIV	
+451	Opérations avec les organismes africains	DIV	
+452	Opérations avec les autres organismes internationaux	DIV	
+458	Organismes internationaux, fonds de dotation et subventions 	DIV	
+4581	Organismes internationaux, fonds de dotation à recevoir	DIV	
+4582	Organismes internationaux, subventions à recevoir	DIV	
+461	Associés, opérations sur le capital	DIV	
+4611	Associés apports en nature	DIV	
+4612	Associés apports en numéraire	DIV	
+4613	Actionnaires, capital souscrit appelé non versé	DIV	
+4614	Associés, capital appelé non versé	DIV	
+4615	Associés, versements reçus sur augmentation de capital	DIV	
+4616	Associés, versements anticipés	DIV	
+4617	Actionnaires défaillants	DIV	
+4618	Associés, autres apports	DIV	
+4619	Associés, capital à rembourser	DIV	
+462	Associés, comptes courants	DIV	
+4621	Principal (comptes courants associés)	DIV	
+4626	Intérêts courus (comptes courants associés)	DIV	
+463	Associés, opérations faites en commun	DIV	
+465	Associés, dividendes à payer	DIV	
+466	Groupe, comptes courants	DIV	
+467	Actionnaires, restant dû sur capital appelé	DIV	
+471	Comptes d'attente	DIV	
+4711	Débiteurs divers	DIV	
+4712	Créditeurs divers	DIV	
+472	Versements restant à effectuer sur titres non libérés	DIV	
+4726	Titres de participation (versements restants)	DIV	
+4727	Titres immobilisés (versements restants)	DIV	
+4728	Titres de placement (versements restants)	DIV	
+474	Répartition périodique des charges et des produits	DIV	
+4746	Charges (répartition périodique)	DIV	
+4747	Produits (répartition périodique)	DIV	
+475	Créances sur travaux non encore facturables	DIV	
+476	Charges constatées d'avance	DIV	
+477	Produits constatés d'avance	DIV	
+478	Écarts de conversion - actif	DIV	
+4781	Diminution des créances	DIV	
+4782	Augmentation des dettes	DIV	
+4788	Différences compensées par couverture de change (actif)	DIV	
+479	Écarts de conversion - passif	DIV	
+4791	Augmentation des créances	DIV	
+4792	Diminution des dettes	DIV	
+4798	Différences compensées par couverture de change (passif)	DIV	
+481	Fournisseurs d'investissements	DIV	
+4811	Immobilisations incorporelles (fournisseurs)	DIV	
+4812	Immobilisations corporelles (fournisseurs)	DIV	
+4817	Retenues de garantie (fournisseurs d'investissements)	DIV	
+4818	Factures non parvenues (fournisseurs d'investissements)	DIV	
+482	Fournisseurs d'investissements, effets à payer	DIV	
+483	Dettes sur acquisition de titres de placement	DIV	
+484	Autres dettes hors activités ordinaires (HAO)	DIV	
+485	Créances sur cessions d'immobilisations (HAO)	DIV	
+4851	En compte (cessions d'immobilisations HAO)	DIV	
+4852	Effets à recevoir (cessions d'immobilisations HAO)	DIV	
+4857	Retenues de garantie (cessions d'immobilisations HAO)	DIV	
+4858	Factures à établir (cessions d'immobilisations HAO)	DIV	
+486	Créances sur cessions de titres de placement	DIV	
+488	Autres créances hors activités ordinaires (HAO)	DIV	
+490	Dépréciations des comptes fournisseurs	DIV	
+491	Dépréciations des comptes clients	DIV	
+4911	Créances litigieuses (clients)	DIV	
+4912	Créances douteuses (clients)	DIV	
+492	Dépréciations des comptes personnel	DIV	
+493	Dépréciations des comptes organismes sociaux	DIV	
+494	Dépréciations des comptes état et collectivités publiques	DIV	
+495	Dépréciations des comptes organismes internationaux	DIV	
+496	Dépréciations des comptes associés et groupe	DIV	
+4962	Associés, comptes courants (dépréciations)	DIV	
+4963	Associés, opérations faites en commun (dépréciations)	DIV	
+4966	Groupe, comptes courants (dépréciations)	DIV	
+497	Dépréciations des comptes débiteurs divers	DIV	
+498	Dépréciations des comptes de créances HAO	DIV	
+4981	Créances sur cessions d'immobilisations (dépréciations)	DIV	
+4982	Créances sur cessions de titres de placement (dépréciations)	DIV	
+4983	Autres créances HAO (dépréciations)	DIV	
+499	Risques provisionnés	DIV	
+4991	Sur opérations d'exploitation	DIV	
+4998	Sur opérations HAO	DIV	
+501	Titres du trésor et bons de caisse à court terme	BQE	
+5011	Titres du Trésor à court terme	BQE	
+5012	Titres d'organismes financiers	BQE	
+5013	Bons de caisse à court terme	BQE	
+502	Actions	BQE	
+5021	Actions propres	BQE	
+5022	Actions cotées	BQE	
+5023	Actions non cotées	BQE	
+5024	Actions démembrées (certificats d'investissement, droits de 	BQE	
+5025	Autres titres conférant un droit de propriété	BQE	
+503	Obligations	BQE	
+5031	Obligations émises par la société et rachetées par elle	BQE	
+5032	Obligations cotées	BQE	
+5033	Obligations non cotées	BQE	
+5035	Autres titres conférant un droit de créance	BQE	
+504	Bons de souscription	BQE	
+5042	Bons de souscription d'actions	BQE	
+5043	Bons de souscription d'obligations	BQE	
+505	Titres négociables hors région	BQE	
+506	Intérêts courus (titres de placement)	BQE	
+5061	Titres du Trésor et bons de caisse à court terme (intérêts c	BQE	
+5062	Actions (intérêts courus)	BQE	
+5063	Obligations (intérêts courus)	BQE	
+508	Autres valeurs assimilées	BQE	
+511	Effets à encaisser	BQE	
+512	Effets à l'encaissement	BQE	
+513	Chèques à encaisser	BQE	
+514	Chèques à l'encaissement	BQE	
+515	Cartes de crédit à encaisser	BQE	
+518	Autres valeurs à l'encaissement	BQE	
+5181	Warrants	BQE	
+5182	Billets de fonds (valeurs à l'encaissement)	BQE	
+5185	Chèques de voyage	BQE	
+5186	Coupons échus	BQE	
+5187	Intérêts échus des obligations	BQE	
+521	Banques locales	BQE	
+5211	Banque X	BQE	
+5212	Banque Y	BQE	
+522	Banques autres États région	BQE	
+523	Banques autres États zone monétaire	BQE	
+524	Banques hors zone monétaire	BQE	
+526	Banques, intérêts courus	BQE	
+531	Chèques postaux	BQE	
+532	Trésor	BQE	
+533	Sociétés de gestion et d'intermédiation (SGI)	BQE	
+536	Établissements financiers, intérêts courus	BQE	
+538	Autres organismes financiers	BQE	
+541	Options de taux d'intérêt	BQE	
+542	Options de taux de change	BQE	
+543	Options de taux boursiers	BQE	
+544	Instruments de marchés à terme	BQE	
+545	Avoirs d'or et autres métaux précieux	BQE	
+561	Crédits de trésorerie	BQE	
+564	Escompte de crédits de campagne	BQE	
+565	Escompte de crédits ordinaires	BQE	
+566	Banques, crédits de trésorerie, intérêts courus	BQE	
+571	Caisse siège social	CAI	
+5711	Caisse siège social en unités monétaires légales	CAI	
+5712	Caisse siège social en devises	CAI	
+572	Caisse succursale A	CAI	
+5721	Caisse succursale A en unités monétaires légales	CAI	
+5722	Caisse succursale A en devises	CAI	
+573	Caisse succursale B	CAI	
+5731	Caisse succursale B en unités monétaires légales	CAI	
+5732	Caisse succursale B en devises	CAI	
+581	Régies d'avance	BQE	
+582	Accréditifs	BQE	
+585	Virements de fonds	BQE	
+588	Autres virements internes	BQE	
+590	Dépréciations des titres de placement	BQE	
+591	Dépréciations des titres et valeurs à encaisser	BQE	
+592	Dépréciations des comptes banques	BQE	
+593	Dépréciations des comptes établissements financiers et assim	BQE	
+594	Dépréciations des comptes d'instruments de trésorerie	BQE	
+599	Risques provisionnés à caractère financier	BQE	
+601	Achats de marchandises	CHA	
+6011	Achats de marchandises dans la Région	CHA	
+6012	Achats de marchandises hors Région	CHA	
+6013	Achats de marchandises aux entreprises du groupe dans la Rég	CHA	
+6014	Achats de marchandises aux entreprises du groupe hors Région	CHA	
+6019	Rabais, Remises et Ristournes obtenus sur marchandises (non 	CHA	
+602	Achats de matières premières et fournitures liées	CHA	
+6021	Achats matières premières dans la Région	CHA	
+6022	Achats matières premières hors Région	CHA	
+6023	Achats matières premières aux entreprises du groupe dans la 	CHA	
+6024	Achats matières premières aux entreprises du groupe hors Rég	CHA	
+6029	Rabais, Remises et Ristournes obtenus sur matières premières	CHA	
+603	Variations des stocks de biens achetés	CHA	
+6031	Variations des stocks de marchandises	CHA	
+6032	Variations des stocks de matières premières et fournitures l	CHA	
+6033	Variations des stocks d'autres approvisionnements	CHA	
+604	Achats stockés de matières et fournitures consommables	CHA	
+6041	Matières consommables	CHA	
+6042	Matières combustibles	CHA	
+6043	Produits d'entretien	CHA	
+6044	Fournitures d'atelier et d'usine	CHA	
+6046	Fournitures de magasin	CHA	
+6047	Fournitures de bureau (achats stockés)	CHA	
+6049	Rabais, Remises et Ristournes obtenus (matières et fournitur	CHA	
+605	Autres achats	CHA	
+6051	Fournitures non stockables - Eau	CHA	
+6052	Fournitures non stockables - Électricité	CHA	
+6053	Fournitures non stockables - Autres énergies	CHA	
+6054	Fournitures d'entretien non stockables	CHA	
+6055	Fournitures de bureau non stockables	CHA	
+6056	Achats de petit matériel et outillage	CHA	
+6057	Achats d'études et prestations de services	CHA	
+6058	Achats de travaux, matériels et équipements	CHA	
+6059	Rabais, Remises et Ristournes obtenus (autres achats)	CHA	
+608	Achats d'emballages	CHA	
+6081	Emballages perdus (achats)	CHA	
+6082	Emballages récupérables non identifiables (achats)	CHA	
+6083	Emballages à usage mixte (achats)	CHA	
+6089	Rabais, Remises et Ristournes obtenus (emballages)	CHA	
+611	Transports sur achats	CHA	
+612	Transports sur ventes	CHA	
+613	Transports pour le compte de tiers	CHA	
+614	Transports du personnel	CHA	
+616	Transports de plis	CHA	
+618	Autres frais de transport	CHA	
+6181	Voyages et déplacements	CHA	
+6182	Transports entre établissements ou chantiers	CHA	
+6183	Transports administratifs	CHA	
+621	Sous-traitance générale	CHA	
+622	Locations et charges locatives	CHA	
+6221	Locations de terrains	CHA	
+6222	Locations de bâtiments	CHA	
+6223	Locations de matériels et outillages	CHA	
+6224	Malis sur emballages	CHA	
+6225	Locations d'emballages	CHA	
+6228	Locations et charges locatives diverses	CHA	
+623	Redevances de crédit-bail et contrats assimilés	CHA	
+6232	Crédit-bail immobilier	CHA	
+6233	Crédit-bail mobilier	CHA	
+6235	Contrats assimilés (crédit-bail)	CHA	
+624	Entretien, réparations et maintenance	CHA	
+6241	Entretien et réparations des biens immobiliers	CHA	
+6242	Entretien et réparations des biens mobiliers	CHA	
+6243	Maintenance	CHA	
+6248	Autres entretiens et réparations	CHA	
+625	Primes d'assurance	CHA	
+6251	Assurances multirisques	CHA	
+6252	Assurances matériel de transport	CHA	
+6253	Assurances risques d'exploitation	CHA	
+6254	Assurances responsabilité du producteur	CHA	
+6255	Assurances insolvabilité clients	CHA	
+6256	Assurances transport sur achats	CHA	
+6257	Assurances transport sur ventes	CHA	
+6258	Autres primes d'assurances	CHA	
+626	Études, recherches et documentation	CHA	
+6261	Études et recherches	CHA	
+6265	Documentation générale	CHA	
+6266	Documentation technique	CHA	
+627	Publicité, publications, relations publiques	CHA	
+6271	Annonces, insertions	CHA	
+6272	Catalogues, imprimés publicitaires	CHA	
+6273	Échantillons	CHA	
+6274	Foires et expositions	CHA	
+6275	Publications	CHA	
+6276	Cadeaux à la clientèle	CHA	
+6277	Frais de colloques, séminaires, conférences	CHA	
+6278	Autres charges de publicité et relations publiques	CHA	
+628	Frais de télécommunications	CHA	
+6281	Frais de téléphone	CHA	
+6282	Frais de télex	CHA	
+6283	Frais de télécopie	CHA	
+6288	Autres frais de télécommunications	CHA	
+631	Frais bancaires	CHA	
+6311	Frais sur titres (achat, vente, garde)	CHA	
+6312	Frais sur effets	CHA	
+6313	Location de coffres	CHA	
+6315	Commissions sur cartes de crédit	CHA	
+6316	Frais d'émission d'emprunts	CHA	
+6318	Autres frais bancaires	CHA	
+632	Rémunérations d'intermédiaires et de conseils	CHA	
+6321	Commissions et courtages sur achats	CHA	
+6322	Commissions et courtages sur ventes	CHA	
+6323	Rémunérations des transitaires	CHA	
+6324	Honoraires	CHA	
+6325	Frais d'actes et de contentieux	CHA	
+6328	Divers frais (intermédiaires et conseils)	CHA	
+633	Frais de formation du personnel	CHA	
+634	Redevances pour brevets, licences, logiciels et droits simil	CHA	
+6342	Redevances pour brevets, licences, concessions et droits sim	CHA	
+6343	Redevances pour logiciels	CHA	
+6344	Redevances pour marques	CHA	
+635	Cotisations	CHA	
+6351	Cotisations	CHA	
+6358	Concours divers	CHA	
+637	Rémunérations de personnel extérieur à l'entreprise	CHA	
+6371	Personnel intérimaire	CHA	
+6372	Personnel détaché ou prêté à l'entreprise	CHA	
+638	Autres charges externes	CHA	
+6381	Frais de recrutement du personnel	CHA	
+6382	Frais de déménagement	CHA	
+6383	Réceptions	CHA	
+6384	Missions	CHA	
+641	Impôts et taxes directs	CHA	
+6411	Impôts fonciers et taxes annexes	CHA	
+6412	Patentes, licences et taxes annexes	CHA	
+6413	Taxes sur appointements et salaires	CHA	
+6414	Taxes d'apprentissage	CHA	
+6415	Formation professionnelle continue	CHA	
+6418	Autres impôts et taxes directs	CHA	
+645	Impôts et taxes indirects	CHA	
+646	Droits d'enregistrement	CHA	
+6461	Droits de mutation	CHA	
+6462	Droits de timbre	CHA	
+6463	Taxes sur les véhicules de société	CHA	
+6464	Vignettes	CHA	
+6468	Autres droits d'enregistrement	CHA	
+647	Pénalités et amendes fiscales	CHA	
+6471	Pénalités d'assiette, impôts directs	CHA	
+6472	Pénalités d'assiette, impôts indirects	CHA	
+6473	Pénalités de recouvrement, impôts directs	CHA	
+6474	Pénalités de recouvrement, impôts indirects	CHA	
+6478	Autres amendes pénales et fiscales	CHA	
+648	Autres impôts et taxes	CHA	
+651	Pertes sur créances clients et autres débiteurs	CHA	
+6511	Clients (pertes sur créances)	CHA	
+6515	Autres débiteurs (pertes sur créances)	CHA	
+652	Quote-part de résultat sur opérations faites en commun	CHA	
+6521	Quote-part transférée de bénéfices (comptabilité du gérant)	CHA	
+6525	Pertes imputées par transfert (comptabilité des associés non	CHA	
+653	Quote-part de résultat annulée sur exécution partielle de co	CHA	
+654	Valeur comptable des cessions courantes d'immobilisations	CHA	
+658	Charges diverses	CHA	
+6581	Jetons de présence et autres rémunérations d'administrateurs	CHA	
+6582	Dons	CHA	
+6583	Mécénat	CHA	
+659	Charges provisionnées d'exploitation	CHA	
+6591	Sur risques à court terme	CHA	
+6593	Sur stocks	CHA	
+6594	Sur créances	CHA	
+6598	Autres charges provisionnées	CHA	
+661	Rémunérations directes versées au personnel national	CHA	
+6611	Appointements salaires et commissions (personnel national)	CHA	
+6612	Primes et gratifications (personnel national)	CHA	
+6613	Congés payés (personnel national)	CHA	
+6614	Indemnités de préavis, de licenciement et de recherche d'emb	CHA	
+6615	Indemnités de maladie versées aux travailleurs (national)	CHA	
+6616	Supplément familial (national)	CHA	
+6617	Avantages en nature (national)	CHA	
+6618	Autres rémunérations directes (national)	CHA	
+662	Rémunérations directes versées au personnel non national	CHA	
+6621	Appointements salaires et commissions (personnel non nationa	CHA	
+6622	Primes et gratifications (personnel non national)	CHA	
+6623	Congés payés (personnel non national)	CHA	
+6624	Indemnités de préavis, de licenciement et de recherche d'emb	CHA	
+6625	Indemnités de maladie versées aux travailleurs (non national	CHA	
+6626	Supplément familial (non national)	CHA	
+6627	Avantages en nature (non national)	CHA	
+6628	Autres rémunérations directes (non national)	CHA	
+663	Indemnités forfaitaires versées au personnel	CHA	
+6631	Indemnités de logement	CHA	
+6632	Indemnités de représentation	CHA	
+6633	Indemnités d'expatriation	CHA	
+6638	Autres indemnités et avantages divers	CHA	
+664	Charges sociales	CHA	
+6641	Charges sociales sur rémunération du personnel national	CHA	
+6642	Charges sociales sur rémunération du personnel non national	CHA	
+666	Rémunérations et charges sociales de l'exploitant individuel	CHA	
+6661	Rémunération du travail de l'exploitant	CHA	
+6662	Charges sociales (exploitant individuel)	CHA	
+667	Rémunération transférée de personnel extérieur	CHA	
+6671	Personnel intérimaire (rémunération transférée)	CHA	
+6672	Personnel détaché ou prêté à l'entreprise (rémunération tran	CHA	
+668	Autres charges sociales	CHA	
+6681	Versements aux syndicats et comités d'entreprise, d'établiss	CHA	
+6682	Versements aux comités d'hygiène et de sécurité	CHA	
+6683	Versements aux autres œuvres sociales	CHA	
+6684	Médecine du travail et pharmacie	CHA	
+671	Intérêts des emprunts	CHA	
+6711	Emprunts obligataires (intérêts)	CHA	
+6712	Emprunts auprès des établissements de crédit (intérêts)	CHA	
+6713	Dettes liées à des participations (intérêts)	CHA	
+672	Intérêts dans loyers de crédit-bail et contrats assimilés	CHA	
+6721	Intérêts dans loyers de crédit-bail immobilier	CHA	
+6722	Intérêts dans loyers de crédit-bail mobilier	CHA	
+6723	Intérêts dans loyers des autres contrats	CHA	
+673	Escomptes accordés	CHA	
+674	Autres intérêts	CHA	
+6741	Avances reçues et dépôts créditeurs (autres intérêts)	CHA	
+6742	Comptes courants bloqués (autres intérêts)	CHA	
+6743	Intérêts sur obligations cautionnées	CHA	
+6744	Intérêts sur dettes commerciales	CHA	
+6745	Intérêts bancaires et sur opérations de trésorerie et d'esco	CHA	
+6748	Intérêts sur dettes diverses	CHA	
+675	Escomptes des effets de commerce	CHA	
+676	Pertes de change	CHA	
+677	Pertes sur cessions de titres de placement	CHA	
+678	Pertes sur risques financiers	CHA	
+6781	Sur rentes viagères	CHA	
+6782	Sur opérations financières	CHA	
+6784	Sur instruments de trésorerie	CHA	
+679	Charges provisionnées financières	CHA	
+6791	Sur risques financiers	CHA	
+6795	Sur titres de placement	CHA	
+6798	Autres charges provisionnées financières	CHA	
+681	Dotations aux amortissements d'exploitation	CHA	
+6811	Dotations aux amortissements des charges immobilisées	CHA	
+6812	Dotations aux amortissements des immobilisations incorporell	CHA	
+6813	Dotations aux amortissements des immobilisations corporelles	CHA	
+687	Dotations aux amortissements à caractère financier	CHA	
+6872	Dotations aux amortissements des primes de remboursement des	CHA	
+6878	Autres dotations aux amortissements à caractère financier	CHA	
+691	Dotations aux provisions d'exploitation	CHA	
+6911	Pour risques et charges (dotations provisions d'exploitation	CHA	
+6912	Pour grosses réparations	CHA	
+6913	Pour dépréciation des immobilisations incorporelles	CHA	
+6914	Pour dépréciation des immobilisations corporelles	CHA	
+697	Dotations aux provisions financières	CHA	
+6971	Pour risques et charges (dotations provisions financières)	CHA	
+6972	Pour dépréciation des immobilisations financières	CHA	
+701	Ventes de marchandises	PRO	
+7011	Ventes de marchandises dans la Région	PRO	
+7012	Ventes de marchandises hors Région	PRO	
+7013	Ventes de marchandises aux entreprises du groupe dans la Rég	PRO	
+7014	Ventes de marchandises aux entreprises du groupe hors Région	PRO	
+702	Ventes de produits finis	PRO	
+7021	Ventes de produits finis dans la Région	PRO	
+7022	Ventes de produits finis hors Région	PRO	
+7023	Ventes de produits finis aux entreprises du groupe dans la R	PRO	
+7024	Ventes de produits finis aux entreprises du groupe hors Régi	PRO	
+703	Ventes de produits intermédiaires	PRO	
+7031	Ventes de produits intermédiaires dans la Région	PRO	
+7032	Ventes de produits intermédiaires hors Région	PRO	
+7033	Ventes de produits intermédiaires aux entreprises du groupe 	PRO	
+7034	Ventes de produits intermédiaires aux entreprises du groupe 	PRO	
+704	Ventes de produits résiduels	PRO	
+7041	Ventes de produits résiduels dans la Région	PRO	
+7042	Ventes de produits résiduels hors Région	PRO	
+7043	Ventes de produits résiduels aux entreprises du groupe dans 	PRO	
+7044	Ventes de produits résiduels aux entreprises du groupe hors 	PRO	
+705	Travaux facturés	PRO	
+7051	Travaux facturés dans la Région	PRO	
+7052	Travaux facturés hors Région	PRO	
+7053	Travaux facturés aux entreprises du groupe dans la Région	PRO	
+7054	Travaux facturés aux entreprises du groupe hors Région	PRO	
+706	Services vendus	PRO	
+7061	Services vendus dans la Région	PRO	
+7062	Services vendus hors Région	PRO	
+7063	Services vendus aux entreprises du groupe dans la Région	PRO	
+7064	Services vendus aux entreprises du groupe hors Région	PRO	
+707	Produits accessoires	PRO	
+7071	Ports, emballages perdus et autres frais facturés	PRO	
+7072	Commissions et courtages	PRO	
+7073	Locations	PRO	
+7074	Bonis sur reprises et cessions d'emballages	PRO	
+7075	Mise à disposition de personnel	PRO	
+7076	Redevances pour brevets, logiciels, marques et droits simila	PRO	
+7077	Services exploités dans l'intérêt du personnel	PRO	
+7078	Autres produits accessoires	PRO	
+711	Subventions d'exploitation sur produits à l'exportation	PRO	
+712	Subventions d'exploitation sur produits à l'importation	PRO	
+713	Subventions d'exploitation sur produits de péréquation	PRO	
+718	Autres subventions d'exploitation	PRO	
+7181	Versées par l'État et les collectivités publiques	PRO	
+7182	Versées par les organismes internationaux	PRO	
+7183	Versées par des tiers	PRO	
+721	Production immobilisée - Immobilisations incorporelles	PRO	
+722	Production immobilisée - Immobilisations corporelles	PRO	
+726	Production immobilisée - Immobilisations financières	PRO	
+734	Variations des stocks de produits en cours	PRO	
+7341	Produits en cours (variations)	PRO	
+7342	Travaux en cours (variations)	PRO	
+735	Variations des en-cours de services	PRO	
+7351	Études en cours (variations)	PRO	
+7352	Prestations de services en cours (variations)	PRO	
+736	Variations des stocks de produits finis	PRO	
+737	Variations des stocks de produits intermédiaires et résiduel	PRO	
+7371	Produits intermédiaires (variations)	PRO	
+7372	Produits résiduels (variations)	PRO	
+752	Quote-part de résultat sur opérations faites en commun (prod	PRO	
+7521	Quote-part transférée de pertes (comptabilité du gérant)	PRO	
+7525	Bénéfices attribués par transfert (comptabilité des associés	PRO	
+753	Quote-part de résultat sur exécution partielle de contrats p	PRO	
+754	Produits des cessions courantes d'immobilisations	PRO	
+758	Produits divers	PRO	
+7581	Jetons de présence et autres rémunérations d'administrateurs	PRO	
+7582	Indemnités d'assurances reçues	PRO	
+759	Reprises de charges provisionnées d'exploitation	PRO	
+7591	Sur risques à court terme (reprises)	PRO	
+7593	Sur stocks (reprises)	PRO	
+7594	Sur créances (reprises)	PRO	
+7598	Sur autres charges provisionnées (reprises)	PRO	
+771	Intérêts de prêts	PRO	
+772	Revenus de participations	PRO	
+773	Escomptes obtenus	PRO	
+774	Revenus de titres de placement	PRO	
+776	Gains de change	PRO	
+777	Gains sur cessions de titres de placement	PRO	
+778	Gains sur risques financiers	PRO	
+7781	Sur rentes viagères (gains)	PRO	
+7782	Sur opérations financières (gains)	PRO	
+7784	Sur instruments de trésorerie (gains)	PRO	
+779	Reprises de charges provisionnées financières	PRO	
+7791	Sur risques financiers (reprises financières)	PRO	
+7795	Sur titres de placement (reprises financières)	PRO	
+7798	Autres charges provisionnées financières (reprises)	PRO	
+781	Transferts de charges d'exploitation	PRO	
+787	Transferts de charges financières	PRO	
+791	Reprises de provisions d'exploitation	PRO	
+7911	Pour risques et charges (reprises provisions d'exploitation)	PRO	
+7912	Pour grosses réparations (reprises)	PRO	
+7913	Pour dépréciation des immobilisations incorporelles (reprise	PRO	
+7914	Pour dépréciation des immobilisations corporelles (reprises)	PRO	
+797	Reprises de provisions financières	PRO	
+7971	Pour risques et charges (reprises provisions financières)	PRO	
+7972	Pour dépréciation des immobilisations financières (reprises)	PRO	
+798	Reprises d'amortissements	PRO	
+811	Valeurs comptables des cessions - Immobilisations incorporel	DIV	
+812	Valeurs comptables des cessions - Immobilisations corporelle	DIV	
+816	Valeurs comptables des cessions - Immobilisations financière	DIV	
+821	Produits des cessions d'immobilisations incorporelles	DIV	
+822	Produits des cessions d'immobilisations corporelles	DIV	
+826	Produits des cessions d'immobilisations financières	DIV	
+831	Charges HAO constatées	DIV	
+834	Pertes sur créances HAO	DIV	
+835	Dons et libéralités accordés	DIV	
+836	Abandons de créances consentis	DIV	
+839	Charges provisionnées HAO	DIV	
+841	Produits HAO constatés	DIV	
+845	Dons et libéralités obtenus	DIV	
+846	Abandons de créances obtenus	DIV	
+848	Transferts de charges HAO	DIV	
+849	Reprises des charges provisionnées HAO	DIV	
+851	Dotations aux provisions réglementées	DIV	
+852	Dotations aux amortissements HAO	DIV	
+853	Dotations aux provisions pour dépréciation HAO	DIV	
+854	Dotations aux provisions pour risques et charges HAO	DIV	
+858	Autres dotations HAO	DIV	
+861	Reprises de provisions réglementées	DIV	
+862	Reprises d'amortissements (HAO)	DIV	
+863	Reprises de provisions pour dépréciation HAO	DIV	
+864	Reprises de provisions pour risques et charges HAO	DIV	
+865	Reprises de subventions d'investissement	DIV	
+868	Autres reprises HAO	DIV	
+871	Participation légale aux bénéfices	DIV	
+874	Participation contractuelle aux bénéfices	DIV	
+878	Autres participations (des travailleurs)	DIV	
+881	Subventions d'équilibre - État	DIV	
+884	Subventions d'équilibre - Collectivités publiques	DIV	
+886	Subventions d'équilibre - Groupe	DIV	
+888	Subventions d'équilibre - Autres	DIV	
+891	Impôts sur les bénéfices de l'exercice	DIV	
+8911	Activités exercées dans l'État	DIV	
+8912	Activités exercées dans les autres États de la Région	DIV	
+8913	Activités exercées hors Région	DIV	
+892	Rappel d'impôts sur résultats antérieurs	DIV	
+895	Impôt minimum forfaitaire IMF	DIV	
+899	Dégrèvements et annulations d'impôts sur résultats antérieur	DIV	
+8991	Dégrèvements	DIV	
+8994	Annulations pour pertes rétroactives	DIV	

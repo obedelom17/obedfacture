@@ -40,6 +40,23 @@ redeployez.
 ### 5. Utiliser l'outil
 Ouvrez l'URL Vercel fournie.
 
+## ETAPE 0 (a faire une seule fois) : importer le plan comptable SYSCOHADA
+
+Si votre dossier Sage est reste sur le plan comptable francais par defaut,
+il faut d'abord y importer les comptes SYSCOHADA avant d'importer la
+moindre facture - sinon Sage cree les comptes "a la volee" avec un mauvais
+type (erreur "compte de type total").
+
+1. Dans Sage : **Fichier -> Format import/export parametrable -> Charger**
+2. Selectionnez **`Import_comptes_ObedFacture.ema`** (fourni dans ce projet)
+3. **Fichier -> Importer -> Format parametrable** -> ce format ->
+   selectionnez **`Comptes_SYSCOHADA_ObedFacture.txt`** (les 1091 comptes,
+   deja au bon format : Compte / Intitule / Nature)
+4. Verifiez dans **Structure -> Comptes generaux** que les comptes
+   sont bien crees (ex: 4452, 605101, 401...)
+
+Cette etape ne se fait qu'une seule fois par dossier comptable.
+
 ## Importer les ecritures dans Sage 100 i7 (etapes testees)
 
 L'export produit un fichier `export_factures_sage.txt` qui suit **exactement**
@@ -88,7 +105,9 @@ AC   28/06/2026  F123  401                   F123       0,00     17700,00 28/06/
 .
 ├── index.html                          -> l'interface ObedFacture
 ├── api/extract.js                       -> fonction serverless (garde la cle)
-├── Import_ecritures_ObedFacture.ema     -> format Sage pret a charger
+├── Import_ecritures_ObedFacture.ema     -> format Sage pret a charger (ecritures)
+├── Import_comptes_ObedFacture.ema       -> format Sage pret a charger (comptes)
+├── Comptes_SYSCOHADA_ObedFacture.txt    -> les 1091 comptes SYSCOHADA a importer une fois
 ├── package.json
 ├── .gitignore
 └── .env.example
