@@ -89,9 +89,13 @@ AC   28/06/2026  F123  401                   F123       0,00     17700,00 28/06/
 
 ## Limites connues
 
-- **Quota gratuit Gemini** : ~250 a 1500 requetes/jour. L'outil traite les
-  factures une par une avec une pause, et reessaie automatiquement en cas de
-  blocage temporaire.
+- **Quota gratuit Gemini par cle** : observe en pratique a ~20
+  requetes/jour et ~5 requetes/minute par cle (verifiable sur la page de
+  quota d'aistudio.google.com, modele gemini-2.5-flash). L'application
+  multiplie ce quota par le nombre de cles fournies dans GEMINI_API_KEYS,
+  avec bascule automatique d'une cle a l'autre en cas de limite atteinte.
+  L'outil traite aussi les factures une par une avec une pause, et reessaie
+  automatiquement en cas de blocage temporaire.
 - **Confidentialite** : niveau gratuit Google = le contenu peut servir a
   ameliorer leurs modeles.
 - **Stockage** : factures validees et memoire fournisseurs gardees dans le
