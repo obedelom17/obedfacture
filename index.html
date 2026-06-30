@@ -2,233 +2,536 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ObedFacture IA — Capture intelligente de factures</title>
+<meta name="description" content="Capture automatique de factures par IA avec suggestion de compte SYSCOHADA et export pour Sage 100 i7. Glissez vos factures, vérifiez, exportez.">
+
+<!-- Favicon / onglet navigateur -->
+<link rel="icon" href="/public/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/public/icon-192.png">
+
+<!-- Installation en application (PWA) : Android / Chrome / Edge / desktop -->
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0F1024">
+
+<!-- Installation iOS / Safari -->
+<link rel="apple-touch-icon" href="/public/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ObedFacture">
+
+<!-- Open Graph (aperçu de lien : WhatsApp, Facebook, LinkedIn...) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ObedFacture IA">
+<meta property="og:title" content="ObedFacture IA — Capture intelligente de factures">
+<meta property="og:description" content="Factures → comptes SYSCOHADA → Sage, automatiquement. Glissez vos factures, l'IA extrait et propose le compte, vous validez, vous exportez.">
+<meta property="og:image" content="/public/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="fr_FR">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ObedFacture IA — Capture intelligente de factures">
+<meta name="twitter:description" content="Factures → comptes SYSCOHADA → Sage, automatiquement.">
+<meta name="twitter:image" content="/public/og-image.png">
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
   :root{
-    --bg-1:#0F1024;
-    --bg-2:#171933;
+    --bg-1:#080B1A;
+    --bg-2:#0F1228;
+    --bg-3:#151830;
     --surface:#FFFFFF;
-    --surface-2:#F7F7FC;
-    --ink:#14162B;
-    --ink-soft:#666A87;
-    --ink-faint:#9B9FBD;
-    --line:#ECEDF7;
-    --primary:#7C5CFC;
-    --primary-2:#B06AFF;
-    --primary-3:#5B3FE0;
-    --teal:#12CFB0;
-    --coral:#FF5C72;
-    --gold:#FFB020;
-    --radius:16px;
-    --radius-sm:10px;
-    --shadow: 0 2px 6px rgba(20,22,43,0.05), 0 14px 36px rgba(20,22,43,0.08);
-    --shadow-lg: 0 18px 50px rgba(124,92,252,0.28);
-    --glow: 0 0 0 4px rgba(124,92,252,0.12);
+    --surface-2:#F5F6FC;
+    --surface-3:#EDEEF8;
+    --ink:#0E1027;
+    --ink-soft:#5B5F80;
+    --ink-faint:#9296B5;
+    --line:#E4E5F2;
+    --line-2:#D0D2E8;
+    --primary:#6D4FE8;
+    --primary-2:#9B72FF;
+    --primary-3:#4D34C4;
+    --primary-bg:#F0ECFF;
+    --teal:#0DC7A8;
+    --teal-bg:#E6FAF7;
+    --coral:#F0445A;
+    --coral-bg:#FFF0F2;
+    --gold:#F5A800;
+    --gold-bg:#FFF7E0;
+    --radius:20px;
+    --radius-sm:12px;
+    --radius-xs:8px;
+    --shadow-sm: 0 1px 3px rgba(12,14,35,0.06), 0 4px 12px rgba(12,14,35,0.06);
+    --shadow: 0 2px 8px rgba(12,14,35,0.06), 0 16px 40px rgba(12,14,35,0.1);
+    --shadow-lg: 0 8px 30px rgba(109,79,232,0.22), 0 2px 8px rgba(109,79,232,0.12);
+    --shadow-xl: 0 20px 60px rgba(12,14,35,0.18), 0 4px 16px rgba(12,14,35,0.08);
+    --glow: 0 0 0 3px rgba(109,79,232,0.14);
+    --glow-teal: 0 0 0 3px rgba(13,199,168,0.18);
   }
-  *{box-sizing:border-box;}
+  *{ box-sizing:border-box; }
   html,body{ height:100%; }
   body{
     margin:0;
-    background:
-      radial-gradient(1100px 600px at 100% -10%, rgba(124,92,252,0.16), transparent 60%),
-      radial-gradient(800px 500px at -10% 0%, rgba(18,207,176,0.10), transparent 55%),
-      var(--surface-2);
+    background:#F2F3F9;
     color:var(--ink);
-    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
     min-height:100vh;
+    -webkit-font-smoothing: antialiased;
   }
-  .wrap{ max-width:1220px; margin:0 auto; padding:0 22px 100px; }
+  .wrap{ max-width:1280px; margin:0 auto; padding:0 24px 100px; }
 
-  /* ===== HERO HEADER ===== */
+  /* ===== HERO ===== */
   .hero{
-    background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 55%, #241A4A 100%);
-    border-radius: 0 0 28px 28px;
-    padding: 34px 22px 64px;
-    margin: 0 0 -40px;
+    background: linear-gradient(140deg, #07091A 0%, #0D1030 45%, #1A0A3B 80%, #0A1A2E 100%);
+    border-radius:0 0 32px 32px;
+    padding:32px 24px 72px;
+    margin:0 0 -48px;
     position:relative; overflow:hidden;
   }
   .hero::before{
-    content:''; position:absolute; inset:0;
+    content:''; position:absolute; inset:0; pointer-events:none;
     background:
-      radial-gradient(420px 280px at 85% 10%, rgba(124,92,252,0.45), transparent 60%),
-      radial-gradient(360px 260px at 10% 90%, rgba(18,207,176,0.30), transparent 60%);
-    pointer-events:none;
+      radial-gradient(900px 600px at 90% -20%, rgba(109,79,232,0.50), transparent 55%),
+      radial-gradient(700px 500px at -15% 110%, rgba(13,199,168,0.28), transparent 55%),
+      radial-gradient(500px 400px at 50% 50%, rgba(155,114,255,0.08), transparent 70%);
   }
-  .hero-inner{ max-width:1220px; margin:0 auto; position:relative; z-index:1; }
-  header.top{ display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
-  .brand{ display:flex; align-items:center; gap:13px; }
+  /* animated star dots */
+  .hero::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 25%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 55% 70%, rgba(255,255,255,0.20) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 85%, rgba(255,255,255,0.18) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,0.22) 0%, transparent 100%);
+    animation: twinkle 6s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{ 0%{opacity:0.6} 100%{opacity:1} }
+  .hero-inner{ max-width:1280px; margin:0 auto; position:relative; z-index:1; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:14px; }
   .logo{
-    width:46px; height:46px; border-radius:14px; flex:none;
-    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    width:50px; height:50px; border-radius:16px; flex:none;
+    background:linear-gradient(135deg, var(--primary), var(--primary-2));
     display:flex; align-items:center; justify-content:center;
-    box-shadow: var(--shadow-lg);
-    animation: floatLogo 4s ease-in-out infinite;
+    box-shadow:var(--shadow-lg);
+    animation: floatLogo 5s ease-in-out infinite;
   }
-  @keyframes floatLogo{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-3px);} }
-  .logo svg{ width:24px; height:24px; }
-  .brand h1{ margin:0; font-size:22px; font-weight:800; letter-spacing:-0.01em; color:#fff; }
-  .brand h1 span{ background: linear-gradient(90deg, var(--primary-2), var(--teal)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .brand .tag{ font-size:12.5px; color:#A6A9D6; margin-top:1px; }
+  @keyframes floatLogo{ 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-4px) rotate(1deg)} }
+  .logo svg{ width:26px; height:26px; }
+  .brand-text h1{ margin:0; font-size:24px; font-weight:900; letter-spacing:-0.03em; color:#fff; line-height:1.1; }
+  .brand-text h1 span{
+    background:linear-gradient(100deg, var(--primary-2) 10%, var(--teal) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .brand-text .tag{ font-size:12px; color:#8A90C4; margin-top:3px; letter-spacing:0.01em; }
+
+  .header-right{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 
   .status-pill{
-    display:flex; align-items:center; gap:7px; font-size:12px; color:#D7D8F2;
-    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:30px; padding:7px 14px 7px 11px;
-    backdrop-filter: blur(6px);
+    display:flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#C8CAEE;
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:40px;
+    padding:8px 16px 8px 12px; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    letter-spacing:0.01em;
   }
-  .dot{ width:7px; height:7px; border-radius:50%; background:var(--teal); flex:none; }
-  .dot.live{ animation: pulse 1.8s ease-in-out infinite; }
-  @keyframes pulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(18,207,176,0.55);} 50%{ box-shadow:0 0 0 6px rgba(18,207,176,0);} }
-  .info-ico{ cursor:help; color:#A6A9D6; font-size:13px; border:1px solid rgba(255,255,255,0.25); border-radius:50%; width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; }
+  .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); flex:none; }
+  .dot.live{ animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(13,199,168,0.6)}
+    50%{box-shadow:0 0 0 7px rgba(13,199,168,0)}
+  }
+  .info-ico{
+    cursor:help; color:#8A90C4; font-size:11px; font-style:normal; font-weight:800;
+    border:1.5px solid rgba(255,255,255,0.22); border-radius:50%;
+    width:18px; height:18px; display:inline-flex; align-items:center; justify-content:center;
+    transition:0.15s;
+  }
+  .info-ico:hover{ color:#fff; border-color:rgba(255,255,255,0.5); }
 
-  .hero-stats{ display:flex; gap:14px; margin-top:26px; flex-wrap:wrap; }
+  /* Stats bar */
+  .hero-stats{ display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
   .stat-chip{
-    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.13); border-radius:14px;
-    padding:12px 18px; backdrop-filter: blur(8px); min-width:120px;
+    background:rgba(255,255,255,0.065);
+    border:1px solid rgba(255,255,255,0.10);
+    border-radius:16px; padding:14px 20px;
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    min-width:130px; position:relative; overflow:hidden; cursor:default;
+    transition:0.2s background;
   }
-  .stat-chip .num{ font-size:22px; font-weight:800; color:#fff; line-height:1.1; }
-  .stat-chip .lbl{ font-size:11.5px; color:#A6A9D6; margin-top:2px; }
+  .stat-chip:hover{ background:rgba(255,255,255,0.10); }
+  .stat-chip .chip-icon{
+    font-size:18px; position:absolute; top:12px; right:14px; opacity:0.25;
+  }
+  .stat-chip .num{ font-size:26px; font-weight:900; color:#fff; line-height:1; letter-spacing:-0.04em; }
+  .stat-chip .lbl{ font-size:11px; color:#8A90C4; margin-top:4px; font-weight:600; letter-spacing:0.02em; text-transform:uppercase; }
+  .stat-chip.s-warn .num{ color:var(--gold); }
+  .stat-chip.s-ok .num{ color:var(--teal); }
 
-  /* ===== GRID / PANELS ===== */
-  .grid{ display:grid; grid-template-columns: 1.2fr 1fr; gap:22px; align-items:start; position:relative; z-index:2; }
-  @media (max-width: 880px){ .grid{ grid-template-columns: 1fr; } }
+  /* ===== GRID ===== */
+  .grid{ display:grid; grid-template-columns:1.18fr 1fr; gap:24px; align-items:start; position:relative; z-index:2; }
+  @media (max-width:920px){ .grid{ grid-template-columns:1fr; } }
 
+  /* ===== PANELS ===== */
   .panel{
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow: var(--shadow); overflow:hidden;
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    overflow:hidden;
   }
-  .panel h2{
-    font-size:15.5px; margin:0; padding:18px 20px; font-weight:800;
-    border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+  .panel-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px; border-bottom:1px solid var(--line);
+    gap:10px;
   }
-  .panel h2 .count{ font-size:12px; color:var(--primary-3); font-weight:700; background:#F1ECFF; padding:3px 11px; border-radius:20px; }
+  .panel-head h2{
+    font-size:15px; margin:0; font-weight:800; color:var(--ink);
+    display:flex; align-items:center; gap:8px; letter-spacing:-0.01em;
+  }
+  .panel-head h2 .ico2{ font-size:14px; }
+  .count-badge{
+    font-size:11.5px; color:var(--primary-3); font-weight:800;
+    background:var(--primary-bg); padding:3px 12px; border-radius:20px;
+    letter-spacing:0.02em;
+  }
 
+  /* ===== DROP ZONE ===== */
   .dropzone{
-    margin:18px; border:2px dashed #DCD4FF; border-radius:var(--radius);
-    background:linear-gradient(180deg, rgba(124,92,252,0.05), transparent);
-    padding:34px 14px; text-align:center; cursor:pointer; transition: 0.2s all;
+    margin:18px; border:2px dashed #D2CAFF; border-radius:var(--radius);
+    background:linear-gradient(160deg, rgba(109,79,232,0.04) 0%, rgba(13,199,168,0.02) 100%);
+    padding:36px 16px; text-align:center; cursor:pointer;
+    transition:0.22s all; position:relative; overflow:hidden;
   }
-  .dropzone:hover, .dropzone.drag{ border-color:var(--primary); background:linear-gradient(180deg, rgba(124,92,252,0.1), transparent); transform: translateY(-2px); box-shadow: var(--glow); }
-  .dropzone .icon{ font-size:30px; display:inline-block; margin-bottom:7px; transition: transform 0.2s; }
-  .dropzone:hover .icon{ transform: translateY(-4px) scale(1.05); }
-  .dropzone .t1{ font-weight:800; font-size:15px; }
-  .dropzone .t2{ font-size:12.5px; color:var(--ink-soft); margin-top:3px; }
+  .dropzone::before{
+    content:''; position:absolute; inset:0; opacity:0;
+    background:radial-gradient(ellipse at 50% 60%, rgba(109,79,232,0.10), transparent 70%);
+    transition:0.3s opacity;
+  }
+  .dropzone:hover::before, .dropzone.drag::before{ opacity:1; }
+  .dropzone:hover, .dropzone.drag{
+    border-color:var(--primary); transform:translateY(-3px);
+    box-shadow:var(--shadow-lg);
+  }
+  .dz-icon-wrap{
+    width:60px; height:60px; border-radius:18px; margin:0 auto 12px;
+    background:linear-gradient(135deg, var(--primary-bg), #E4DAFF);
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; transition:0.2s transform;
+    box-shadow:0 4px 16px rgba(109,79,232,0.14);
+  }
+  .dropzone:hover .dz-icon-wrap, .dropzone.drag .dz-icon-wrap{
+    transform:translateY(-4px) scale(1.06);
+  }
+  .dropzone .t1{ font-weight:800; font-size:15.5px; color:var(--ink); }
+  .dropzone .t2{ font-size:12.5px; color:var(--ink-soft); margin-top:5px; line-height:1.5; }
+  .dz-formats{
+    margin-top:10px; display:inline-flex; gap:6px;
+  }
+  .dz-fmt{
+    font-size:10.5px; font-weight:700; letter-spacing:0.04em; padding:3px 10px;
+    border-radius:20px; border:1.5px solid var(--line-2); color:var(--ink-soft);
+    background:var(--surface-2);
+  }
   input[type=file]{ display:none; }
 
-  .progress-wrap{ margin:0 18px 12px; display:none; }
+  /* ===== PROGRESS ===== */
+  .progress-wrap{ margin:0 18px 14px; display:none; }
   .progress-wrap.show{ display:block; }
-  .progress-label{ font-size:12px; color:var(--ink-soft); margin-bottom:5px; display:flex; justify-content:space-between; font-weight:600; }
-  .progress-track{ height:7px; background:var(--surface-2); border-radius:6px; overflow:hidden; }
-  .progress-fill{ height:100%; border-radius:6px; background:linear-gradient(90deg, var(--primary), var(--teal)); transition: width 0.4s ease; background-size:200% 100%; animation: shimmer 2s linear infinite; }
-  @keyframes shimmer{ 0%{ background-position: 0% 0;} 100%{ background-position: 200% 0;} }
-
-  .queue{ padding:0 18px 18px; display:flex; flex-direction:column; gap:9px; max-height:500px; overflow-y:auto; }
-  .qitem{
-    display:flex; align-items:center; gap:11px; border:1px solid var(--line); border-left:3px solid var(--line);
-    border-radius:13px; padding:11px 12px; cursor:pointer; background:var(--surface);
-    transition: 0.15s all; animation: fadeIn 0.25s ease;
+  .progress-label{
+    font-size:11.5px; color:var(--ink-soft); margin-bottom:7px;
+    display:flex; justify-content:space-between; font-weight:700; letter-spacing:0.01em;
   }
-  @keyframes fadeIn{ from{ opacity:0; transform: translateY(5px);} to{ opacity:1; transform:none; } }
-  .qitem:hover{ box-shadow: var(--shadow); transform: translateY(-1px); border-color:#E2DCFF; }
-  .qitem.active{ border-color:var(--primary); border-left-color:var(--primary); background:linear-gradient(90deg, rgba(124,92,252,0.06), transparent); box-shadow: var(--glow); }
+  .progress-track{
+    height:6px; background:var(--surface-3); border-radius:6px;
+    overflow:hidden; position:relative;
+  }
+  .progress-fill{
+    height:100%; border-radius:6px;
+    background:linear-gradient(90deg, var(--primary), var(--primary-2), var(--teal));
+    background-size:200% 100%;
+    transition:width 0.4s ease;
+    animation:shimmer 2.4s linear infinite;
+  }
+  @keyframes shimmer{ 0%{background-position:0% 0} 100%{background-position:200% 0} }
+
+  /* ===== QUEUE ===== */
+  .queue{ padding:0 16px 16px; display:flex; flex-direction:column; gap:8px; max-height:480px; overflow-y:auto; }
+  .queue::-webkit-scrollbar{ width:5px; }
+  .queue::-webkit-scrollbar-thumb{ background:var(--line-2); border-radius:4px; }
+
+  @keyframes fadeSlide{ from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+
+  .qitem{
+    display:flex; align-items:center; gap:12px;
+    border:1.5px solid var(--line); border-left:3px solid var(--line);
+    border-radius:14px; padding:11px 13px; cursor:pointer;
+    background:var(--surface);
+    transition:0.15s border-color, 0.15s box-shadow, 0.15s transform, 0.15s background;
+    animation:fadeSlide 0.22s ease both;
+  }
+  .qitem:hover{ box-shadow:var(--shadow-sm); transform:translateY(-1px); border-color:var(--line-2); }
+  .qitem.active{
+    border-color:var(--primary); border-left-color:var(--primary);
+    background:linear-gradient(96deg, rgba(109,79,232,0.05), transparent 70%);
+    box-shadow:var(--glow);
+  }
   .qitem.s-waiting{ border-left-color:var(--ink-faint); }
   .qitem.s-extracting{ border-left-color:var(--gold); }
+  .qitem.s-extracting .qthumb{
+    background:linear-gradient(90deg, var(--gold-bg) 25%, #FFF0B5 50%, var(--gold-bg) 75%);
+    background-size:200% 100%;
+    animation:shimmer 1.6s linear infinite;
+  }
+
+  /* Spinner used in loading state */
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .spinner{
+    width:16px; height:16px; border:2.5px solid rgba(245,168,0,0.25);
+    border-top-color:var(--gold); border-radius:50%;
+    animation:spin 0.7s linear infinite; flex:none;
+  }
   .qitem.s-review{ border-left-color:var(--primary); }
   .qitem.s-validated{ border-left-color:var(--teal); }
   .qitem.s-error{ border-left-color:var(--coral); }
+
   .qthumb{
-    width:38px; height:38px; border-radius:10px; background:var(--surface-2); flex:none;
-    display:flex; align-items:center; justify-content:center; font-size:16px; overflow:hidden;
+    width:40px; height:40px; border-radius:11px; background:var(--surface-3);
+    flex:none; display:flex; align-items:center; justify-content:center;
+    font-size:18px; overflow:hidden; border:1px solid var(--line);
   }
   .qthumb img{ width:100%; height:100%; object-fit:cover; }
   .qmeta{ flex:1; min-width:0; }
-  .qmeta .name{ font-size:13px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .qmeta .sup{ font-size:11.5px; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .qstatus{ font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.03em; padding:4px 9px; border-radius:20px; flex:none; }
-  .st-waiting{ background:#EEEEF6; color:var(--ink-soft); }
-  .st-extracting{ background:#FFF3DD; color:#9A6B00; }
-  .st-review{ background:#EDE6FF; color:var(--primary-3); }
-  .st-validated{ background:#DCF8F1; color:#0A8F76; }
-  .st-error{ background:#FFE3E7; color:#C5293E; }
-  .warn-badge{ font-size:10px; font-weight:800; color:#9A6B00; background:#FFF3DD; border-radius:20px; padding:3px 8px; flex:none; }
-
-  .empty{ padding:40px 16px; text-align:center; color:var(--ink-faint); font-size:13px; }
-  .empty .ico{ font-size:26px; display:block; margin-bottom:8px; opacity:0.5; }
-
-  .detail{ padding:20px; }
-  .field{ margin-bottom:15px; }
-  .field label{ display:block; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-soft); margin-bottom:6px; }
-  .field input{
-    width:100%; padding:11px 13px; border:1.5px solid var(--line); border-radius:var(--radius-sm);
-    font-size:14px; font-family: inherit; background:var(--surface-2); color:var(--ink); transition: 0.15s border-color, 0.15s background, 0.15s box-shadow;
+  .qmeta .name{
+    font-size:13px; font-weight:700; overflow:hidden;
+    text-overflow:ellipsis; white-space:nowrap; color:var(--ink);
   }
-  .field input:focus{ outline:none; border-color:var(--primary); background:var(--surface); box-shadow: var(--glow); }
-  .field input.field-invalid{ border-color:var(--coral); background:#FFF3F4; }
-  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:11px; }
-  .mono input{ font-family: ui-monospace, "SF Mono", Consolas, monospace; }
+  .qmeta .sup{
+    font-size:11.5px; color:var(--ink-soft); margin-top:1px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .qstatus{
+    font-size:10px; font-weight:800; text-transform:uppercase;
+    letter-spacing:0.04em; padding:4px 10px; border-radius:20px; flex:none;
+  }
+  .st-waiting{ background:#EDEDF6; color:var(--ink-soft); }
+  .st-extracting{ background:var(--gold-bg); color:#9B6900; }
+  .st-review{ background:var(--primary-bg); color:var(--primary-3); }
+  .st-validated{ background:var(--teal-bg); color:#0A8572; }
+  .st-error{ background:var(--coral-bg); color:#C03248; }
+  .warn-badge{
+    font-size:10px; font-weight:800; color:#9B6900;
+    background:var(--gold-bg); border-radius:20px; padding:3px 8px; flex:none;
+  }
 
+  .empty{ padding:48px 18px; text-align:center; color:var(--ink-faint); font-size:13px; }
+  .empty .ico{ font-size:32px; display:block; margin-bottom:10px; opacity:0.4; }
+  .empty p{ margin:0; line-height:1.6; }
+
+  /* ===== DETAIL PANEL ===== */
+  .detail{
+    padding:22px;
+    max-height:calc(100vh - 260px);
+    overflow-y:auto;
+  }
+  .detail::-webkit-scrollbar{ width:5px; }
+  .detail::-webkit-scrollbar-thumb{ background:var(--line-2); border-radius:4px; }
+  .field{ margin-bottom:16px; }
+  .field label{
+    display:block; font-size:10.5px; font-weight:800; text-transform:uppercase;
+    letter-spacing:0.06em; color:var(--ink-faint); margin-bottom:7px;
+  }
+  .field input{
+    width:100%; padding:11px 14px; border:1.5px solid var(--line);
+    border-radius:var(--radius-sm); font-size:14px; font-family:inherit;
+    background:var(--surface-2); color:var(--ink);
+    transition:0.15s border-color, 0.15s background, 0.15s box-shadow;
+  }
+  .field input:focus{
+    outline:none; border-color:var(--primary);
+    background:var(--surface); box-shadow:var(--glow);
+  }
+  .field input:disabled{
+    background:var(--surface-3); color:var(--ink-soft);
+    cursor:default; border-color:var(--line);
+  }
+  .field input.field-invalid{ border-color:var(--coral); background:#FFF4F5; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .mono input{ font-family:'JetBrains Mono', ui-monospace, Consolas, monospace; font-size:13px; }
+
+  /* Account picker */
   .acct-wrap{ position:relative; }
   .acct-list{
-    position:absolute; z-index:5; top:calc(100% + 4px); left:0; right:0;
-    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm);
-    max-height:230px; overflow-y:auto; box-shadow: var(--shadow-lg); display:none;
+    position:absolute; z-index:10; top:calc(100% + 6px); left:0; right:0;
+    background:var(--surface); border:1.5px solid var(--line);
+    border-radius:var(--radius-sm); max-height:240px; overflow-y:auto;
+    box-shadow:var(--shadow-xl); display:none;
   }
+  .acct-list::-webkit-scrollbar{ width:5px; }
+  .acct-list::-webkit-scrollbar-thumb{ background:var(--line-2); border-radius:4px; }
   .acct-list.open{ display:block; }
-  .acct-opt{ padding:9px 12px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--surface-2); }
-  .acct-opt:hover{ background:var(--surface-2); }
-  .acct-opt .code{ font-family: ui-monospace, monospace; color:var(--primary-3); margin-right:9px; font-weight:800; }
+  .acct-opt{
+    padding:9px 14px; font-size:13px; cursor:pointer;
+    border-bottom:1px solid var(--surface-3);
+    display:flex; align-items:baseline; gap:9px;
+    transition:0.1s background;
+  }
+  .acct-opt:last-child{ border-bottom:none; }
+  .acct-opt:hover{ background:var(--primary-bg); }
+  .acct-opt .code{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    color:var(--primary-3); font-weight:700; font-size:12px; flex:none;
+  }
+  .acct-opt .lib{ color:var(--ink); }
 
-  .actions{ display:flex; gap:9px; padding:16px 18px; border-top:1px solid var(--line); flex-wrap:wrap; }
-  button{ font-family:inherit; cursor:pointer; border:none; border-radius:11px; font-size:13.5px; font-weight:700; padding:11px 18px; transition: 0.15s transform, 0.15s box-shadow, 0.15s background, 0.15s filter; }
-  button:active{ transform: scale(0.96); }
-  .btn-primary{ background: linear-gradient(135deg, var(--primary), var(--primary-2)); color:#fff; box-shadow: var(--shadow-lg); }
-  .btn-primary:hover{ filter:brightness(1.07); transform: translateY(-1px); }
-  .btn-primary:disabled{ background:#DCD9F2; color:#fff; cursor:not-allowed; box-shadow:none; transform:none; }
-  .btn-bulk{ background:#fff; color:var(--teal); border:1.5px solid var(--teal); }
-  .btn-bulk:hover{ background:#EAFBF7; transform: translateY(-1px); }
-  .btn-bulk:disabled{ color:var(--ink-faint); border-color:var(--line); cursor:not-allowed; transform:none; }
-  .btn-ghost{ background:transparent; color:var(--ink-soft); border:1.5px solid var(--line); }
-  .btn-ghost:hover{ border-color:var(--ink-soft); color:var(--ink); }
-  .btn-export{ background:linear-gradient(135deg, var(--bg-1), var(--bg-2)); color:#fff; }
-  .btn-export:hover{ filter:brightness(1.2); transform: translateY(-1px); }
+  /* confidence badge inline */
+  .conf-badge{
+    display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700;
+    padding:3px 10px; border-radius:20px; margin-bottom:14px;
+  }
+  .conf-haute{ background:var(--teal-bg); color:#0A8572; }
+  .conf-moyenne{ background:var(--gold-bg); color:#9B6900; }
+  .conf-basse{ background:var(--coral-bg); color:#C03248; }
 
+  /* ===== ACTIONS ===== */
+  .actions{
+    display:flex; gap:9px; padding:16px 22px;
+    border-top:1px solid var(--line); flex-wrap:wrap;
+    background:var(--surface-2);
+  }
+  .panel-actions{
+    display:flex; gap:9px; padding:16px 20px;
+    border-top:1px solid var(--line); flex-wrap:wrap;
+    background:var(--surface-2);
+  }
+
+  button{
+    font-family:inherit; cursor:pointer; border:none;
+    border-radius:12px; font-size:13.5px; font-weight:700; padding:10px 18px;
+    transition:0.16s transform, 0.16s box-shadow, 0.16s filter, 0.16s background;
+    display:inline-flex; align-items:center; gap:6px; line-height:1.2;
+  }
+  button:active{ transform:scale(0.96) !important; }
+
+  .btn-primary{
+    background:linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
+    color:#fff; box-shadow:var(--shadow-lg);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); filter:brightness(1.07); box-shadow:0 10px 34px rgba(109,79,232,0.32); }
+  .btn-primary:disabled{
+    background:linear-gradient(135deg, #C8C4EC, #D8D4F4);
+    color:rgba(255,255,255,0.8); cursor:not-allowed; box-shadow:none; transform:none;
+  }
+
+  .btn-teal{
+    background:linear-gradient(135deg, #0BA98C, var(--teal));
+    color:#fff; box-shadow:0 6px 20px rgba(13,199,168,0.22);
+  }
+  .btn-teal:hover{ transform:translateY(-2px); filter:brightness(1.07); }
+  .btn-teal:disabled{ background:#C0EDE6; color:rgba(255,255,255,0.8); cursor:not-allowed; transform:none; box-shadow:none; }
+
+  .btn-dark{
+    background:linear-gradient(135deg, var(--bg-2), var(--bg-3));
+    color:#fff; box-shadow:0 4px 16px rgba(8,11,26,0.28);
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .btn-dark:hover{ transform:translateY(-2px); filter:brightness(1.25); }
+  .btn-dark:disabled{ opacity:0.4; cursor:not-allowed; transform:none; }
+
+  .btn-ghost{
+    background:transparent; color:var(--ink-soft);
+    border:1.5px solid var(--line-2);
+  }
+  .btn-ghost:hover{ border-color:var(--ink-soft); color:var(--ink); background:var(--surface-3); }
+
+  .btn-danger{ background:var(--coral-bg); color:var(--coral); border:1.5px solid #FFC9D0; }
+  .btn-danger:hover{ background:#FFE0E5; color:#C03248; }
+
+  /* ===== STAMP ===== */
   .stamp-fx{
     position:fixed; pointer-events:none; z-index:50;
     border:5px solid var(--teal); color:var(--teal); border-radius:50%;
-    width:130px; height:130px; display:flex; align-items:center; justify-content:center;
-    font-weight:800; font-size:18px; letter-spacing:1.5px;
-    transform: scale(2.4) rotate(-14deg); opacity:0;
-    top:50%; left:50%; margin:-65px 0 0 -65px;
-    animation: stampIn 0.5s cubic-bezier(.2,1.4,.4,1) forwards;
-    box-shadow: 0 0 50px rgba(18,207,176,0.3);
+    width:140px; height:140px; display:flex; align-items:center; justify-content:center;
+    font-weight:900; font-size:20px; letter-spacing:2px;
+    transform:scale(2.4) rotate(-14deg); opacity:0;
+    top:50%; left:50%; margin:-70px 0 0 -70px;
+    animation:stampIn 0.5s cubic-bezier(.2,1.4,.4,1) forwards;
+    box-shadow:0 0 60px rgba(13,199,168,0.35);
+    text-shadow:0 2px 8px rgba(13,199,168,0.3);
   }
   @keyframes stampIn{
-    0%{ transform: scale(2.4) rotate(-14deg); opacity:0; }
-    55%{ transform: scale(0.94) rotate(-14deg); opacity:0.95; }
-    75%{ transform: scale(1.04) rotate(-14deg); opacity:0.9;}
-    100%{ transform: scale(1) rotate(-14deg); opacity:0; }
+    0%{transform:scale(2.4) rotate(-14deg);opacity:0}
+    55%{transform:scale(0.94) rotate(-14deg);opacity:0.95}
+    75%{transform:scale(1.04) rotate(-14deg);opacity:0.9}
+    100%{transform:scale(1) rotate(-14deg);opacity:0}
   }
 
-  .toast-wrap{ position:fixed; bottom:22px; right:22px; display:flex; flex-direction:column; gap:9px; z-index:60; }
+  /* ===== TOASTS ===== */
+  .toast-wrap{ position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column; gap:10px; z-index:60; }
   .toast{
-    background:var(--ink); color:#fff; padding:12px 17px; border-radius:12px; font-size:13px; font-weight:600;
-    box-shadow: var(--shadow-lg); animation: toastIn 0.25s ease, toastOut 0.3s ease 2.7s forwards;
-    display:flex; align-items:center; gap:8px;
+    background:var(--ink); color:#fff; padding:13px 18px; border-radius:14px; font-size:13px; font-weight:600;
+    box-shadow:var(--shadow-xl); display:flex; align-items:center; gap:9px; min-width:260px;
+    animation:toastIn 0.26s cubic-bezier(.2,1.2,.4,1), toastOut 0.3s ease 2.7s forwards;
   }
-  .toast.ok{ background: linear-gradient(135deg, #0A8F76, var(--teal)); }
-  .toast.err{ background: linear-gradient(135deg, #C5293E, var(--coral)); }
-  @keyframes toastIn{ from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform:none;} }
-  @keyframes toastOut{ to{ opacity:0; transform: translateY(8px);} }
+  .toast.ok{ background:linear-gradient(135deg, #0A7A65, var(--teal)); }
+  .toast.err{ background:linear-gradient(135deg, #B52035, var(--coral)); }
+  @keyframes toastIn{ from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:none} }
+  @keyframes toastOut{ to{opacity:0;transform:translateX(16px)} }
 
+  /* ===== WARN BOX ===== */
   .warn-box{
-    font-size:12.5px; color:#9A6B00; background:#FFF7E6; border:1px solid #FFE2A8;
-    border-radius:var(--radius-sm); padding:11px 14px; margin-bottom:14px; line-height:1.5;
+    font-size:12.5px; color:#8C6700; background:var(--gold-bg);
+    border:1.5px solid #F5DFA0; border-radius:var(--radius-sm);
+    padding:12px 16px; margin-bottom:16px; line-height:1.6;
   }
-  .warn-box ul{ margin:5px 0 0; padding-left:18px; }
-  .warn-box.danger{ color:#C5293E; background:#FFF1F2; border-color:#FFC8CE; }
+  .warn-box strong{ font-weight:800; display:block; margin-bottom:4px; }
+  .warn-box ul{ margin:4px 0 0; padding-left:16px; }
+  .warn-box li{ margin-bottom:2px; }
+  .warn-box.danger{ color:#A0243A; background:var(--coral-bg); border-color:#F5B0BC; }
 
-  ::-webkit-scrollbar{ width:8px; }
-  ::-webkit-scrollbar-thumb{ background:var(--line); border-radius:4px; }
+  /* validated banner */
+  .validated-banner{
+    background:linear-gradient(96deg, #E6FAF7, #F0FDF9);
+    border:1.5px solid #A8E8DE; border-radius:var(--radius-sm);
+    padding:12px 16px; margin-bottom:16px;
+    display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:#0A7A65;
+  }
+  .validated-banner .check{ font-size:18px; }
+
+  /* separator */
+  .field-sep{
+    border:none; border-top:1.5px solid var(--line);
+    margin:14px 0;
+  }
+
+  /* Loading skeleton animation */
+  @keyframes skeletonPulse{
+    0%,100%{ opacity:0.5; }
+    50%{ opacity:1; }
+  }
+  .skel-line{
+    height:14px; background:var(--line); border-radius:6px;
+    animation:skeletonPulse 1.6s ease-in-out infinite;
+    margin-bottom:12px;
+  }
+  .skel-line.w80{ width:80%; }
+  .skel-line.w60{ width:60%; }
+  .skel-line.w40{ width:40%; }
+  ::-webkit-scrollbar{ width:6px; }
+  ::-webkit-scrollbar-thumb{ background:var(--line-2); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover{ background:var(--ink-faint); }
+
+  @media(max-width:600px){
+    .hero{ padding:24px 16px 64px; border-radius:0 0 24px 24px; }
+    .hero-stats .stat-chip{ min-width:90px; padding:12px 14px; }
+    .hero-stats .stat-chip .num{ font-size:22px; }
+    .wrap{ padding:0 14px 80px; }
+    .panel-actions{ flex-direction:column; }
+    .actions{ flex-direction:column; }
+    button{ justify-content:center; }
+  }
 </style>
 </head>
 <body>
@@ -240,61 +543,96 @@
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 3h9l3 3v15H6V3z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
             <path d="M9 9h6M9 12.5h6M9 16h3.5" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-            <circle cx="17.2" cy="17.2" r="3.8" fill="#12CFB0" stroke="white" stroke-width="1"/>
+            <circle cx="17.2" cy="17.2" r="3.8" fill="#0DC7A8" stroke="white" stroke-width="1"/>
             <path d="M15.5 17.2l1.1 1.1 2.1-2.2" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div>
+        <div class="brand-text">
           <h1>ObedFacture <span>IA</span></h1>
           <div class="tag">Factures → comptes SYSCOHADA → Sage, automatiquement</div>
         </div>
       </div>
-      <div class="status-pill">
-        <span class="dot live"></span> IA prête
-        <span class="info-ico" title="Cle Gemini securisee cote serveur. Niveau gratuit Google : le contenu peut etre utilise pour ameliorer leurs modeles. Donnees gardees dans ce navigateur uniquement.">i</span>
+      <div class="header-right">
+        <div class="status-pill">
+          <span class="dot live"></span> IA prête
+          <i class="info-ico" title="Clé Gemini sécurisée côté serveur. Niveau gratuit Google : le contenu peut être utilisé pour améliorer leurs modèles. Données gardées dans ce navigateur uniquement.">i</i>
+        </div>
       </div>
     </header>
     <div class="hero-stats">
-      <div class="stat-chip"><div class="num" id="statTotal">0</div><div class="lbl">Factures en cours</div></div>
-      <div class="stat-chip"><div class="num" id="statValidated">0</div><div class="lbl">Validées</div></div>
-      <div class="stat-chip"><div class="num" id="statSum">0 F</div><div class="lbl">Total TTC validé</div></div>
-      <div class="stat-chip"><div class="num" id="statWarn">0</div><div class="lbl">À vérifier</div></div>
+      <div class="stat-chip">
+        <span class="chip-icon">📄</span>
+        <div class="num" id="statTotal">0</div>
+        <div class="lbl">Factures en cours</div>
+      </div>
+      <div class="stat-chip s-ok">
+        <span class="chip-icon">✅</span>
+        <div class="num" id="statValidated">0</div>
+        <div class="lbl">Validées</div>
+      </div>
+      <div class="stat-chip s-ok">
+        <span class="chip-icon">💰</span>
+        <div class="num" id="statSum">0 F</div>
+        <div class="lbl">Total TTC validé</div>
+      </div>
+      <div class="stat-chip s-warn">
+        <span class="chip-icon">⚠️</span>
+        <div class="num" id="statWarn">0</div>
+        <div class="lbl">À vérifier</div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="wrap">
   <div class="grid">
+
+    <!-- Panel gauche : file d'attente -->
     <div class="panel">
-      <h2>Boîte de réception <span class="count" id="queueCount">0</span></h2>
+      <div class="panel-head">
+        <h2><span class="ico2">📥</span> Boîte de réception <span class="count-badge" id="queueCount">0</span></h2>
+      </div>
       <div class="dropzone" id="dropzone">
-        <span class="icon">⤓</span>
+        <div class="dz-icon-wrap">⤓</div>
         <div class="t1">Glissez vos factures ici</div>
-        <div class="t2">Photos ou PDF · plusieurs à la fois</div>
+        <div class="t2">Photos JPG/PNG ou documents PDF · plusieurs fichiers à la fois</div>
+        <div class="dz-formats">
+          <span class="dz-fmt">JPG</span>
+          <span class="dz-fmt">PNG</span>
+          <span class="dz-fmt">PDF</span>
+        </div>
         <input type="file" id="fileInput" accept="image/png,image/jpeg,image/jpg,application/pdf" multiple>
       </div>
       <div class="progress-wrap" id="progressBar">
-        <div class="progress-label"><span>Traitement <b id="progDone">0</b>/<b id="progTotal">0</b></span><span id="progEta">—</span></div>
+        <div class="progress-label"><span>Traitement <b id="progDone">0</b> / <b id="progTotal">0</b></span><span id="progEta">—</span></div>
         <div class="progress-track"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
       </div>
       <div class="queue" id="queue">
-        <div class="empty"><span class="ico">📂</span>Aucune facture pour l'instant.</div>
+        <div class="empty"><span class="ico">📂</span><p>Aucune facture pour l'instant.<br>Glissez un fichier pour démarrer.</p></div>
       </div>
-      <div class="actions">
-        <button class="btn-bulk" id="bulkBtn" disabled>⚡ Valider tout</button>
-        <button class="btn-export" id="exportBtn" disabled>Exporter pour Sage</button>
-        <button class="btn-ghost" id="clearBtn">Vider</button>
+      <div class="panel-actions">
+        <button class="btn-teal" id="bulkBtn" disabled>⚡ Valider tout</button>
+        <button class="btn-dark" id="exportBtn" disabled>⬇ Exporter Sage</button>
+        <button class="btn-ghost" id="clearBtn">🗑 Vider</button>
       </div>
     </div>
 
+    <!-- Panel droit : détail facture -->
     <div class="panel">
-      <h2 id="detailTitle">Détail</h2>
+      <div class="panel-head">
+        <h2 id="detailTitle"><span class="ico2">🔍</span> Détail</h2>
+      </div>
       <div class="detail" id="detailBody">
-        <div class="empty"><span class="ico">🔍</span>Sélectionnez une facture pour la vérifier.</div>
+        <div class="empty"><span class="ico">🔍</span><p>Sélectionnez une facture dans la liste<br>pour la vérifier et la valider.</p></div>
       </div>
     </div>
+
   </div>
 </div>
+
+<footer style="text-align:center;padding:28px 0 16px;color:#9296B5;font-size:11.5px;letter-spacing:0.02em;">
+  ObedFacture IA · Plan comptable SYSCOHADA révisé · Export Sage 100 i7
+</footer>
 
 <div class="toast-wrap" id="toastWrap"></div>
 
@@ -302,6 +640,71 @@
 const FULL_ACCOUNTS = [["10100000", "Capital social"], ["10110000", "Capital souscrit, non appelé"], ["10120000", "Capital souscrit, appelé, non versé"], ["10130000", "Capital souscrit, appelé, versé, non amorti"], ["10140000", "Capital souscrit, appelé, versé, amorti"], ["10180000", "Capital souscrit soumis à des conditions particulières"], ["10200000", "Capital par dotation"], ["10210000", "Dotation initiale"], ["10220000", "Dotations complémentaires"], ["10280000", "Autres dotations"], ["10300000", "Capital personnel"], ["10400000", "Compte de l'exploitant"], ["10410000", "Apports temporaires"], ["10420000", "Opérations courantes"], ["10430000", "Rémunérations, impôts et autres charges personnelles"], ["10470000", "Prélèvements d'autoconsommation"], ["10480000", "Autres prélèvements"], ["10500000", "Primes liées aux capitaux propres"], ["10510000", "Primes d'émission"], ["10520000", "Primes d'apport"], ["10530000", "Primes de fusion"], ["10540000", "Primes de conversion"], ["10580000", "Autres primes"], ["10600000", "Écarts de réévaluation"], ["10610000", "Écarts de réévaluation légale"], ["10620000", "Écarts de réévaluation libre"], ["10900000", "Actionnaires, capital souscrit, non appelé"], ["11100000", "Réserve légale"], ["11200000", "Réserves statutaires ou contractuelles"], ["11300000", "Réserves réglementées"], ["11310000", "Réserves de plus-values nettes à long terme"], ["11330000", "Réserves consécutives à l'octroi de subventions d'investissement"], ["11380000", "Autres réserves réglementées"], ["11800000", "Autres réserves"], ["11810000", "Réserves facultatives"], ["11880000", "Réserves diverses"], ["12100000", "Report à nouveau créditeur"], ["12900000", "Report à nouveau débiteur"], ["12910000", "Perte nette à reporter"], ["12920000", "Perte - Amortissements réputés différés"], ["13000000", "Résultat en instance d'affectation"], ["13010000", "Résultat en instance d'affectation : bénéfice"], ["13090000", "Résultat en instance d'affectation : perte"], ["13100000", "Résultat net : bénéfice"], ["13200000", "Marge brute (MB)"], ["13210000", "Marge brute sur marchandises"], ["13220000", "Marge brute sur matières"], ["13300000", "Valeur ajoutée (VA)"], ["13400000", "Excédent brut d'exploitation (EBE)"], ["13500000", "Résultat d'exploitation (RE)"], ["13600000", "Résultat financier (RF)"], ["13700000", "Résultat des activités ordinaires (RAO)"], ["13800000", "Résultat hors activités ordinaires (RHAO)"], ["13900000", "Résultat net : perte"], ["14100000", "Subventions d'équipement A"], ["14110000", "État"], ["14120000", "Régions"], ["14130000", "Départements"], ["14140000", "Communes et collectivités publiques décentralisées"], ["14150000", "Entreprises publiques ou mixtes"], ["14160000", "Entreprises et organismes privés"], ["14170000", "Organismes internationaux"], ["14180000", "Autres"], ["14200000", "Subventions d'équipement B"], ["14800000", "Autres subventions d'investissement"], ["15100000", "Amortissements dérogatoires"], ["15200000", "Plus-values de cession à réinvestir"], ["15300000", "Fonds réglementés"], ["15310000", "Fonds National"], ["15320000", "Prélèvement pour le Budget"], ["15400000", "Provision spéciale de réévaluation"], ["15500000", "Provisions réglementées relatives aux immobilisations"], ["15510000", "Reconstitution des gisements miniers et pétroliers"], ["15600000", "Provisions réglementées relatives aux stocks"], ["15610000", "Hausse de prix"], ["15620000", "Fluctuation des cours"], ["15700000", "Provisions pour investissement"], ["15800000", "Autres provisions et fonds réglementés"], ["16100000", "Emprunts obligataires"], ["16110000", "Emprunts obligataires ordinaires"], ["16120000", "Emprunts obligataires convertibles"], ["16180000", "Autres emprunts obligataires"], ["16200000", "Emprunts et dettes auprès des établissements de crédit"], ["16300000", "Avances reçues de l'état"], ["16400000", "Avances reçues et comptes courants bloqués"], ["16500000", "Dépôts et cautionnements reçus"], ["16510000", "Dépôts"], ["16520000", "Cautionnements"], ["16600000", "Intérêts courus (classe 1 - emprunts)"], ["16610000", "Intérêts courus sur emprunts obligataires"], ["16620000", "Intérêts courus sur emprunts et dettes auprès des établissements de crédit"], ["16630000", "Intérêts courus sur avances reçues de l'État"], ["16640000", "Intérêts courus sur avances reçues et comptes courants bloqués"], ["16650000", "Intérêts courus sur dépôts et cautionnements reçus"], ["16670000", "Intérêts courus sur avances assorties de conditions particulières"], ["16680000", "Intérêts courus sur autres emprunts et dettes"], ["16700000", "Avances assorties de conditions particulières"], ["16710000", "Avances bloquées pour augmentation du capital"], ["16720000", "Avances conditionnées par l'État"], ["16730000", "Avances conditionnées par les autres organismes africains"], ["16740000", "Avances conditionnées par les organismes internationaux"], ["16760000", "Droits du concédant exigibles en nature"], ["16800000", "Autres emprunts et dettes"], ["16810000", "Rentes viagères capitalisées"], ["16820000", "Billets de fonds"], ["16830000", "Dettes consécutives à des titres empruntés"], ["16840000", "Dettes du concédant exigibles en nature"], ["16850000", "Emprunts participatifs"], ["16860000", "Participation des travailleurs aux bénéfices"], ["17200000", "Emprunts équivalents de crédit-bail immobilier"], ["17300000", "Emprunts équivalents de crédit-bail mobilier"], ["17600000", "Intérêts courus (classe 1 - crédit-bail)"], ["17620000", "Intérêts courus sur emprunts équivalents de crédit-bail immobilier"], ["17630000", "Intérêts courus sur emprunts équivalents de crédit-bail mobilier"], ["17680000", "Intérêts courus sur emprunts équivalents d'autres contrats"], ["17800000", "Emprunts équivalents d'autres contrats"], ["18100000", "Dettes liées à des participations"], ["18110000", "Dettes liées à des participations (groupe)"], ["18120000", "Dettes liées à des participations (hors groupe)"], ["18200000", "Dettes liées à des sociétés en participation"], ["18300000", "Intérêts courus sur dettes liées à des participations"], ["18400000", "Comptes permanents bloqués des établissements et succursales"], ["18500000", "Comptes permanents non bloqués des établissements et succursales"], ["18600000", "Comptes de liaison charges"], ["18700000", "Comptes de liaison produits"], ["18800000", "Comptes de liaison des sociétés en participation"], ["19100000", "Provisions pour litiges"], ["19200000", "Provisions pour garanties données aux clients"], ["19300000", "Provisions pour pertes sur marchés à achèvement futur"], ["19400000", "Provisions pour pertes de change"], ["19500000", "Provisions pour impôts"], ["19600000", "Provisions pour pensions et obligations similaires"], ["19700000", "Provisions pour charges à répartir sur plusieurs exercices"], ["19710000", "Provisions pour grosses réparations"], ["19800000", "Autres provisions financières pour risques et charges"], ["19810000", "Provisions pour amendes et pénalités"], ["19820000", "Provisions pour renouvellement des immobilisations (concessionnaires)"], ["19830000", "Provisions de propre assureur"], ["19880000", "Autres provisions financières pour risques et charges"], ["20100000", "Frais d'établissement"], ["20110000", "Frais de constitution"], ["20120000", "Frais de prospection"], ["20130000", "Frais de publicité et de lancement"], ["20140000", "Frais de fonctionnement antérieurs au démarrage"], ["20150000", "Frais de modification du capital (fusions, scissions, transformations)"], ["20160000", "Frais d'entrée à la Bourse"], ["20170000", "Frais de restructuration"], ["20180000", "Frais divers d'établissement"], ["20200000", "Charges à répartir sur plusieurs exercices"], ["20210000", "Charges différées"], ["20220000", "Frais d'acquisition d'immobilisations"], ["20260000", "Frais d'émission des emprunts"], ["20280000", "Charges à étaler"], ["20600000", "Primes de remboursement des obligations"], ["20610000", "Obligations ordinaires"], ["20620000", "Obligations convertibles"], ["20680000", "Autres emprunts obligataires"], ["21100000", "Frais de recherche et de développement"], ["21200000", "Brevets, licences, concessions et droits similaires"], ["21300000", "Logiciels"], ["21400000", "Marques"], ["21500000", "Fonds commercial"], ["21600000", "Droit au bail"], ["21700000", "Investissements de création"], ["21800000", "Autres droits et valeurs incorporels"], ["21900000", "Immobilisations incorporelles en cours"], ["21910000", "Frais de recherche et de développement en cours"], ["21930000", "Logiciels en cours"], ["21980000", "Autres droits et valeurs incorporels en cours"], ["22100000", "Terrains agricoles et forestiers"], ["22110000", "Terrains d'exploitation agricole"], ["22120000", "Terrains d'exploitation forestière"], ["22180000", "Autres terrains agricoles et forestiers"], ["22200000", "Terrains nus"], ["22210000", "Terrains à bâtir"], ["22280000", "Autres terrains nus"], ["22300000", "Terrains bâtis"], ["22310000", "Terrains pour bâtiments industriels et agricoles"], ["22320000", "Terrains pour bâtiments administratifs et commerciaux"], ["22340000", "Terrains pour bâtiments affectés aux autres opérations professionnelles"], ["22350000", "Terrains pour bâtiments affectés aux autres opérations non professionnelles"], ["22380000", "Autres terrains bâtis"], ["22400000", "Travaux de mise en valeur des terrains"], ["22410000", "Plantation d'arbres et d'arbustes"], ["22480000", "Autres travaux de mise en valeur des terrains"], ["22500000", "Terrains de gisement"], ["22510000", "Carrières"], ["22600000", "Terrains aménagés"], ["22610000", "Parkings"], ["22700000", "Terrains mis en concession"], ["22800000", "Autres terrains"], ["22810000", "Terrains des immeubles de rapport"], ["22850000", "Terrains des logements affectés au personnel"], ["22880000", "Autres terrains"], ["22900000", "Aménagements de terrains en cours"], ["22910000", "Terrains agricoles et forestiers en cours"], ["22920000", "Terrains nus en cours"], ["22950000", "Terrains de gisement en cours"], ["22980000", "Autres terrains en cours"], ["23100000", "Bâtiments industriels, agricoles, administratifs et commerciaux sur sol propre"], ["23110000", "Bâtiments industriels (sol propre)"], ["23120000", "Bâtiments agricoles (sol propre)"], ["23130000", "Bâtiments administratifs et commerciaux (sol propre)"], ["23140000", "Bâtiments affectés au logement du personnel (sol propre)"], ["23150000", "Immeubles de rapport (sol propre)"], ["23200000", "Bâtiments industriels, agricoles, administratifs et commerciaux sur sol d'autrui"], ["23210000", "Bâtiments industriels (sol d'autrui)"], ["23220000", "Bâtiments agricoles (sol d'autrui)"], ["23230000", "Bâtiments administratifs et commerciaux (sol d'autrui)"], ["23240000", "Bâtiments affectés au logement du personnel (sol d'autrui)"], ["23250000", "Immeubles de rapport (sol d'autrui)"], ["23300000", "Ouvrages d'infrastructure"], ["23310000", "Voies de terre"], ["23320000", "Voies de fer"], ["23330000", "Voies d'eau"], ["23340000", "Barrages, Digues"], ["23350000", "Pistes d'aérodrome"], ["23380000", "Autres ouvrages d'infrastructure"], ["23400000", "Installations techniques"], ["23410000", "Installations complexes spécialisées sur sol propre"], ["23420000", "Installations complexes spécialisées sur sol d'autrui"], ["23430000", "Installations à caractère spécifique sur sol propre"], ["23440000", "Installations à caractère spécifique sur sol d'autrui"], ["23500000", "Aménagements de bureaux"], ["23510000", "Installations générales"], ["23580000", "Autres aménagements de bureaux"], ["23700000", "Bâtiments industriels, agricoles et commerciaux mis en concession"], ["23800000", "Autres installations et agencements"], ["23900000", "Bâtiments et installations en cours"], ["24100000", "Matériel et outillage industriel et commercial"], ["24110000", "Matériel industriel"], ["24120000", "Outillage industriel"], ["24130000", "Matériel commercial"], ["24140000", "Outillage commercial"], ["24200000", "Matériel et outillage agricole"], ["24210000", "Matériel agricole"], ["24220000", "Outillage agricole"], ["24300000", "Matériel d'emballage récupérable et identifiable"], ["24400000", "Matériel et mobilier"], ["24410000", "Matériel de bureau"], ["24420000", "Matériel informatique"], ["24430000", "Matériel bureautique"], ["24440000", "Mobilier de bureau"], ["24460000", "Matériel et mobilier des immeubles de rapport"], ["24470000", "Matériel et mobilier des logements du personnel"], ["24500000", "Matériel de transport"], ["24510000", "Matériel automobile"], ["24520000", "Matériel ferroviaire"], ["24530000", "Matériel fluvial, lagunaire"], ["24540000", "Matériel naval"], ["24550000", "Matériel aérien"], ["24560000", "Matériel hippomobile"], ["24580000", "Autres matériels de transport (vélo, mobylette, moto)"], ["24600000", "Immobilisations animales et agricoles"], ["24610000", "Cheptel, animaux de trait"], ["24620000", "Cheptel, animaux reproducteurs"], ["24630000", "Animaux de garde"], ["24650000", "Plantations agricoles"], ["24680000", "Autres immobilisations animales et agricoles"], ["24700000", "Agencements et aménagements du matériel"], ["24800000", "Autres matériels"], ["24810000", "Collections et œuvres d'art"], ["24900000", "Matériel en cours"], ["24910000", "Matériel et outillage industriel et commercial en cours"], ["24920000", "Matériel et outillage agricole en cours"], ["24930000", "Matériel d'emballage récupérable et identifiable en cours"], ["24940000", "Matériel et mobilier de bureau en cours"], ["24950000", "Matériel de transport en cours"], ["24960000", "Immobilisations animales et agricoles en cours"], ["24970000", "Agencements et aménagements du matériel en cours"], ["24980000", "Autres matériels en cours"], ["25100000", "Avances et acomptes versés sur immobilisations incorporelles"], ["25200000", "Avances et acomptes versés sur immobilisations corporelles"], ["26100000", "Titres de participation dans des sociétés sous contrôle exclusif"], ["26200000", "Titres de participation dans des sociétés sous contrôle conjoint"], ["26300000", "Titres de participation dans des sociétés conférant une influence notable"], ["26500000", "Participations dans des organismes professionnels"], ["26600000", "Parts dans des groupements d'intérêt économique (GIE)"], ["26800000", "Autres titres de participation"], ["27100000", "Prêts et créances non commerciales"], ["27110000", "Prêts participatifs"], ["27120000", "Prêts aux associés"], ["27130000", "Billets de fonds"], ["27140000", "Titres prêtés"], ["27200000", "Prêts au personnel"], ["27210000", "Prêts immobiliers"], ["27220000", "Prêts mobiliers et d'installation"], ["27280000", "Autres prêts (frais d'études…)"], ["27300000", "Créances sur l'État"], ["27310000", "Retenues de garantie"], ["27330000", "Fonds réglementé"], ["27380000", "Autres créances sur l'État"], ["27400000", "Titres immobilisés"], ["27410000", "Titres immobilisés de l'activité de portefeuille (TIAP)"], ["27420000", "Titres participatifs"], ["27430000", "Certificats d'investissement"], ["27440000", "Parts de fonds commun de placement (FCP)"], ["27480000", "Autres titres immobilisés"], ["27500000", "Dépôts et cautionnements versés"], ["27510000", "Dépôts pour loyers d'avance"], ["27520000", "Dépôts pour l'électricité"], ["27530000", "Dépôts pour l'eau"], ["27540000", "Dépôts pour le gaz"], ["27550000", "Dépôts pour le téléphone, le télex, la télécopie"], ["27560000", "Cautionnements sur marchés publics"], ["27570000", "Cautionnements sur autres opérations"], ["27580000", "Autres dépôts et cautionnements"], ["27600000", "Intérêts courus (immobilisations financières)"], ["27610000", "Intérêts courus sur prêts et créances non commerciales"], ["27620000", "Intérêts courus sur prêts au personnel"], ["27630000", "Intérêts courus sur créances sur l'État"], ["27640000", "Intérêts courus sur titres immobilisés"], ["27650000", "Intérêts courus sur dépôts et cautionnements versés"], ["27670000", "Intérêts courus sur créances rattachées à des participations"], ["27680000", "Intérêts courus sur immobilisations financières diverses"], ["27700000", "Créances rattachées à des participations et avances à des GIE"], ["27710000", "Créances rattachées à des participations (groupe)"], ["27720000", "Créances rattachées à des participations (hors groupe)"], ["27730000", "Créances rattachées à des sociétés en participation"], ["27740000", "Avances à des Groupements d'intérêt économique (GIE)"], ["27800000", "Immobilisations financières diverses"], ["27810000", "Créances diverses groupe"], ["27820000", "Créances diverses hors groupe"], ["27850000", "Or et métaux précieux"], ["28100000", "Amortissements des immobilisations incorporelles"], ["28110000", "Amortissements des frais de recherche et de développement"], ["28120000", "Amortissements des brevets, licences, concessions et droits similaires"], ["28130000", "Amortissements des logiciels"], ["28140000", "Amortissements des marques"], ["28150000", "Amortissements du fonds commercial"], ["28160000", "Amortissements du droit au bail"], ["28170000", "Amortissements des investissements de création"], ["28180000", "Amortissements des autres droits et valeurs incorporels"], ["28200000", "Amortissements des terrains"], ["28210000", "Amortissements des terrains agricoles et forestiers"], ["28240000", "Amortissements des travaux de mise en valeur des terrains"], ["28250000", "Amortissements des terrains de gisement"], ["28300000", "Amortissements des bâtiments, installations techniques et agencements"], ["28310000", "Amortissements des bâtiments industriels, agricoles, administratifs et commerciaux sur sol propre"], ["28320000", "Amortissements des bâtiments industriels, agricoles, administratifs et commerciaux sur sol d'autrui"], ["28330000", "Amortissements des ouvrages d'infrastructure"], ["28340000", "Amortissements des installations techniques"], ["28350000", "Amortissements des aménagements de bureaux"], ["28370000", "Amortissements des bâtiments mis en concession"], ["28380000", "Amortissements des autres installations et agencements"], ["28400000", "Amortissements du matériel"], ["28410000", "Amortissements du matériel et outillage industriel et commercial"], ["28420000", "Amortissements du matériel et outillage agricole"], ["28430000", "Amortissements du matériel d'emballage récupérable et identifiable"], ["28440000", "Amortissements du matériel et mobilier"], ["28450000", "Amortissements du matériel de transport"], ["28460000", "Amortissements des immobilisations animales et agricoles"], ["28470000", "Amortissements des agencements et aménagements du matériel"], ["28480000", "Amortissements des autres matériels"], ["29100000", "Provisions pour dépréciation des immobilisations incorporelles"], ["29120000", "Provisions pour dépréciation des brevets, licences, concessions et droits similaires"], ["29130000", "Provisions pour dépréciation des logiciels"], ["29140000", "Provisions pour dépréciation des marques"], ["29150000", "Provisions pour dépréciation du fonds commercial"], ["29160000", "Provisions pour dépréciation du droit au bail"], ["29170000", "Provisions pour dépréciation des investissements de création"], ["29180000", "Provisions pour dépréciation des autres droits et valeurs incorporels"], ["29190000", "Provisions pour dépréciation des immobilisations incorporelles en cours"], ["29200000", "Provisions pour dépréciation des terrains"], ["29300000", "Provisions pour dépréciation des bâtiments, installations techniques et agencements"], ["29400000", "Provisions pour dépréciation de matériel"], ["29500000", "Provisions pour dépréciation des avances et acomptes versés sur immobilisations"], ["29600000", "Provisions pour dépréciation des titres de participation"], ["29700000", "Provisions pour dépréciation des autres immobilisations financières"], ["31100000", "Marchandises A"], ["31110000", "Marchandises A1"], ["31120000", "Marchandises A2"], ["31200000", "Marchandises B"], ["31210000", "Marchandises B1"], ["31220000", "Marchandises B2"], ["31800000", "Marchandises hors activités ordinaires (HAO)"], ["32100000", "Matières A"], ["32200000", "Matières B"], ["32300000", "Fournitures liées (A, B)"], ["33100000", "Matières consommables"], ["33200000", "Fournitures d'atelier et d'usine"], ["33300000", "Fournitures de magasin"], ["33400000", "Fournitures de bureau"], ["33500000", "Emballages"], ["33510000", "Emballages perdus"], ["33520000", "Emballages récupérables non identifiables"], ["33530000", "Emballages à usage mixte"], ["33580000", "Autres emballages"], ["33800000", "Autres matières"], ["34100000", "Produits en cours"], ["34110000", "Produits en cours P1"], ["34120000", "Produits en cours P2"], ["34200000", "Travaux en cours"], ["34210000", "Travaux en cours T1"], ["34220000", "Travaux en cours T2"], ["34300000", "Produits intermédiaires en cours"], ["34310000", "Produits intermédiaires en cours A"], ["34320000", "Produits intermédiaires en cours B"], ["34400000", "Produits résiduels en cours"], ["34410000", "Produits résiduels en cours A"], ["34420000", "Produits résiduels en cours B"], ["35100000", "Études en cours"], ["35110000", "Études en cours E1"], ["35120000", "Études en cours E2"], ["35200000", "Prestations de services en cours"], ["35210000", "Prestations de services en cours S1"], ["35220000", "Prestations de services en cours S2"], ["36100000", "Produits finis A"], ["36200000", "Produits finis B"], ["37100000", "Produits intermédiaires"], ["37110000", "Produits intermédiaires A"], ["37120000", "Produits intermédiaires B"], ["37200000", "Produits résiduels"], ["37210000", "Déchets"], ["37220000", "Rebuts"], ["37230000", "Matières de récupération"], ["38100000", "Marchandises en cours de route"], ["38200000", "Matières premières et fournitures liées en cours de route"], ["38300000", "Autres approvisionnements en cours de route"], ["38600000", "Produits finis en cours de route"], ["38700000", "Stock en consignation ou en dépôt"], ["38710000", "Stock en consignation"], ["38720000", "Stock en dépôt"], ["38800000", "Stock provenant d'immobilisations mises hors service ou au rebut"], ["39100000", "Dépréciations des stocks de marchandises"], ["39200000", "Dépréciations des stocks de matières premières et fournitures liées"], ["39300000", "Dépréciations des stocks d'autres approvisionnements"], ["39400000", "Dépréciations des productions en cours"], ["39500000", "Dépréciations des services en cours"], ["39600000", "Dépréciations des stocks de produits finis"], ["39700000", "Dépréciations des stocks de produits intermédiaires et résiduels"], ["39800000", "Dépréciations des stocks en cours de route, en consignation ou en dépôt"], ["40100000", "Fournisseurs, dettes en compte"], ["40110000", "Fournisseurs"], ["40120000", "Fournisseurs Groupe"], ["40130000", "Fournisseurs sous-traitants"], ["40170000", "Fournisseurs, retenues de garantie"], ["40200000", "Fournisseurs, effets à payer"], ["40210000", "Fournisseurs, Effets à payer"], ["40220000", "Fournisseurs - Groupe, Effets à payer"], ["40230000", "Fournisseurs sous-traitants, Effets à payer"], ["40800000", "Fournisseurs, factures non parvenues"], ["40810000", "Fournisseurs - factures non parvenues"], ["40820000", "Fournisseurs - Groupe - factures non parvenues"], ["40830000", "Fournisseurs sous-traitants - factures non parvenues"], ["40860000", "Fournisseurs, intérêts courus"], ["40900000", "Fournisseurs débiteurs"], ["40910000", "Fournisseurs avances et acomptes versés"], ["40920000", "Fournisseurs - Groupe avances et acomptes versés"], ["40930000", "Fournisseurs sous-traitants avances et acomptes versés"], ["40940000", "Fournisseurs créances pour emballages et matériels à rendre"], ["40980000", "Rabais, Remises, Ristournes et autres avoirs à obtenir"], ["41100000", "Clients"], ["41110000", "Clients"], ["41120000", "Clients - Groupe"], ["41140000", "Clients, État et Collectivités publiques"], ["41150000", "Clients, organismes internationaux"], ["41170000", "Client, retenues de garantie"], ["41180000", "Clients, dégrèvement de taxes sur la valeur ajoutée (TVA)"], ["41200000", "Clients, effets à recevoir en portefeuille"], ["41210000", "Clients, Effets à recevoir"], ["41220000", "Clients - Groupe, Effets à recevoir"], ["41240000", "État et Collectivités publiques, Effets à recevoir"], ["41250000", "Organismes Internationaux, Effets à recevoir"], ["41400000", "Créances sur cessions d'immobilisations"], ["41410000", "Créances en compte (cessions d'immobilisations)"], ["41420000", "Effets à recevoir (cessions d'immobilisations)"], ["41500000", "Clients, effets escomptés non échus"], ["41600000", "Créances clients litigieuses ou douteuses"], ["41610000", "Créances litigieuses"], ["41620000", "Créances douteuses"], ["41800000", "Clients, produits à recevoir"], ["41810000", "Clients, factures à établir"], ["41860000", "Clients, intérêts courus"], ["41900000", "Clients créditeurs"], ["41910000", "Clients, avances et acomptes reçus"], ["41920000", "Clients - Groupe, avances et acomptes reçus"], ["41940000", "Clients, dettes pour emballages et matériels consignés"], ["41980000", "Rabais, Remises, Ristournes et autres avoirs à accorder"], ["42100000", "Personnel, avances et acomptes"], ["42110000", "Personnel, avances"], ["42120000", "Personnel, acomptes"], ["42130000", "Frais avancés et fournitures au personnel"], ["42200000", "Personnel, rémunérations dues"], ["42300000", "Personnel, oppositions, saisies-arrêts"], ["42310000", "Personnel, oppositions"], ["42320000", "Personnel, saisies-arrêts"], ["42330000", "Personnel, avis à tiers détenteur"], ["42400000", "Personnel, œuvres sociales internes"], ["42410000", "Assistance médicale"], ["42420000", "Allocations familiales"], ["42450000", "Organismes sociaux rattachés à l'entreprise"], ["42480000", "Autres œuvres sociales internes"], ["42500000", "Représentants du personnel"], ["42510000", "Délégués du personnel"], ["42520000", "Syndicats et Comités d'entreprises, d'Établissement"], ["42580000", "Autres représentants du personnel"], ["42600000", "Personnel, participation aux bénéfices"], ["42700000", "Personnel - dépôts"], ["42800000", "Personnel, charges à payer et produits à recevoir"], ["42810000", "Dettes provisionnées pour congés à payer"], ["42860000", "Autres charges à payer (personnel)"], ["42870000", "Produits à recevoir (personnel)"], ["43100000", "Sécurité sociale"], ["43110000", "Prestations familiales"], ["43120000", "Accidents de travail"], ["43130000", "Caisse de retraite obligatoire"], ["43140000", "Caisse de retraite facultative"], ["43180000", "Autres cotisations sociales"], ["43200000", "Caisses de retraite complémentaire"], ["43300000", "Autres organismes sociaux"], ["43310000", "Mutuelle"], ["43800000", "Organismes sociaux, charges à payer et produits à recevoir"], ["43810000", "Charges sociales sur gratifications à payer"], ["43820000", "Charges sociales sur congés à payer"], ["43860000", "Autres charges à payer (organismes sociaux)"], ["43870000", "Produits à recevoir (organismes sociaux)"], ["44100000", "État, impôt sur les bénéfices"], ["44200000", "État, autres impôts et taxes"], ["44210000", "Impôts et taxes d'État"], ["44220000", "Impôts et taxes pour les collectivités publiques"], ["44230000", "Impôts et taxes recouvrables sur des obligataires"], ["44240000", "Impôts et taxes recouvrables sur des associés"], ["44260000", "Droits de douane"], ["44280000", "Autres impôts et taxes"], ["44300000", "État, TVA facturée"], ["44310000", "TVA facturée sur ventes"], ["44320000", "TVA facturée sur prestations de services"], ["44330000", "TVA facturée sur travaux"], ["43340000", "TVA facturée sur production livrée à soi-même"], ["43350000", "TVA sur factures à établir"], ["44400000", "État, TVA due ou crédit de TVA"], ["44410000", "État, TVA due"], ["44490000", "État, crédit de TVA à reporter"], ["44500000", "État, TVA récupérable"], ["44510000", "TVA récupérable sur immobilisations"], ["44520000", "TVA récupérable sur achats"], ["44530000", "TVA récupérable sur transport"], ["44540000", "TVA récupérable sur services extérieurs et autres charges"], ["44550000", "TVA récupérable sur factures non parvenues"], ["44560000", "TVA transférée par d'autres entreprises"], ["44600000", "État, autres taxes sur le chiffre d'affaires"], ["44700000", "État, impôts retenus à la source"], ["44710000", "Impôt Général sur le revenu"], ["44720000", "Impôts sur salaires"], ["44730000", "Contribution nationale"], ["44740000", "Contribution nationale de solidarité"], ["44780000", "Autres impôts et contributions"], ["44800000", "État, charges à payer et produits à recevoir"], ["44860000", "Charges à payer (État)"], ["44870000", "Produits à recevoir (État)"], ["44900000", "État, créances et dettes diverses"], ["44910000", "État, obligations cautionnées"], ["44920000", "État, avances et acomptes versés sur impôts"], ["44930000", "État, fonds de dotation à recevoir"], ["44940000", "État, subventions d'équipement à recevoir"], ["44950000", "État, subventions d'exploitation à recevoir"], ["44960000", "État, subventions d'équilibre à recevoir"], ["44990000", "État, fonds réglementé provisionné"], ["45100000", "Opérations avec les organismes africains"], ["45200000", "Opérations avec les autres organismes internationaux"], ["45800000", "Organismes internationaux, fonds de dotation et subventions à recevoir"], ["45810000", "Organismes internationaux, fonds de dotation à recevoir"], ["45820000", "Organismes internationaux, subventions à recevoir"], ["46100000", "Associés, opérations sur le capital"], ["46110000", "Associés apports en nature"], ["46120000", "Associés apports en numéraire"], ["46130000", "Actionnaires, capital souscrit appelé non versé"], ["46140000", "Associés, capital appelé non versé"], ["46150000", "Associés, versements reçus sur augmentation de capital"], ["46160000", "Associés, versements anticipés"], ["46170000", "Actionnaires défaillants"], ["46180000", "Associés, autres apports"], ["46190000", "Associés, capital à rembourser"], ["46200000", "Associés, comptes courants"], ["46210000", "Principal (comptes courants associés)"], ["46260000", "Intérêts courus (comptes courants associés)"], ["46300000", "Associés, opérations faites en commun"], ["46500000", "Associés, dividendes à payer"], ["46600000", "Groupe, comptes courants"], ["46700000", "Actionnaires, restant dû sur capital appelé"], ["47100000", "Comptes d'attente"], ["47110000", "Débiteurs divers"], ["47120000", "Créditeurs divers"], ["47200000", "Versements restant à effectuer sur titres non libérés"], ["47260000", "Titres de participation (versements restants)"], ["47270000", "Titres immobilisés (versements restants)"], ["47280000", "Titres de placement (versements restants)"], ["47400000", "Répartition périodique des charges et des produits"], ["47460000", "Charges (répartition périodique)"], ["47470000", "Produits (répartition périodique)"], ["47500000", "Créances sur travaux non encore facturables"], ["47600000", "Charges constatées d'avance"], ["47700000", "Produits constatés d'avance"], ["47800000", "Écarts de conversion - actif"], ["47810000", "Diminution des créances"], ["47820000", "Augmentation des dettes"], ["47880000", "Différences compensées par couverture de change (actif)"], ["47900000", "Écarts de conversion - passif"], ["47910000", "Augmentation des créances"], ["47920000", "Diminution des dettes"], ["47980000", "Différences compensées par couverture de change (passif)"], ["48100000", "Fournisseurs d'investissements"], ["48110000", "Immobilisations incorporelles (fournisseurs)"], ["48120000", "Immobilisations corporelles (fournisseurs)"], ["48170000", "Retenues de garantie (fournisseurs d'investissements)"], ["48180000", "Factures non parvenues (fournisseurs d'investissements)"], ["48200000", "Fournisseurs d'investissements, effets à payer"], ["48300000", "Dettes sur acquisition de titres de placement"], ["48400000", "Autres dettes hors activités ordinaires (HAO)"], ["48500000", "Créances sur cessions d'immobilisations (HAO)"], ["48510000", "En compte (cessions d'immobilisations HAO)"], ["48520000", "Effets à recevoir (cessions d'immobilisations HAO)"], ["48570000", "Retenues de garantie (cessions d'immobilisations HAO)"], ["48580000", "Factures à établir (cessions d'immobilisations HAO)"], ["48600000", "Créances sur cessions de titres de placement"], ["48800000", "Autres créances hors activités ordinaires (HAO)"], ["49000000", "Dépréciations des comptes fournisseurs"], ["49100000", "Dépréciations des comptes clients"], ["49110000", "Créances litigieuses (clients)"], ["49120000", "Créances douteuses (clients)"], ["49200000", "Dépréciations des comptes personnel"], ["49300000", "Dépréciations des comptes organismes sociaux"], ["49400000", "Dépréciations des comptes état et collectivités publiques"], ["49500000", "Dépréciations des comptes organismes internationaux"], ["49600000", "Dépréciations des comptes associés et groupe"], ["49620000", "Associés, comptes courants (dépréciations)"], ["49630000", "Associés, opérations faites en commun (dépréciations)"], ["49660000", "Groupe, comptes courants (dépréciations)"], ["49700000", "Dépréciations des comptes débiteurs divers"], ["49800000", "Dépréciations des comptes de créances HAO"], ["49810000", "Créances sur cessions d'immobilisations (dépréciations)"], ["49820000", "Créances sur cessions de titres de placement (dépréciations)"], ["49830000", "Autres créances HAO (dépréciations)"], ["49900000", "Risques provisionnés"], ["49910000", "Sur opérations d'exploitation"], ["49980000", "Sur opérations HAO"], ["50100000", "Titres du trésor et bons de caisse à court terme"], ["50110000", "Titres du Trésor à court terme"], ["50120000", "Titres d'organismes financiers"], ["50130000", "Bons de caisse à court terme"], ["50200000", "Actions"], ["50210000", "Actions propres"], ["50220000", "Actions cotées"], ["50230000", "Actions non cotées"], ["50240000", "Actions démembrées (certificats d'investissement, droits de vote)"], ["50250000", "Autres titres conférant un droit de propriété"], ["50300000", "Obligations"], ["50310000", "Obligations émises par la société et rachetées par elle"], ["50320000", "Obligations cotées"], ["50330000", "Obligations non cotées"], ["50350000", "Autres titres conférant un droit de créance"], ["50400000", "Bons de souscription"], ["50420000", "Bons de souscription d'actions"], ["50430000", "Bons de souscription d'obligations"], ["50500000", "Titres négociables hors région"], ["50600000", "Intérêts courus (titres de placement)"], ["50610000", "Titres du Trésor et bons de caisse à court terme (intérêts courus)"], ["50620000", "Actions (intérêts courus)"], ["50630000", "Obligations (intérêts courus)"], ["50800000", "Autres valeurs assimilées"], ["51100000", "Effets à encaisser"], ["51200000", "Effets à l'encaissement"], ["51300000", "Chèques à encaisser"], ["51400000", "Chèques à l'encaissement"], ["51500000", "Cartes de crédit à encaisser"], ["51800000", "Autres valeurs à l'encaissement"], ["51810000", "Warrants"], ["51820000", "Billets de fonds (valeurs à l'encaissement)"], ["51850000", "Chèques de voyage"], ["51860000", "Coupons échus"], ["51870000", "Intérêts échus des obligations"], ["52100000", "Banques locales"], ["52110000", "Banque X"], ["52120000", "Banque Y"], ["52200000", "Banques autres États région"], ["52300000", "Banques autres États zone monétaire"], ["52400000", "Banques hors zone monétaire"], ["52600000", "Banques, intérêts courus"], ["53100000", "Chèques postaux"], ["53200000", "Trésor"], ["53300000", "Sociétés de gestion et d'intermédiation (SGI)"], ["53600000", "Établissements financiers, intérêts courus"], ["53800000", "Autres organismes financiers"], ["54100000", "Options de taux d'intérêt"], ["54200000", "Options de taux de change"], ["54300000", "Options de taux boursiers"], ["54400000", "Instruments de marchés à terme"], ["54500000", "Avoirs d'or et autres métaux précieux"], ["56100000", "Crédits de trésorerie"], ["56400000", "Escompte de crédits de campagne"], ["56500000", "Escompte de crédits ordinaires"], ["56600000", "Banques, crédits de trésorerie, intérêts courus"], ["57100000", "Caisse siège social"], ["57110000", "Caisse siège social en unités monétaires légales"], ["57120000", "Caisse siège social en devises"], ["57200000", "Caisse succursale A"], ["57210000", "Caisse succursale A en unités monétaires légales"], ["57220000", "Caisse succursale A en devises"], ["57300000", "Caisse succursale B"], ["57310000", "Caisse succursale B en unités monétaires légales"], ["57320000", "Caisse succursale B en devises"], ["58100000", "Régies d'avance"], ["58200000", "Accréditifs"], ["58500000", "Virements de fonds"], ["58800000", "Autres virements internes"], ["59000000", "Dépréciations des titres de placement"], ["59100000", "Dépréciations des titres et valeurs à encaisser"], ["59200000", "Dépréciations des comptes banques"], ["59300000", "Dépréciations des comptes établissements financiers et assimilés"], ["59400000", "Dépréciations des comptes d'instruments de trésorerie"], ["59900000", "Risques provisionnés à caractère financier"], ["60100000", "Achats de marchandises"], ["60110000", "Achats de marchandises dans la Région"], ["60120000", "Achats de marchandises hors Région"], ["60130000", "Achats de marchandises aux entreprises du groupe dans la Région"], ["60140000", "Achats de marchandises aux entreprises du groupe hors Région"], ["60190000", "Rabais, Remises et Ristournes obtenus sur marchandises (non ventilés)"], ["60200000", "Achats de matières premières et fournitures liées"], ["60210000", "Achats matières premières dans la Région"], ["60220000", "Achats matières premières hors Région"], ["60230000", "Achats matières premières aux entreprises du groupe dans la Région"], ["60240000", "Achats matières premières aux entreprises du groupe hors Région"], ["60290000", "Rabais, Remises et Ristournes obtenus sur matières premières"], ["60300000", "Variations des stocks de biens achetés"], ["60310000", "Variations des stocks de marchandises"], ["60320000", "Variations des stocks de matières premières et fournitures liées"], ["60330000", "Variations des stocks d'autres approvisionnements"], ["60400000", "Achats stockés de matières et fournitures consommables"], ["60410000", "Matières consommables"], ["60420000", "Matières combustibles"], ["60430000", "Produits d'entretien"], ["60440000", "Fournitures d'atelier et d'usine"], ["60460000", "Fournitures de magasin"], ["60470000", "Fournitures de bureau (achats stockés)"], ["60490000", "Rabais, Remises et Ristournes obtenus (matières et fournitures consommables)"], ["60500000", "Autres achats"], ["60510000", "Fournitures non stockables - Eau"], ["60520000", "Fournitures non stockables - Électricité"], ["60530000", "Fournitures non stockables - Autres énergies"], ["60540000", "Fournitures d'entretien non stockables"], ["60550000", "Fournitures de bureau non stockables"], ["60560000", "Achats de petit matériel et outillage"], ["60570000", "Achats d'études et prestations de services"], ["60580000", "Achats de travaux, matériels et équipements"], ["60590000", "Rabais, Remises et Ristournes obtenus (autres achats)"], ["60800000", "Achats d'emballages"], ["60810000", "Emballages perdus (achats)"], ["60820000", "Emballages récupérables non identifiables (achats)"], ["60830000", "Emballages à usage mixte (achats)"], ["60890000", "Rabais, Remises et Ristournes obtenus (emballages)"], ["61100000", "Transports sur achats"], ["61200000", "Transports sur ventes"], ["61300000", "Transports pour le compte de tiers"], ["61400000", "Transports du personnel"], ["61600000", "Transports de plis"], ["61800000", "Autres frais de transport"], ["61810000", "Voyages et déplacements"], ["61820000", "Transports entre établissements ou chantiers"], ["61830000", "Transports administratifs"], ["62100000", "Sous-traitance générale"], ["62200000", "Locations et charges locatives"], ["62210000", "Locations de terrains"], ["62220000", "Locations de bâtiments"], ["62230000", "Locations de matériels et outillages"], ["62240000", "Malis sur emballages"], ["62250000", "Locations d'emballages"], ["62280000", "Locations et charges locatives diverses"], ["62300000", "Redevances de crédit-bail et contrats assimilés"], ["62320000", "Crédit-bail immobilier"], ["62330000", "Crédit-bail mobilier"], ["62350000", "Contrats assimilés (crédit-bail)"], ["62400000", "Entretien, réparations et maintenance"], ["62410000", "Entretien et réparations des biens immobiliers"], ["62420000", "Entretien et réparations des biens mobiliers"], ["62430000", "Maintenance"], ["62480000", "Autres entretiens et réparations"], ["62500000", "Primes d'assurance"], ["62510000", "Assurances multirisques"], ["62520000", "Assurances matériel de transport"], ["62530000", "Assurances risques d'exploitation"], ["62540000", "Assurances responsabilité du producteur"], ["62550000", "Assurances insolvabilité clients"], ["62560000", "Assurances transport sur achats"], ["62570000", "Assurances transport sur ventes"], ["62580000", "Autres primes d'assurances"], ["62600000", "Études, recherches et documentation"], ["62610000", "Études et recherches"], ["62650000", "Documentation générale"], ["62660000", "Documentation technique"], ["62700000", "Publicité, publications, relations publiques"], ["62710000", "Annonces, insertions"], ["62720000", "Catalogues, imprimés publicitaires"], ["62730000", "Échantillons"], ["62740000", "Foires et expositions"], ["62750000", "Publications"], ["62760000", "Cadeaux à la clientèle"], ["62770000", "Frais de colloques, séminaires, conférences"], ["62780000", "Autres charges de publicité et relations publiques"], ["62800000", "Frais de télécommunications"], ["62810000", "Frais de téléphone"], ["62820000", "Frais de télex"], ["62830000", "Frais de télécopie"], ["62880000", "Autres frais de télécommunications"], ["63100000", "Frais bancaires"], ["63110000", "Frais sur titres (achat, vente, garde)"], ["63120000", "Frais sur effets"], ["63130000", "Location de coffres"], ["63150000", "Commissions sur cartes de crédit"], ["63160000", "Frais d'émission d'emprunts"], ["63180000", "Autres frais bancaires"], ["63200000", "Rémunérations d'intermédiaires et de conseils"], ["63210000", "Commissions et courtages sur achats"], ["63220000", "Commissions et courtages sur ventes"], ["63230000", "Rémunérations des transitaires"], ["63240000", "Honoraires"], ["63250000", "Frais d'actes et de contentieux"], ["63280000", "Divers frais (intermédiaires et conseils)"], ["63300000", "Frais de formation du personnel"], ["63400000", "Redevances pour brevets, licences, logiciels et droits similaires"], ["63420000", "Redevances pour brevets, licences, concessions et droits similaires"], ["63430000", "Redevances pour logiciels"], ["63440000", "Redevances pour marques"], ["63500000", "Cotisations"], ["63510000", "Cotisations"], ["63580000", "Concours divers"], ["63700000", "Rémunérations de personnel extérieur à l'entreprise"], ["63710000", "Personnel intérimaire"], ["63720000", "Personnel détaché ou prêté à l'entreprise"], ["63800000", "Autres charges externes"], ["63810000", "Frais de recrutement du personnel"], ["63820000", "Frais de déménagement"], ["63830000", "Réceptions"], ["63840000", "Missions"], ["64100000", "Impôts et taxes directs"], ["64110000", "Impôts fonciers et taxes annexes"], ["64120000", "Patentes, licences et taxes annexes"], ["64130000", "Taxes sur appointements et salaires"], ["64140000", "Taxes d'apprentissage"], ["64150000", "Formation professionnelle continue"], ["64180000", "Autres impôts et taxes directs"], ["64500000", "Impôts et taxes indirects"], ["64600000", "Droits d'enregistrement"], ["64610000", "Droits de mutation"], ["64620000", "Droits de timbre"], ["64630000", "Taxes sur les véhicules de société"], ["64640000", "Vignettes"], ["64680000", "Autres droits d'enregistrement"], ["64700000", "Pénalités et amendes fiscales"], ["64710000", "Pénalités d'assiette, impôts directs"], ["64720000", "Pénalités d'assiette, impôts indirects"], ["64730000", "Pénalités de recouvrement, impôts directs"], ["64740000", "Pénalités de recouvrement, impôts indirects"], ["64780000", "Autres amendes pénales et fiscales"], ["64800000", "Autres impôts et taxes"], ["65100000", "Pertes sur créances clients et autres débiteurs"], ["65110000", "Clients (pertes sur créances)"], ["65150000", "Autres débiteurs (pertes sur créances)"], ["65200000", "Quote-part de résultat sur opérations faites en commun"], ["65210000", "Quote-part transférée de bénéfices (comptabilité du gérant)"], ["65250000", "Pertes imputées par transfert (comptabilité des associés non gérants)"], ["65300000", "Quote-part de résultat annulée sur exécution partielle de contrats pluri-exercices"], ["65400000", "Valeur comptable des cessions courantes d'immobilisations"], ["65800000", "Charges diverses"], ["65810000", "Jetons de présence et autres rémunérations d'administrateurs"], ["65820000", "Dons"], ["65830000", "Mécénat"], ["65900000", "Charges provisionnées d'exploitation"], ["65910000", "Sur risques à court terme"], ["65930000", "Sur stocks"], ["65940000", "Sur créances"], ["65980000", "Autres charges provisionnées"], ["66100000", "Rémunérations directes versées au personnel national"], ["66110000", "Appointements salaires et commissions (personnel national)"], ["66120000", "Primes et gratifications (personnel national)"], ["66130000", "Congés payés (personnel national)"], ["66140000", "Indemnités de préavis, de licenciement et de recherche d'embauche (national)"], ["66150000", "Indemnités de maladie versées aux travailleurs (national)"], ["66160000", "Supplément familial (national)"], ["66170000", "Avantages en nature (national)"], ["66180000", "Autres rémunérations directes (national)"], ["66200000", "Rémunérations directes versées au personnel non national"], ["66210000", "Appointements salaires et commissions (personnel non national)"], ["66220000", "Primes et gratifications (personnel non national)"], ["66230000", "Congés payés (personnel non national)"], ["66240000", "Indemnités de préavis, de licenciement et de recherche d'embauche (non national)"], ["66250000", "Indemnités de maladie versées aux travailleurs (non national)"], ["66260000", "Supplément familial (non national)"], ["66270000", "Avantages en nature (non national)"], ["66280000", "Autres rémunérations directes (non national)"], ["66300000", "Indemnités forfaitaires versées au personnel"], ["66310000", "Indemnités de logement"], ["66320000", "Indemnités de représentation"], ["66330000", "Indemnités d'expatriation"], ["66380000", "Autres indemnités et avantages divers"], ["66400000", "Charges sociales"], ["66410000", "Charges sociales sur rémunération du personnel national"], ["66420000", "Charges sociales sur rémunération du personnel non national"], ["66600000", "Rémunérations et charges sociales de l'exploitant individuel"], ["66610000", "Rémunération du travail de l'exploitant"], ["66620000", "Charges sociales (exploitant individuel)"], ["66700000", "Rémunération transférée de personnel extérieur"], ["66710000", "Personnel intérimaire (rémunération transférée)"], ["66720000", "Personnel détaché ou prêté à l'entreprise (rémunération transférée)"], ["66800000", "Autres charges sociales"], ["66810000", "Versements aux syndicats et comités d'entreprise, d'établissement"], ["66820000", "Versements aux comités d'hygiène et de sécurité"], ["66830000", "Versements aux autres œuvres sociales"], ["66840000", "Médecine du travail et pharmacie"], ["67100000", "Intérêts des emprunts"], ["67110000", "Emprunts obligataires (intérêts)"], ["67120000", "Emprunts auprès des établissements de crédit (intérêts)"], ["67130000", "Dettes liées à des participations (intérêts)"], ["67200000", "Intérêts dans loyers de crédit-bail et contrats assimilés"], ["67210000", "Intérêts dans loyers de crédit-bail immobilier"], ["67220000", "Intérêts dans loyers de crédit-bail mobilier"], ["67230000", "Intérêts dans loyers des autres contrats"], ["67300000", "Escomptes accordés"], ["67400000", "Autres intérêts"], ["67410000", "Avances reçues et dépôts créditeurs (autres intérêts)"], ["67420000", "Comptes courants bloqués (autres intérêts)"], ["67430000", "Intérêts sur obligations cautionnées"], ["67440000", "Intérêts sur dettes commerciales"], ["67450000", "Intérêts bancaires et sur opérations de trésorerie et d'escompte"], ["67480000", "Intérêts sur dettes diverses"], ["67500000", "Escomptes des effets de commerce"], ["67600000", "Pertes de change"], ["67700000", "Pertes sur cessions de titres de placement"], ["67800000", "Pertes sur risques financiers"], ["67810000", "Sur rentes viagères"], ["67820000", "Sur opérations financières"], ["67840000", "Sur instruments de trésorerie"], ["67900000", "Charges provisionnées financières"], ["67910000", "Sur risques financiers"], ["67950000", "Sur titres de placement"], ["67980000", "Autres charges provisionnées financières"], ["68100000", "Dotations aux amortissements d'exploitation"], ["68110000", "Dotations aux amortissements des charges immobilisées"], ["68120000", "Dotations aux amortissements des immobilisations incorporelles"], ["68130000", "Dotations aux amortissements des immobilisations corporelles"], ["68700000", "Dotations aux amortissements à caractère financier"], ["68720000", "Dotations aux amortissements des primes de remboursement des obligations"], ["68780000", "Autres dotations aux amortissements à caractère financier"], ["69100000", "Dotations aux provisions d'exploitation"], ["69110000", "Pour risques et charges (dotations provisions d'exploitation)"], ["69120000", "Pour grosses réparations"], ["69130000", "Pour dépréciation des immobilisations incorporelles"], ["69140000", "Pour dépréciation des immobilisations corporelles"], ["69700000", "Dotations aux provisions financières"], ["69710000", "Pour risques et charges (dotations provisions financières)"], ["69720000", "Pour dépréciation des immobilisations financières"], ["70100000", "Ventes de marchandises"], ["70110000", "Ventes de marchandises dans la Région"], ["70120000", "Ventes de marchandises hors Région"], ["70130000", "Ventes de marchandises aux entreprises du groupe dans la Région"], ["70140000", "Ventes de marchandises aux entreprises du groupe hors Région"], ["70200000", "Ventes de produits finis"], ["70210000", "Ventes de produits finis dans la Région"], ["70220000", "Ventes de produits finis hors Région"], ["70230000", "Ventes de produits finis aux entreprises du groupe dans la Région"], ["70240000", "Ventes de produits finis aux entreprises du groupe hors Région"], ["70300000", "Ventes de produits intermédiaires"], ["70310000", "Ventes de produits intermédiaires dans la Région"], ["70320000", "Ventes de produits intermédiaires hors Région"], ["70330000", "Ventes de produits intermédiaires aux entreprises du groupe dans la Région"], ["70340000", "Ventes de produits intermédiaires aux entreprises du groupe hors Région"], ["70400000", "Ventes de produits résiduels"], ["70410000", "Ventes de produits résiduels dans la Région"], ["70420000", "Ventes de produits résiduels hors Région"], ["70430000", "Ventes de produits résiduels aux entreprises du groupe dans la Région"], ["70440000", "Ventes de produits résiduels aux entreprises du groupe hors Région"], ["70500000", "Travaux facturés"], ["70510000", "Travaux facturés dans la Région"], ["70520000", "Travaux facturés hors Région"], ["70530000", "Travaux facturés aux entreprises du groupe dans la Région"], ["70540000", "Travaux facturés aux entreprises du groupe hors Région"], ["70600000", "Services vendus"], ["70610000", "Services vendus dans la Région"], ["70620000", "Services vendus hors Région"], ["70630000", "Services vendus aux entreprises du groupe dans la Région"], ["70640000", "Services vendus aux entreprises du groupe hors Région"], ["70700000", "Produits accessoires"], ["70710000", "Ports, emballages perdus et autres frais facturés"], ["70720000", "Commissions et courtages"], ["70730000", "Locations"], ["70740000", "Bonis sur reprises et cessions d'emballages"], ["70750000", "Mise à disposition de personnel"], ["70760000", "Redevances pour brevets, logiciels, marques et droits similaires"], ["70770000", "Services exploités dans l'intérêt du personnel"], ["70780000", "Autres produits accessoires"], ["71100000", "Subventions d'exploitation sur produits à l'exportation"], ["71200000", "Subventions d'exploitation sur produits à l'importation"], ["71300000", "Subventions d'exploitation sur produits de péréquation"], ["71800000", "Autres subventions d'exploitation"], ["71810000", "Versées par l'État et les collectivités publiques"], ["71820000", "Versées par les organismes internationaux"], ["71830000", "Versées par des tiers"], ["72100000", "Production immobilisée - Immobilisations incorporelles"], ["72200000", "Production immobilisée - Immobilisations corporelles"], ["72600000", "Production immobilisée - Immobilisations financières"], ["73400000", "Variations des stocks de produits en cours"], ["73410000", "Produits en cours (variations)"], ["73420000", "Travaux en cours (variations)"], ["73500000", "Variations des en-cours de services"], ["73510000", "Études en cours (variations)"], ["73520000", "Prestations de services en cours (variations)"], ["73600000", "Variations des stocks de produits finis"], ["73700000", "Variations des stocks de produits intermédiaires et résiduels"], ["73710000", "Produits intermédiaires (variations)"], ["73720000", "Produits résiduels (variations)"], ["75200000", "Quote-part de résultat sur opérations faites en commun (produits)"], ["75210000", "Quote-part transférée de pertes (comptabilité du gérant)"], ["75250000", "Bénéfices attribués par transfert (comptabilité des associés non gérants)"], ["75300000", "Quote-part de résultat sur exécution partielle de contrats pluri-exercices (produits)"], ["75400000", "Produits des cessions courantes d'immobilisations"], ["75800000", "Produits divers"], ["75810000", "Jetons de présence et autres rémunérations d'administrateurs (produits)"], ["75820000", "Indemnités d'assurances reçues"], ["75900000", "Reprises de charges provisionnées d'exploitation"], ["75910000", "Sur risques à court terme (reprises)"], ["75930000", "Sur stocks (reprises)"], ["75940000", "Sur créances (reprises)"], ["75980000", "Sur autres charges provisionnées (reprises)"], ["77100000", "Intérêts de prêts"], ["77200000", "Revenus de participations"], ["77300000", "Escomptes obtenus"], ["77400000", "Revenus de titres de placement"], ["77600000", "Gains de change"], ["77700000", "Gains sur cessions de titres de placement"], ["77800000", "Gains sur risques financiers"], ["77810000", "Sur rentes viagères (gains)"], ["77820000", "Sur opérations financières (gains)"], ["77840000", "Sur instruments de trésorerie (gains)"], ["77900000", "Reprises de charges provisionnées financières"], ["77910000", "Sur risques financiers (reprises financières)"], ["77950000", "Sur titres de placement (reprises financières)"], ["77980000", "Autres charges provisionnées financières (reprises)"], ["78100000", "Transferts de charges d'exploitation"], ["78700000", "Transferts de charges financières"], ["79100000", "Reprises de provisions d'exploitation"], ["79110000", "Pour risques et charges (reprises provisions d'exploitation)"], ["79120000", "Pour grosses réparations (reprises)"], ["79130000", "Pour dépréciation des immobilisations incorporelles (reprises)"], ["79140000", "Pour dépréciation des immobilisations corporelles (reprises)"], ["79700000", "Reprises de provisions financières"], ["79710000", "Pour risques et charges (reprises provisions financières)"], ["79720000", "Pour dépréciation des immobilisations financières (reprises)"], ["79800000", "Reprises d'amortissements"], ["81100000", "Valeurs comptables des cessions - Immobilisations incorporelles"], ["81200000", "Valeurs comptables des cessions - Immobilisations corporelles"], ["81600000", "Valeurs comptables des cessions - Immobilisations financières"], ["82100000", "Produits des cessions d'immobilisations incorporelles"], ["82200000", "Produits des cessions d'immobilisations corporelles"], ["82600000", "Produits des cessions d'immobilisations financières"], ["83100000", "Charges HAO constatées"], ["83400000", "Pertes sur créances HAO"], ["83500000", "Dons et libéralités accordés"], ["83600000", "Abandons de créances consentis"], ["83900000", "Charges provisionnées HAO"], ["84100000", "Produits HAO constatés"], ["84500000", "Dons et libéralités obtenus"], ["84600000", "Abandons de créances obtenus"], ["84800000", "Transferts de charges HAO"], ["84900000", "Reprises des charges provisionnées HAO"], ["85100000", "Dotations aux provisions réglementées"], ["85200000", "Dotations aux amortissements HAO"], ["85300000", "Dotations aux provisions pour dépréciation HAO"], ["85400000", "Dotations aux provisions pour risques et charges HAO"], ["85800000", "Autres dotations HAO"], ["86100000", "Reprises de provisions réglementées"], ["86200000", "Reprises d'amortissements (HAO)"], ["86300000", "Reprises de provisions pour dépréciation HAO"], ["86400000", "Reprises de provisions pour risques et charges HAO"], ["86500000", "Reprises de subventions d'investissement"], ["86800000", "Autres reprises HAO"], ["87100000", "Participation légale aux bénéfices"], ["87400000", "Participation contractuelle aux bénéfices"], ["87800000", "Autres participations (des travailleurs)"], ["88100000", "Subventions d'équilibre - État"], ["88400000", "Subventions d'équilibre - Collectivités publiques"], ["88600000", "Subventions d'équilibre - Groupe"], ["88800000", "Subventions d'équilibre - Autres"], ["89100000", "Impôts sur les bénéfices de l'exercice"], ["89110000", "Activités exercées dans l'État"], ["89120000", "Activités exercées dans les autres États de la Région"], ["89130000", "Activités exercées hors Région"], ["89200000", "Rappel d'impôts sur résultats antérieurs"], ["89500000", "Impôt minimum forfaitaire IMF"], ["89900000", "Dégrèvements et annulations d'impôts sur résultats antérieurs"], ["89910000", "Dégrèvements"], ["89940000", "Annulations pour pertes rétroactives"]];
 const SUGGEST_ACCOUNTS = [["20100000", "Frais d'établissement"], ["20200000", "Charges à répartir sur plusieurs exercices"], ["20600000", "Primes de remboursement des obligations"], ["21100000", "Frais de recherche et de développement"], ["21200000", "Brevets, licences, concessions et droits similaires"], ["21300000", "Logiciels"], ["21400000", "Marques"], ["21500000", "Fonds commercial"], ["21600000", "Droit au bail"], ["21700000", "Investissements de création"], ["21800000", "Autres droits et valeurs incorporels"], ["21900000", "Immobilisations incorporelles en cours"], ["22100000", "Terrains agricoles et forestiers"], ["22200000", "Terrains nus"], ["22300000", "Terrains bâtis"], ["22400000", "Travaux de mise en valeur des terrains"], ["22500000", "Terrains de gisement"], ["22600000", "Terrains aménagés"], ["22700000", "Terrains mis en concession"], ["22800000", "Autres terrains"], ["22900000", "Aménagements de terrains en cours"], ["23100000", "Bâtiments industriels, agricoles, administratifs et commerciaux sur sol propre"], ["23200000", "Bâtiments industriels, agricoles, administratifs et commerciaux sur sol d'autrui"], ["23300000", "Ouvrages d'infrastructure"], ["23400000", "Installations techniques"], ["23500000", "Aménagements de bureaux"], ["23700000", "Bâtiments industriels, agricoles et commerciaux mis en concession"], ["23800000", "Autres installations et agencements"], ["23900000", "Bâtiments et installations en cours"], ["24100000", "Matériel et outillage industriel et commercial"], ["24200000", "Matériel et outillage agricole"], ["24300000", "Matériel d'emballage récupérable et identifiable"], ["24400000", "Matériel et mobilier"], ["24500000", "Matériel de transport"], ["24600000", "Immobilisations animales et agricoles"], ["24700000", "Agencements et aménagements du matériel"], ["24800000", "Autres matériels"], ["24900000", "Matériel en cours"], ["25100000", "Avances et acomptes versés sur immobilisations incorporelles"], ["25200000", "Avances et acomptes versés sur immobilisations corporelles"], ["26100000", "Titres de participation dans des sociétés sous contrôle exclusif"], ["26200000", "Titres de participation dans des sociétés sous contrôle conjoint"], ["26300000", "Titres de participation dans des sociétés conférant une influence notable"], ["26500000", "Participations dans des organismes professionnels"], ["26600000", "Parts dans des groupements d'intérêt économique (GIE)"], ["26800000", "Autres titres de participation"], ["27100000", "Prêts et créances non commerciales"], ["27200000", "Prêts au personnel"], ["27300000", "Créances sur l'État"], ["27400000", "Titres immobilisés"], ["27500000", "Dépôts et cautionnements versés"], ["27600000", "Intérêts courus (immobilisations financières)"], ["27700000", "Créances rattachées à des participations et avances à des GIE"], ["27800000", "Immobilisations financières diverses"], ["28100000", "Amortissements des immobilisations incorporelles"], ["28200000", "Amortissements des terrains"], ["28300000", "Amortissements des bâtiments, installations techniques et agencements"], ["28400000", "Amortissements du matériel"], ["29100000", "Provisions pour dépréciation des immobilisations incorporelles"], ["29200000", "Provisions pour dépréciation des terrains"], ["29300000", "Provisions pour dépréciation des bâtiments, installations techniques et agencements"], ["29400000", "Provisions pour dépréciation de matériel"], ["29500000", "Provisions pour dépréciation des avances et acomptes versés sur immobilisations"], ["29600000", "Provisions pour dépréciation des titres de participation"], ["29700000", "Provisions pour dépréciation des autres immobilisations financières"], ["40100000", "Fournisseurs, dettes en compte"], ["40110000", "Fournisseurs"], ["40200000", "Fournisseurs, effets à payer"], ["40800000", "Fournisseurs, factures non parvenues"], ["40810000", "Fournisseurs - factures non parvenues"], ["40900000", "Fournisseurs débiteurs"], ["41100000", "Clients"], ["41110000", "Clients"], ["44300000", "État, TVA facturée"], ["44310000", "TVA facturée sur ventes"], ["44400000", "État, TVA due ou crédit de TVA"], ["44500000", "État, TVA récupérable"], ["44510000", "TVA récupérable sur immobilisations"], ["44520000", "TVA récupérable sur achats"], ["44530000", "TVA récupérable sur transport"], ["44540000", "TVA récupérable sur services extérieurs et autres charges"], ["60100000", "Achats de marchandises"], ["60200000", "Achats de matières premières et fournitures liées"], ["60300000", "Variations des stocks de biens achetés"], ["60400000", "Achats stockés de matières et fournitures consommables"], ["60500000", "Autres achats"], ["60800000", "Achats d'emballages"], ["61100000", "Transports sur achats"], ["61200000", "Transports sur ventes"], ["61300000", "Transports pour le compte de tiers"], ["61400000", "Transports du personnel"], ["61600000", "Transports de plis"], ["61800000", "Autres frais de transport"], ["62100000", "Sous-traitance générale"], ["62200000", "Locations et charges locatives"], ["62300000", "Redevances de crédit-bail et contrats assimilés"], ["62400000", "Entretien, réparations et maintenance"], ["62500000", "Primes d'assurance"], ["62600000", "Études, recherches et documentation"], ["62700000", "Publicité, publications, relations publiques"], ["62800000", "Frais de télécommunications"], ["63100000", "Frais bancaires"], ["63200000", "Rémunérations d'intermédiaires et de conseils"], ["63300000", "Frais de formation du personnel"], ["63400000", "Redevances pour brevets, licences, logiciels et droits similaires"], ["63500000", "Cotisations"], ["63700000", "Rémunérations de personnel extérieur à l'entreprise"], ["63800000", "Autres charges externes"], ["64100000", "Impôts et taxes directs"], ["64500000", "Impôts et taxes indirects"], ["64600000", "Droits d'enregistrement"], ["64700000", "Pénalités et amendes fiscales"], ["64800000", "Autres impôts et taxes"], ["65100000", "Pertes sur créances clients et autres débiteurs"], ["65200000", "Quote-part de résultat sur opérations faites en commun"], ["65300000", "Quote-part de résultat annulée sur exécution partielle de contrats pluri-exercices"], ["65400000", "Valeur comptable des cessions courantes d'immobilisations"], ["65800000", "Charges diverses"], ["65900000", "Charges provisionnées d'exploitation"], ["66100000", "Rémunérations directes versées au personnel national"], ["66200000", "Rémunérations directes versées au personnel non national"], ["66300000", "Indemnités forfaitaires versées au personnel"], ["66400000", "Charges sociales"], ["66600000", "Rémunérations et charges sociales de l'exploitant individuel"], ["66700000", "Rémunération transférée de personnel extérieur"], ["66800000", "Autres charges sociales"], ["67100000", "Intérêts des emprunts"], ["67200000", "Intérêts dans loyers de crédit-bail et contrats assimilés"], ["67300000", "Escomptes accordés"], ["67400000", "Autres intérêts"], ["67500000", "Escomptes des effets de commerce"], ["67600000", "Pertes de change"], ["67700000", "Pertes sur cessions de titres de placement"], ["67800000", "Pertes sur risques financiers"], ["67900000", "Charges provisionnées financières"], ["68100000", "Dotations aux amortissements d'exploitation"], ["68700000", "Dotations aux amortissements à caractère financier"], ["69100000", "Dotations aux provisions d'exploitation"], ["69700000", "Dotations aux provisions financières"]];
 const VALID_CODES = new Set(FULL_ACCOUNTS.map(a=>a[0]));
+
+// Comptes precis frequemment necessaires sur des factures courantes (eau, electricite,
+// telecom, carburant, fournitures, loyers, assurances, honoraires...) qui n'etaient pas
+// tous presents dans la liste de suggestion d'origine, plus generique. Le LLM a tendance
+// a se tromper quand on ne lui propose que des comptes "chapeau" (ex: 60500000 "Autres
+// achats" au lieu de 60520000 "Electricite") : on lui donne donc explicitement les
+// sous-comptes les plus utilises en pratique pour qu'il choisisse le plus precis.
+const PRECISE_ACCOUNT_CODES = [
+  "60470000","60510000","60520000","60530000","60550000","60560000","60570000","60580000",
+  "61810000","61820000","61830000",
+  "62210000","62220000","62230000","62240000","62250000",
+  "62320000","62330000",
+  "62410000","62420000","62430000",
+  "62510000","62520000","62530000","62540000","62550000","62560000","62570000",
+  "62610000","62650000","62660000",
+  "62710000","62720000","62730000","62740000","62750000","62760000","62770000",
+  "62810000","62820000","62830000","62880000",
+  "63110000","63120000","63130000","63150000","63160000","63180000",
+  "63210000","63220000","63230000","63240000","63250000",
+  "63420000","63430000","63440000",
+  "63510000",
+  "63710000","63720000",
+  "63810000","63820000","63830000","63840000",
+  "64110000","64120000","64130000","64140000","64150000",
+  "64610000","64620000","64630000","64640000",
+  "21300000","21400000",
+  "24410000","24420000","24430000","24440000",
+  "24510000","24520000","24530000","24540000","24550000","24580000"
+];
+PRECISE_ACCOUNT_CODES.forEach(code=>{
+  const found = FULL_ACCOUNTS.find(a=>a[0]===code);
+  if(found && !SUGGEST_ACCOUNTS.some(a=>a[0]===code)) SUGGEST_ACCOUNTS.push(found);
+});
+
+// Aide-memoire categorie -> compte, injecte dans le prompt pour guider le choix
+// vers le compte le plus precis plutot qu'un compte generique "Autres achats / charges".
+const ACCOUNT_CHEATSHEET = [
+  "Facture d'electricite (CEET, etc.) -> 60520000 Fournitures non stockables - Electricite",
+  "Facture d'eau (TdE, etc.) -> 60510000 Fournitures non stockables - Eau",
+  "Facture de telephone mobile/fixe -> 62810000 Frais de telephone",
+  "Facture internet / connexion / hebergement -> 62880000 Autres frais de telecommunications",
+  "Carburant, essence, gasoil -> 60580000 Achats de travaux, materiels et equipements (ou 61810000 Voyages et deplacements si transport de personnes)",
+  "Fournitures de bureau (papier, stylos, consommables imprimante) -> 60470000 ou 60550000 Fournitures de bureau",
+  "Materiel informatique (ordinateur, imprimante, peripherique) achete en bien durable -> 24420000 Materiel informatique",
+  "Logiciel / licence / abonnement SaaS professionnel -> 63430000 Redevances pour logiciels (ou 21300000 si immobilisable, montant eleve et durable)",
+  "Loyer de bureau, magasin, entrepot -> 62220000 Locations de batiments",
+  "Location de vehicule ou de materiel -> 62230000 Locations de materiels et outillages",
+  "Entretien/reparation vehicule ou materiel -> 62420000 Entretien et reparations des biens mobiliers",
+  "Entretien/reparation batiment -> 62410000 Entretien et reparations des biens immobiliers",
+  "Maintenance informatique ou technique (contrat) -> 62430000 Maintenance",
+  "Assurance vehicule -> 62520000 Assurances materiel de transport ; autre assurance -> 62510000 Assurances multirisques",
+  "Honoraires (avocat, comptable, consultant, notaire) -> 63240000 Honoraires",
+  "Frais bancaires, commissions bancaires -> 63180000 Autres frais bancaires",
+  "Formation, seminaire du personnel -> 63300000 Frais de formation du personnel",
+  "Publicite, impression de flyers/affiches, communication -> 62700000/62710000 a 62780000 selon le detail",
+  "Repas d'affaires, reception client -> 63830000 Receptions",
+  "Frais de mission, deplacement professionnel avec hebergement -> 63840000 Missions",
+  "Transport de marchandises (achats) -> 61100000 Transports sur achats ; transport de personnel -> 61400000 Transports du personnel",
+  "Achat de marchandises destinees a la revente -> 60100000 Achats de marchandises",
+  "Achat de matieres premieres pour transformation/production -> 60200000 Achats de matieres premieres et fournitures liees",
+  "Prestation de service / sous-traitance facturee par un tiers -> 60570000 Achats d'etudes et prestations de services ou 62100000 Sous-traitance generale",
+  "Mobilier de bureau (chaise, bureau, armoire) -> 24440000 Mobilier de bureau",
+  "Materiel de transport (vehicule, moto) achete -> 24510000 Materiel automobile"
+].join("\n");
+
 
 let queue = [];
 let activeId = null;
@@ -451,11 +854,15 @@ function retryItem(id){
 
 async function extractInvoice(item){
   const candidates = SUGGEST_ACCOUNTS.map(a=> a[0]+' : '+a[1]).join('\n');
-  const promptText = "Tu es un assistant comptable specialise SYSCOHADA (zone OHADA, Afrique de l'Ouest/Centrale). " +
-    "On te montre une facture (photo ou PDF). Extrais les informations et reponds UNIQUEMENT avec un objet JSON valide, sans texte autour, sans balises markdown. " +
-    "Format exact attendu: {\"fournisseur\":string,\"date\":string (format YYYY-MM-DD ou vide si illisible),\"numero_facture\":string (numero ou reference de la facture visible sur le document, vide si absent),\"description\":string (court, 5-8 mots),\"montant_ht\":number,\"montant_tva\":number,\"montant_ttc\":number,\"compte_code\":string,\"compte_libelle\":string,\"confiance\":\"haute\"|\"moyenne\"|\"basse\"}. " +
-    "Pour compte_code, choisis le code le plus pertinent UNIQUEMENT dans cette liste de comptes SYSCOHADA (charges, immobilisations, tiers) :\n" + candidates +
-    "\nSi aucun montant TVA n'est visible, mets 0. Si le HT n'est pas indique mais le TTC oui, estime le HT en supposant 18% de TVA sauf indication contraire visible sur la facture. Cherche activement la date d'emission ecrite sur la facture (jamais une date par defaut) ; si elle est vraiment introuvable, laisse le champ date vide plutot que de deviner. Les montants sont en Francs CFA, donne des nombres simples sans espace ni symbole.";
+  const promptText = "Tu es un expert-comptable specialise dans le plan comptable SYSCOHADA revise (zone OHADA, Afrique de l'Ouest/Centrale), avec une connaissance fine des factures courantes au Togo. " +
+    "On te montre une facture (photo ou PDF). Lis-la attentivement, y compris les petites lignes, avant de repondre. Reponds UNIQUEMENT avec un objet JSON valide, sans texte autour, sans balises markdown. " +
+    "Format exact attendu: {\"fournisseur\":string,\"date\":string (format YYYY-MM-DD ou vide si illisible),\"numero_facture\":string (numero ou reference de la facture visible sur le document, vide si absent),\"description\":string (court, 5-8 mots, decrit precisement la nature de l'achat),\"montant_ht\":number,\"montant_tva\":number,\"montant_ttc\":number,\"compte_code\":string,\"compte_libelle\":string,\"confiance\":\"haute\"|\"moyenne\"|\"basse\"}. " +
+    "\n\nPOUR LE CHOIX DU COMPTE (compte_code), c'est l'etape la plus importante et la plus souvent ratee : ne choisis JAMAIS un compte generique 'fourre-tout' (ex: 60500000 Autres achats, 65800000 Charges diverses, 63800000 Autres charges externes) s'il existe un compte plus precis qui correspond mieux a la nature exacte de l'achat. " +
+    "Voici un aide-memoire de correspondances courantes a utiliser en priorite quand la facture correspond a un de ces cas :\n" + ACCOUNT_CHEATSHEET +
+    "\n\nChoisis le compte_code UNIQUEMENT parmi les codes de cette liste officielle SYSCOHADA (charges, immobilisations, tiers) :\n" + candidates +
+    "\nRegle de selection : (1) identifie d'abord la NATURE precise de l'achat ou du service facture (electricite, eau, telephone, carburant, fournitures, loyer, prestation, marchandise, materiel...), (2) cherche dans l'aide-memoire puis dans la liste le compte qui decrit le plus precisement cette nature, (3) recopie le compte_code EXACTEMENT comme il apparait dans la liste (8 chiffres, ne tronque pas, n'invente pas de code), (4) compte_libelle doit etre recopie a l'identique du libelle associe a ce code dans la liste, pas reformule. " +
+    "\nSi tu hesites vraiment entre deux comptes precis de niveau equivalent, choisis le plus specifique aux mots presents sur la facture (nom du fournisseur, designation des articles/services) plutot que le plus generique. Mets confiance a 'basse' si tu n'es pas sur du compte. " +
+    "\n\nSi aucun montant TVA n'est visible, mets 0. Si le HT n'est pas indique mais le TTC oui, estime le HT en supposant 18% de TVA sauf indication contraire visible sur la facture. Cherche activement la date d'emission ecrite sur la facture (jamais une date par defaut) ; si elle est vraiment introuvable, laisse le champ date vide plutot que de deviner. Les montants sont en Francs CFA, donne des nombres simples sans espace ni symbole.";
 
   const parts = [
     { text: promptText },
@@ -481,17 +888,34 @@ async function extractInvoice(item){
     parsed.compte_libelle = supplierMemory[normSup].libelle;
     parsed._memoire = true;
   }
-  // Rattrapage : si l'IA renvoie un code court (ex: "628" au lieu de "62800000"),
-  // on complete automatiquement avec des zeros et on verifie qu'il existe vraiment.
+  // Rattrapage : on essaie de retrouver un code SYSCOHADA valide meme si l'IA
+  // a renvoye un format legerement different (espaces, code tronque, code
+  // parent au lieu du sous-compte...), puis on force le libelle officiel
+  // (celui du plan comptable charge) plutot que celui reformule par l'IA,
+  // pour eviter toute incoherence entre le code et son intitule affiche.
   if(parsed.compte_code){
-    const raw = String(parsed.compte_code).trim();
-    if(!VALID_CODES.has(raw)){
+    let raw = String(parsed.compte_code).replace(/[^0-9]/g,'').trim();
+    if(raw && !VALID_CODES.has(raw)){
+      // 1) code trop court -> on complete avec des zeros (ex: "628" -> "62800000")
       const padded = raw.padEnd(8, '0');
       if(VALID_CODES.has(padded)){
-        parsed.compte_code = padded;
-        const found = FULL_ACCOUNTS.find(a=>a[0]===padded);
-        if(found) parsed.compte_libelle = found[1];
+        raw = padded;
+      } else {
+        // 2) sinon on cherche le compte valide dont le prefixe numerique colle le mieux
+        //    (du plus precis au plus general : 6 chiffres, puis 4, puis 2)
+        let bestMatch = null;
+        for(const len of [6,5,4,3,2]){
+          const prefix = raw.slice(0,len);
+          const match = FULL_ACCOUNTS.find(a=> a[0].slice(0,len)===prefix);
+          if(match){ bestMatch = match[0]; break; }
+        }
+        if(bestMatch) raw = bestMatch;
       }
+    }
+    if(VALID_CODES.has(raw)){
+      parsed.compte_code = raw;
+      const found = FULL_ACCOUNTS.find(a=>a[0]===raw);
+      if(found) parsed.compte_libelle = found[1]; // toujours le libelle officiel, jamais reformule
     }
   }
 
@@ -560,7 +984,7 @@ function getWarnings(ex, excludeId){
 function renderQueue(){
   queueCount.textContent = queue.length;
   if(queue.length===0){
-    queueEl.innerHTML = '<div class="empty"><span class="ico">📂</span>Aucune facture pour l\'instant.</div>';
+    queueEl.innerHTML = '<div class="empty"><span class="ico">📂</span><p>Aucune facture pour l\'instant.<br>Glissez un fichier pour démarrer.</p></div>';
     bulkBtn.disabled = true;
     return;
   }
@@ -570,20 +994,25 @@ function renderQueue(){
     if(item.status==='review') reviewCount++;
     const div = document.createElement('div');
     div.className = 'qitem s-'+item.status + (item.id===activeId ? ' active':'');
-    const thumb = item.dataUrl ? '<img src="'+item.dataUrl+'">' : '📄';
-    const supName = item.extracted && item.extracted.fournisseur ? item.extracted.fournisseur : (item.status==='extracting' ? 'Lecture…' : (item.status==='waiting' ? 'En attente…' : '—'));
-    const stMap = { waiting:'En attente', extracting:'Lecture', review:'A verifier', validated:'Validee', error:'Erreur' };
+    const thumb = item.dataUrl ? '<img src="'+item.dataUrl+'">' : (item.isPdf ? '📑' : '🖼');
+    const supName = item.extracted && item.extracted.fournisseur
+      ? item.extracted.fournisseur
+      : (item.status==='extracting' ? 'Analyse en cours…' : (item.status==='waiting' ? 'En attente…' : '—'));
+    const stMap = { waiting:'Attente', extracting:'Lecture…', review:'À vérifier', validated:'Validée ✓', error:'Erreur' };
     const itemWarnings = item.status==='review' ? getWarnings(item.extracted, item.id) : [];
+    const shortName = item.filename.length > 22 ? item.filename.slice(0,20)+'…' : item.filename;
+    const spinnerHtml = item.status==='extracting' ? '<div class="spinner"></div>' : '';
     div.innerHTML =
       '<div class="qthumb">'+thumb+'</div>' +
-      '<div class="qmeta"><div class="name">'+escapeHtml(item.filename)+'</div><div class="sup">'+escapeHtml(supName)+'</div></div>' +
+      '<div class="qmeta"><div class="name">'+escapeHtml(shortName)+'</div><div class="sup">'+escapeHtml(supName)+'</div></div>' +
       (itemWarnings.length ? '<span class="warn-badge" title="'+escapeHtml(itemWarnings.join(' / '))+'">⚠ '+itemWarnings.length+'</span>' : '') +
+      spinnerHtml +
       '<div class="qstatus st-'+item.status+'">'+(stMap[item.status]||item.status)+'</div>';
     div.addEventListener('click', ()=> selectItem(item.id));
     queueEl.appendChild(div);
   });
   bulkBtn.disabled = reviewCount === 0;
-  bulkBtn.textContent = reviewCount > 0 ? ('⚡ Valider tout ('+reviewCount+')') : '⚡ Valider tout';
+  bulkBtn.innerHTML = reviewCount > 0 ? ('⚡ Valider tout <span style="font-weight:900;opacity:0.75">('+reviewCount+')</span>') : '⚡ Valider tout';
 }
 
 function selectItem(id){
@@ -591,31 +1020,59 @@ function selectItem(id){
   renderQueue();
   const item = queue.find(q=>q.id===id);
   if(!item) return;
-  detailTitle.innerHTML = 'Détail <span class="count">'+escapeHtml(item.filename)+'</span>';
+  // Update header with filename badge
+  const fname = item.filename.length > 28 ? item.filename.slice(0,26)+'…' : item.filename;
+  detailTitle.innerHTML = '<span class="ico2">🔍</span> Détail <span class="count-badge">'+escapeHtml(fname)+'</span>';
+
   if(item.status==='extracting' || item.status==='waiting'){
-    detailBody.innerHTML = '<div class="empty"><span class="ico">⏳</span>'+(item.status==='waiting' ? 'En attente dans la file…' : 'Lecture automatique en cours…')+'</div>';
+    const isExtracting = item.status==='extracting';
+    detailBody.innerHTML = isExtracting
+      ? '<div style="padding:4px 0 8px">' +
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;color:var(--gold);font-size:13px;font-weight:700;">' +
+        '<div class="spinner" style="border-color:rgba(245,168,0,0.2);border-top-color:var(--gold)"></div>Analyse IA en cours…</div>' +
+        '<div class="skel-line w80"></div><div class="skel-line w60"></div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0">' +
+        '<div class="skel-line" style="height:40px;width:100%;margin:0"></div>' +
+        '<div class="skel-line" style="height:40px;width:100%;margin:0"></div></div>' +
+        '<div class="skel-line w40"></div><div class="skel-line w80"></div>' +
+        '</div>'
+      : '<div class="empty"><span class="ico">⏳</span><p>En attente dans la file…</p></div>';
     return;
   }
-  const ex = item.extracted || { fournisseur:'', date:'', numero_facture:'', description:'', montant_ht:0, montant_tva:0, montant_ttc:0, compte_code:'', compte_libelle:'' };
+  const ex = item.extracted || { fournisseur:'', date:'', numero_facture:'', description:'', montant_ht:0, montant_tva:0, montant_ttc:0, compte_code:'', compte_libelle:'', confiance:'' };
   const readonly = item.status==='validated';
   const warnings = readonly ? [] : getWarnings(ex, item.id);
+
+  // Confidence badge
+  const conf = (ex.confiance||'').toLowerCase();
+  const confMap = { haute:'🟢 Fiabilité haute', moyenne:'🟡 Fiabilité moyenne', basse:'🔴 Fiabilité basse' };
+  const confBadge = conf ? '<span class="conf-badge conf-'+conf+'" title="Niveau de confiance de l\'IA sur l\'extraction">'+escapeHtml(confMap[conf]||conf)+'</span>' : '';
+
+  // Validated banner
+  const valBanner = readonly
+    ? '<div class="validated-banner"><span class="check">✅</span> Cette facture est validée et incluse dans l\'export.</div>'
+    : '';
+
   detailBody.innerHTML =
-    (item.error ? '<div class="qstatus st-error" style="display:inline-block;margin-bottom:10px;">'+escapeHtml(item.error)+'</div>' : '') +
-    (warnings.length ? '<div class="warn-box">⚠️ A verifier avant de valider :<ul>'+warnings.map(w=>'<li>'+escapeHtml(w)+'</li>').join('')+'</ul></div>' : '') +
+    confBadge +
+    valBanner +
+    (item.error ? '<div class="warn-box danger">❌ '+escapeHtml(item.error)+'</div>' : '') +
+    (warnings.length ? '<div class="warn-box"><strong>⚠️ À vérifier avant de valider</strong><ul>'+warnings.map(w=>'<li>'+escapeHtml(w)+'</li>').join('')+'</ul></div>' : '') +
     field('Fournisseur','d_fournisseur', ex.fournisseur, readonly) +
     '<div class="row2">' + field('Date','d_date', ex.date, readonly, true) + field('N° Facture','d_numfact', ex.numero_facture, readonly, true) + '</div>' +
-    '<div class="row2">' + field('Montant HT','d_ht', ex.montant_ht, readonly, true) + field('TVA','d_tva', ex.montant_tva, readonly, true) + '</div>' +
-    field('TTC (F CFA)','d_ttc', ex.montant_ttc, readonly, true) +
+    '<div class="row2">' + field('Montant HT (F CFA)','d_ht', ex.montant_ht, readonly, true) + field('TVA (F CFA)','d_tva', ex.montant_tva, readonly, true) + '</div>' +
+    field('Total TTC (F CFA)','d_ttc', ex.montant_ttc, readonly, true) +
     field('Description','d_desc', ex.description, readonly) +
-    '<div class="field"><label>Compte SYSCOHADA</label><div class="acct-wrap">' +
-      '<input id="d_compte" '+(readonly?'disabled':'')+' value="'+escapeHtml((ex.compte_code||'')+(ex.compte_libelle ? ' — '+ex.compte_libelle : ''))+'" placeholder="Chercher un compte" autocomplete="off">' +
+    '<hr class="field-sep">' +
+    '<div class="field"><label>Compte SYSCOHADA (OHADA)</label><div class="acct-wrap">' +
+      '<input id="d_compte" '+(readonly?'disabled':'')+' value="'+escapeHtml((ex.compte_code||'')+(ex.compte_libelle ? ' — '+ex.compte_libelle : ''))+'" placeholder="Chercher par numéro ou libellé…" autocomplete="off">' +
       '<div class="acct-list" id="acctList"></div>' +
     '</div></div>' +
     (readonly
-      ? '<div class="actions" style="padding:6px 0 0;"><button class="btn-ghost" id="btnUnvalidate">Modifier à nouveau</button></div>'
-      : ('<div class="actions" style="padding:6px 0 0;"><button class="btn-primary" id="btnValidate">Valider</button>' +
-         (item.status==='error' ? '<button class="btn-ghost" id="btnRetry">Réessayer</button>' : '') +
-         '<button class="btn-ghost" id="btnDelete">Supprimer</button></div>'));
+      ? '<div class="actions"><button class="btn-ghost" id="btnUnvalidate">✏️ Modifier à nouveau</button></div>'
+      : ('<div class="actions"><button class="btn-primary" id="btnValidate">✅ Valider</button>' +
+         (item.status==='error' ? '<button class="btn-ghost" id="btnRetry">🔄 Réessayer</button>' : '') +
+         '<button class="btn-danger" id="btnDelete">🗑 Supprimer</button></div>'));
 
   if(!readonly){
     const acctInput = document.getElementById('d_compte');
@@ -642,7 +1099,7 @@ function showAcctOptions(query){
   const q = (query||'').toLowerCase();
   let matches = !q ? FULL_ACCOUNTS.slice(0,30) : FULL_ACCOUNTS.filter(a=> a[0].includes(q) || a[1].toLowerCase().includes(q)).slice(0,30);
   acctList.innerHTML = matches.length===0 ? '<div class="acct-opt">Aucun résultat</div>' :
-    matches.map(a=> '<div class="acct-opt" data-code="'+a[0]+'" data-lib="'+escapeHtml(a[1])+'"><span class="code">'+a[0]+'</span>'+escapeHtml(a[1])+'</div>').join('');
+    matches.map(a=> '<div class="acct-opt" data-code="'+a[0]+'" data-lib="'+escapeHtml(a[1])+'"><span class="code">'+a[0]+'</span><span class="lib">'+escapeHtml(a[1])+'</span></div>').join('');
   acctList.querySelectorAll('.acct-opt[data-code]').forEach(el=>{
     el.addEventListener('click', ()=>{
       const input = document.getElementById('d_compte');
@@ -727,7 +1184,7 @@ bulkBtn.addEventListener('click', ()=>{
   saveValidated();
   renderQueue();
   updateTotals();
-  toast(clean.length+' facture(s) validée(s) automatiquement'+(flagged>0 ? ' · '+flagged+' laissée(s) de côté' : ''), 'ok');
+  toast('✅ '+clean.length+' facture(s) validée(s)'+(flagged>0 ? ' · '+flagged+' ignorée(s)' : ''), 'ok');
   showStamp(clean.length + ' ✓');
 });
 
@@ -736,8 +1193,8 @@ function deleteItem(id){
   activeId = null;
   renderQueue();
   updateTotals();
-  detailBody.innerHTML = '<div class="empty"><span class="ico">🔍</span>Sélectionnez une facture.</div>';
-  detailTitle.textContent = 'Détail';
+  detailBody.innerHTML = '<div class="empty"><span class="ico">🔍</span><p>Sélectionnez une facture dans la liste pour la vérifier.</p></div>';
+  detailTitle.innerHTML = '<span class="ico2">🔍</span> Détail';
   saveValidated();
 }
 
@@ -802,7 +1259,7 @@ exportBtn.addEventListener('click', ()=>{
   a.href = url; a.download = 'export_factures_sage.txt';
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
-  toast('Export genere : export_factures_sage.txt', 'ok');
+  toast('✅ Export Sage généré !', 'ok');
 });
 
 clearBtn.addEventListener('click', ()=>{
@@ -811,14 +1268,21 @@ clearBtn.addEventListener('click', ()=>{
   activeId = null;
   renderQueue();
   updateTotals();
-  detailBody.innerHTML = '<div class="empty"><span class="ico">🔍</span>Sélectionnez une facture.</div>';
-  detailTitle.textContent = 'Détail';
+  detailBody.innerHTML = '<div class="empty"><span class="ico">🔍</span><p>Sélectionnez une facture dans la liste pour la vérifier.</p></div>';
+  detailTitle.innerHTML = '<span class="ico2">🔍</span> Détail';
   saveValidated();
 });
 
 loadAll();
 renderQueue();
 updateTotals();
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('/sw.js').catch(()=>{});
+  });
+}
+
 </script>
 </body>
 </html>
