@@ -481,6 +481,20 @@ async function extractInvoice(item){
     parsed.compte_libelle = supplierMemory[normSup].libelle;
     parsed._memoire = true;
   }
+  // Rattrapage : si l'IA renvoie un code court (ex: "628" au lieu de "62800000"),
+  // on complete automatiquement avec des zeros et on verifie qu'il existe vraiment.
+  if(parsed.compte_code){
+    const raw = String(parsed.compte_code).trim();
+    if(!VALID_CODES.has(raw)){
+      const padded = raw.padEnd(8, '0');
+      if(VALID_CODES.has(padded)){
+        parsed.compte_code = padded;
+        const found = FULL_ACCOUNTS.find(a=>a[0]===padded);
+        if(found) parsed.compte_libelle = found[1];
+      }
+    }
+  }
+
   item.extracted = parsed;
   item.status = 'review';
 }
