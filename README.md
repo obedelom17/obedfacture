@@ -1,4 +1,4 @@
-# ObedFacture — version Vercel
+# ObedFacture IA — version Vercel
 
 Capture automatique de factures (photo ou PDF) avec lecture par IA (Gemini),
 suggestion du compte SYSCOHADA, validation manuelle ou en masse, et export
