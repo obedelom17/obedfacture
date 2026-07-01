@@ -8,7 +8,7 @@
 // suivante avant d'abandonner. Ca multiplie le quota gratuit quotidien par
 // le nombre de cles fournies (ex: 5 cles x 20 requetes/jour = 100/jour).
 
-const GEMINI_MODEL = 'gemini-3.5-flash';
+const GEMINI_MODEL = 'gemini-2.5-flash';
 
 // Compteur en memoire : tourne tant que l'instance serverless reste "chaude".
 // Redemarre a 0 sur une instance froide, ce qui est sans consequence (juste

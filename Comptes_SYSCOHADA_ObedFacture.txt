@@ -528,8 +528,8 @@ Compte	Intitulé	Nature
 44310000	TVA facturée sur ventes	DIV	
 44320000	TVA facturée sur prestations de services	DIV	
 44330000	TVA facturée sur travaux	DIV	
-43340000	TVA facturée sur production livrée à soi-même	DIV	
-43350000	TVA sur factures à établir	DIV	
+44340000	TVA facturée sur production livrée à soi-même	DIV	
+44350000	TVA sur factures à établir	DIV	
 44400000	État, TVA due ou crédit de TVA	DIV	
 44410000	État, TVA due	DIV	
 44490000	État, crédit de TVA à reporter	DIV	
