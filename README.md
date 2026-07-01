@@ -69,7 +69,7 @@ de configuration officiel fonctionne directement.
 3. Selectionnez le fichier **`Import_ecritures_ObedFacture.ema`** fourni dans
    ce projet (c'est le modele officiel Sage pour ce type de structure, copie
    tel quel depuis le dossier "Modeles d'importation" de Sage)
-4. Verifiez que le journal par defaut (`AC`) correspond a un code journal
+4. Verifiez que le journal par defaut (`ACH`) correspond a un code journal
    existant dans votre dossier (sinon adaptez dans Sage ou demandez-moi de
    changer le code dans l'outil)
 5. **Fichier -> Importer -> Format parametrable** -> selectionnez ce format
@@ -82,9 +82,9 @@ Encodage : Windows-1252 (compatible Sage)
 
 ```
 Jal  Date        N°    General   Auxiliaire  Reference  Debit    Credit   Date echeance  Libelle                       Mode de paiement
-AC   28/06/2026  F123  605101                F123       15000,00 0,00                    Fact. fourn.  ACME - fournitures
-AC   28/06/2026  F123  4452                  F123       2700,00  0,00                    Fact. fourn.  ACME - fournitures
-AC   28/06/2026  F123  401                   F123       0,00     17700,00 28/06/2026     Fact. fourn.  ACME - fournitures
+ACH  28/06/2026  F123  605101                F123       15000,00 0,00                    Fact. fourn.  ACME - fournitures
+ACH  28/06/2026  F123  4452                  F123       2700,00  0,00                    Fact. fourn.  ACME - fournitures
+ACH  28/06/2026  F123  401                   F123       0,00     17700,00 28/06/2026     Fact. fourn.  ACME - fournitures
 ```
 
 ## Limites connues
